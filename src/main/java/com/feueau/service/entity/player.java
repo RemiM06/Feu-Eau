@@ -1,4 +1,4 @@
-package com.aokijiakainu.service.entity;
+package com.feueau.service.entity;
 
 public class player {
 

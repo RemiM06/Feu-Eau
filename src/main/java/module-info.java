@@ -3,6 +3,6 @@ module com.aokijiakainu.sae {
     requires javafx.fxml;
             
                             
-    opens com.aokijiakainu.sae to javafx.fxml;
-    exports com.aokijiakainu.sae;
+    opens com.feueau.sae to javafx.fxml;
+    exports com.feueau.sae;
 }

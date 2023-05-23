@@ -1,4 +1,4 @@
-package com.aokijiakainu.sae;
+package com.feueau.sae;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

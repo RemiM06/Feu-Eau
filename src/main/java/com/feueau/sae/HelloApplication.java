@@ -1,4 +1,4 @@
-package com.aokijiakainu.sae;
+package com.feueau.sae;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

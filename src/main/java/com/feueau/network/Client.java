@@ -1,4 +1,4 @@
-package com.aokijiakainu.network;
+package com.feueau.network;
 
 import java.net.*;
 import java.io.*;
