@@ -11,4 +11,6 @@ public class Bloc {
         this.y = y;
         this.name = name;
     }
+
+
 }
