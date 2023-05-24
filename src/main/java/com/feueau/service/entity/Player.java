@@ -1,10 +1,10 @@
 package com.feueau.service.entity;
 
-public class player {
+public class Player {
 
     private int id;
 
-    public player(int id) {
+    public Player(int id) {
         this.id = id;
     }
 }

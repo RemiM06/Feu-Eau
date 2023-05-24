@@ -1,4 +1,4 @@
 package com.feueau.datas;
 
-public class player {
+public class Partie {
 }
