@@ -1,6 +1,7 @@
 package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
+import com.feueau.sae.menus.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +47,7 @@ public class AppSAE extends Application {
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
-        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> System.out.println("à definir"));
+        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> System.out.println("à definir"));
 
         //VBox boutons
