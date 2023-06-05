@@ -15,8 +15,13 @@ public class PopUpConnection {
         Label usernameLabel = new Label("Nom d'utilisateur:");
         TextField usernameTextField = new TextField();
 
+        Label passwordLabel = new Label("Mot de passe:");
+        TextField passwordTextField = new TextField();
+
+
         VBox content = new VBox(10);
         content.getChildren().addAll(usernameLabel, usernameTextField);
+
 
         dialogPane.setContent(content);
 
@@ -27,13 +32,15 @@ public class PopUpConnection {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
-                // Action à exécuter lors du clic sur le bouton "Se connecter"
+
                 String username = usernameTextField.getText();
                 System.out.println("Connexion - Nom d'utilisateur : " + username);
+
             } else if (dialogButton == registerButtonType) {
-                // Action à exécuter lors du clic sur le bouton "S'inscrire"
+
                 String username = usernameTextField.getText();
                 System.out.println("Inscription - Nom d'utilisateur : " + username);
+
             }
             return null;
         });

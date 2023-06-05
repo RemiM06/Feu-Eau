@@ -41,7 +41,7 @@ public class AppSAE extends Application {
 
         //Titre
         Label titreAcceuil = new Label("Feu & Eau");
-        titreAcceuil.setStyle("-fx-font-size: 24px;");
+        titreAcceuil.setStyle("-fx-font-size: 72px;");
 
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
@@ -53,8 +53,14 @@ public class AppSAE extends Application {
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, titreAcceuil);
+        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
         rootPane.setCenter(boutonsVbox);
+
+        //VBox titre
+        VBox titreVBox = new VBox(10);
+        titreVBox.setAlignment(Pos.TOP_CENTER);
+        titreVBox.getChildren().addAll(titreAcceuil);
+        rootPane.setTop(titreVBox);
 
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
