@@ -20,7 +20,7 @@ public class PopUpConnection {
 
 
         VBox content = new VBox(10);
-        content.getChildren().addAll(usernameLabel, usernameTextField);
+        content.getChildren().addAll(usernameLabel, usernameTextField, passwordLabel);
 
 
         dialogPane.setContent(content);
@@ -35,6 +35,8 @@ public class PopUpConnection {
 
                 String username = usernameTextField.getText();
                 System.out.println("Connexion - Nom d'utilisateur : " + username);
+
+            } else if (dialogButton == registerButtonType) {
 
             } else if (dialogButton == registerButtonType) {
 
