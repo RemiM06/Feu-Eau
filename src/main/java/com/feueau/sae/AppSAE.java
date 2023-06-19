@@ -1,5 +1,7 @@
 package com.feueau.sae;
 
+import com.feueau.sae.level.LEVEL1;
+
 import com.feueau.sae.graphiques.BackGroundImage;
 import com.feueau.sae.menus.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
@@ -12,9 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.net.URL;
 
 import java.io.IOException;
+
 
 public class AppSAE extends Application {
 
@@ -48,7 +53,7 @@ public class AppSAE extends Application {
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> System.out.println("à definir"));
+        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> new LEVEL1());
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
@@ -65,12 +70,9 @@ public class AppSAE extends Application {
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
 
-
-        stageMain.setFullScreen(true);
+        //stageMain.setFullScreen(true);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();
     }
-
-
 }

@@ -4,15 +4,15 @@ import javafx.scene.paint.Color;
 
 public class Bloc {
 
-    private int x;
     private int y;
+    private int x;
     private String name;
     private boolean etat;
     private Color couleur;
 
-    public Bloc(int x, int y, String name, boolean etat, Color couleur) {
-        this.x = x;
+    public Bloc(int y, int x, String name, boolean etat, Color couleur) {
         this.y = y;
+        this.x = x;
         this.name = name;
         this.etat = etat;
         this.couleur = couleur;
@@ -45,5 +45,13 @@ public class Bloc {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        if (this.etat) {
+            return " " + this.name.substring(0,1) + " ";
+        }
+        return "   ";
     }
 }
