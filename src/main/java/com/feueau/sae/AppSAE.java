@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.net.URL;
 
@@ -25,6 +26,7 @@ public class AppSAE extends Application {
 
     private Scene jeuScene;
     private Scene gameScene;
+    private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private Stage stageMain;
 
@@ -34,21 +36,24 @@ public class AppSAE extends Application {
 
     @Override
     public void start(Stage stageMain) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppSAE.class.getResource("hello-view.fxml"));
 
         BorderPane rootPane = new BorderPane();
+        BorderPane reglesPane = new BorderPane();
         this.stageMain = stageMain;
 
         //Titre
         Label titreAcceuil = new Label("Feu & Eau");
         titreAcceuil.setStyle("-fx-font-size: 72px;");
 
+        //Regles
+        reglesScene = new Scene(reglesPane, 700, 400);
+
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> System.out.println("à definir"));
+        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
