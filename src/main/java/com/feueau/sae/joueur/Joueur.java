@@ -1,40 +1,44 @@
 package com.feueau.sae.joueur;
 
-import javafx.scene.input.KeyEvent;
-
-import java.security.Key;
-
 public class Joueur {
 
-    private int y=1;
-    private int x=1;
+    private double y=1.0;
+    private double x=1.0;
 
     public Joueur() {
     }
-    public Joueur(int y, int x) {
+    public Joueur(double y, double x) {
         this.y=y;
         this.x=x;
     }
-    public int getY() {
+    public double getY() {
         return y;
     }
-    public int getX() {
+    public double getX() {
         return x;
     }
 
     public void gauche() {
-        this.x -= 1;
+        this.x = ((this.x*10) - 1)/10.0;
     }
 
     public void droite() {
-        this.x += 1;
+        this.x = ((this.x*10) + 1)/10.0;
     }
 
     public void haut() {
-        this.y += 1;
+        this.y = ((this.y*10) + 1)/10.0;
     }
 
     public void bas() {
-        this.y -= 1;
+        this.y = ((this.y*10) - 1)/10.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Joueur{" +
+                "y=" + y +
+                ", x=" + x +
+                '}';
     }
 }

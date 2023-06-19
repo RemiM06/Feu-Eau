@@ -1,8 +1,10 @@
 package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
+import com.feueau.sae.level.Level;
 import com.feueau.sae.menus.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
+import com.feueau.sae.partie.Partie;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -46,14 +48,20 @@ public class AppSAE extends Application {
         titreAcceuil.setStyle("-fx-font-size: 72px;");
 
         //Regles
-        reglesScene = new Scene(reglesPane, 700, 400);
+        //reglesScene = new Scene(reglesPane, 700, 400);
 
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
+        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
+                {
+                    Scene sceneJeu = new Scene(reglesPane, 700, 400);
+                    Partie partie = new Partie(sceneJeu, new Level("Level 1"));
+                    stageMain.setScene(partie.getScene());
+                }
+        );
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
