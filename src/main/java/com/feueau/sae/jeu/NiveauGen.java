@@ -1,4 +1,4 @@
-package com.feueau.sae.base;
+package com.feueau.sae.jeu;
 
 import com.feueau.service.entity.Bloc;
 
