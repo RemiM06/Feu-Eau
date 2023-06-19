@@ -1,7 +1,5 @@
 package com.feueau.sae;
 
-import com.feueau.sae.level.LEVEL1;
-
 import com.feueau.sae.graphiques.BackGroundImage;
 import com.feueau.sae.menus.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
@@ -13,13 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.net.URL;
 
 import java.io.IOException;
-
 
 public class AppSAE extends Application {
 
@@ -30,6 +26,7 @@ public class AppSAE extends Application {
 
     private Scene jeuScene;
     private Scene gameScene;
+    private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private Stage stageMain;
 
@@ -39,21 +36,24 @@ public class AppSAE extends Application {
 
     @Override
     public void start(Stage stageMain) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppSAE.class.getResource("hello-view.fxml"));
 
         BorderPane rootPane = new BorderPane();
+        BorderPane reglesPane = new BorderPane();
         this.stageMain = stageMain;
 
         //Titre
         Label titreAcceuil = new Label("Feu & Eau");
         titreAcceuil.setStyle("-fx-font-size: 72px;");
 
+        //Regles
+        reglesScene = new Scene(reglesPane, 700, 400);
+
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> new LEVEL1());
+        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
@@ -70,9 +70,12 @@ public class AppSAE extends Application {
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
 
-        //stageMain.setFullScreen(true);
+
+        stageMain.setFullScreen(true);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();
     }
+
+
 }
