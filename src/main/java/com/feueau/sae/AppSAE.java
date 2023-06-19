@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 public class AppSAE extends Application {
 
@@ -53,13 +52,7 @@ public class AppSAE extends Application {
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
-        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
-            try {
-                PopUpConnection.showLoginDialog();
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
 
         //VBox boutons
@@ -78,7 +71,7 @@ public class AppSAE extends Application {
         backGroundImage.appliquerBackground(scene);
 
 
-        stageMain.setFullScreen(false);
+        stageMain.setFullScreen(true);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();
