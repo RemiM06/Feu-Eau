@@ -12,8 +12,10 @@ public class LEVEL1 {
     private int tailleRow=10;
     private int tailleCol=10;
     private Bloc[][] grille = new Bloc[this.tailleRow][this.tailleCol];
-
-    private Joueur joueur1 = new Joueur(1,8);
+    private int xJoueur1 = 1;
+    private int yJoueur1 = 1;
+    private int xJoueur2 = 2;
+    private int yJoueur2 = 1;
 
     public LEVEL1() {
         for (int row = 0; row < this.tailleRow; row++) {
@@ -38,7 +40,36 @@ public class LEVEL1 {
         System.out.println(this);
         System.out.println("fin");
     }
+    public int getxJoueur1() {
+        return xJoueur1;
+    }
 
+    public int getyJoueur1() {
+        return yJoueur1;
+    }
+
+    public int getxJoueur2() {
+        return xJoueur2;
+    }
+    public int getyJoueur2() {
+        return yJoueur2;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTailleRow() {
+        return tailleRow;
+    }
+
+    public int getTailleCol() {
+        return tailleCol;
+    }
+
+    public Bloc[][] getGrille() {
+        return grille;
+    }
 
     //faire une classe niveau générique dont les autres niveaux heriteront
 

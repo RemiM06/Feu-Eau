@@ -13,7 +13,7 @@ public class Partie {
     Joueur joueur1;
     Joueur joueur2;
 
-    public Partie(Scene scene) {
+    public Partie(Scene scene, Level level) {
         this.scene = scene;
     }
 

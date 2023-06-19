@@ -8,6 +8,11 @@ public class Level {
     private int tailleCol=10;
     private Bloc[][] grille = new Bloc[this.tailleRow][this.tailleCol];
 
+    private int xJoueur1;
+    private int yJoueur1;
+    private int xJoueur2;
+    private int yJoueur2;
+
     public Level(String nom) {
         for (int row = 0; row < this.tailleRow; row++) {
             for (int col = 0; col < this.tailleRow; col++) {
@@ -20,6 +25,11 @@ public class Level {
         }
 
         if (nom == "Level 1") {
+            this.xJoueur1 = 1;
+            this.yJoueur1 = 1;
+            this.xJoueur2 = 2;
+            this.yJoueur2 = 1;
+
             this.grille[8][8] = new Bloc(8, 8, "bloc", true, Color.BLACK);
             this.grille[7][8] = new Bloc(7, 8, "bloc", true, Color.BLACK);
             this.grille[8][7] = new Bloc(8, 7, "bloc", true, Color.BLACK);
@@ -31,6 +41,34 @@ public class Level {
             this.grille[5][5] = new Bloc(5, 5, "bloc", true, Color.BLACK);
             this.grille[5][6] = new Bloc(5, 6, "bloc", true, Color.BLACK);
         }
+    }
+
+    public int getTailleRow() {
+        return tailleRow;
+    }
+
+    public int getTailleCol() {
+        return tailleCol;
+    }
+
+    public Bloc[][] getGrille() {
+        return grille;
+    }
+
+    public int getxJoueur1() {
+        return xJoueur1;
+    }
+
+    public int getyJoueur1() {
+        return yJoueur1;
+    }
+
+    public int getxJoueur2() {
+        return xJoueur2;
+    }
+
+    public int getyJoueur2() {
+        return yJoueur2;
     }
 
     public String toString() {
