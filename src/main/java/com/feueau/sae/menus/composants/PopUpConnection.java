@@ -1,4 +1,4 @@
-package com.feueau.sae.menus;
+package com.feueau.sae.menus.composants;
 
 import com.feueau.sae.menus.composants.CreerBouton;
 import com.feueau.sae.menus.composants.PopUpInscription;

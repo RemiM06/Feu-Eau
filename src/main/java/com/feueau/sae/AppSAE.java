@@ -1,19 +1,15 @@
 package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
-import com.feueau.sae.menus.PopUpConnection;
+import com.feueau.sae.menus.composants.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.net.URL;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
