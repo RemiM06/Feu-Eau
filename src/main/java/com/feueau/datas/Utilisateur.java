@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 
 public class Utilisateur {
 
-    public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse) {
-        String url = "jdbc:mysql://localhost:3306/sae_feueau";
+    public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse, String IP) {
+        String url = "jdbc:mysql://http://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
 
@@ -22,10 +22,11 @@ public class Utilisateur {
 
         try {
             connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
-            String sql = "INSERT INTO player (userName, mdp) VALUES (?, ?)";
+            String sql = "INSERT INTO player (userName, mdp, IP) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
                 statement.setString(1, nomUtilisateur);
                 statement.setString(2, motDePasse);
+                statement.setString(3, IP);
                 statement.executeUpdate();
                 System.out.println("Utilisateur ajouté avec succès à la base de données.");
 
@@ -45,11 +46,6 @@ public class Utilisateur {
         }
 
 
-    }
-    public static void main (String[] args){
-        String nomUtilisateur = "john_doe";
-        String motDePasse = "secret123";
-        AjoutUtilisateur(nomUtilisateur, motDePasse);
     }
 }
 

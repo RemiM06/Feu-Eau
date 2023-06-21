@@ -1,28 +1,22 @@
 package com.feueau.sae.menus.composants;
 
-import com.feueau.sae.menus.composants.CreerBouton;
-import com.feueau.sae.menus.composants.PopUpInscription;
+import com.feueau.datas.Utilisateur;
+import com.feueau.network.recuperation.IPUtilisateur;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
-    private static Button creerBouton(String texte, Pos position, Runnable action){
-        return CreerBouton.creerBouton(texte, position, action);
-    }
-
     public static void showLoginDialog() throws UnknownHostException {
-        Dialog<ButtonType> dialogConnexion = new Dialog<>();
-        dialogConnexion.setTitle("Connexion");
+        Dialog<Void> dialogConnexion = new Dialog<>();
+        dialogConnexion.setTitle("Connexion/Inscription");
 
         DialogPane dialogPane = dialogConnexion.getDialogPane();
         dialogPane.setPrefWidth(300);
-
-        InetAddress adresse = InetAddress.getLocalHost();
 
         Label usernameLabel = new Label("Nom d'utilisateur:");
         TextField usernameTextField = new TextField();
@@ -30,45 +24,50 @@ public class PopUpConnection {
         Label passwordLabel = new Label("Mot de passe:");
         TextField passwordTextField = new TextField();
 
-        Label ipLabel = new Label("Votre adresse IP:" +
-                adresse.getHostAddress());
+        String adresseIP = IPUtilisateur.getIPAddress();
 
+        Label ipLabel = new Label("Votre adresse IP: " + adresseIP);
 
         VBox content = new VBox(10);
         content.getChildren().addAll(usernameLabel, usernameTextField, ipLabel, passwordLabel, passwordTextField);
-
 
         dialogPane.setContent(content);
 
         ButtonType loginButtonType = new ButtonType("Se connecter");
         ButtonType registerButtonType = new ButtonType("S'inscrire");
 
-       /* registerButtonType.setOnAction(event -> {
-            new PopUpInscription();
-
-        });*/
-
-
-
         dialogConnexion.getDialogPane().getButtonTypes().addAll(loginButtonType, registerButtonType, ButtonType.CANCEL);
 
-        //TODO Ajouter la requete SQL qui crée un ID au joueur quand il s'inscrit
+        Button loginButton = (Button) dialogPane.lookupButton(loginButtonType);
+        loginButton.addEventFilter(ActionEvent.ACTION, event -> {
+            String username = usernameTextField.getText();
+            String password = passwordTextField.getText();
 
-        dialogConnexion.setResultConverter(dialogButton -> {
-            if (dialogButton == loginButtonType) {
+            System.out.println("Connexion - Nom d'utilisateur : " + username);
+            System.out.println("Connexion - IPAdress : " + adresseIP);
+            System.out.println("Connexion - Mot de Passe : " + password);
 
-                String username = usernameTextField.getText();
-                String adresseIP = adresse.getHostAddress();
-                System.out.println("Connexion - Nom d'utilisateur : " + username);
-                System.out.println("Connexion - IPAdress : " + adresseIP);
 
-            }
-            else{
 
-            }
-            return null;
+        });
+
+        Button registerButton = (Button) dialogPane.lookupButton(registerButtonType);
+        registerButton.addEventFilter(ActionEvent.ACTION, event -> {
+            String username = usernameTextField.getText();
+            String password = passwordTextField.getText();
+
+            System.out.println("Inscription - Nom d'utilisateur : " + username);
+            System.out.println("Inscription - IPAdress : " + adresseIP);
+            System.out.println("Inscription - Mot de Passe : " + password);
+
+            Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+
         });
 
         dialogConnexion.showAndWait();
     }
 }
+
+
+
+
