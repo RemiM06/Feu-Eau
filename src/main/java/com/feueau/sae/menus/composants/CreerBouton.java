@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class CreerBouton {
+public class  CreerBouton {
     
     public static  Button creerBouton(String text, Pos position, Runnable action){
         Button bouton = new Button(text);

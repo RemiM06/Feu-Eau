@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 
 public class Utilisateur {
 
-    public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse, int IP) {
+    public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse, String IP) {
         String url = "jdbc:mysql://localhost:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
@@ -26,7 +26,7 @@ public class Utilisateur {
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
                 statement.setString(1, nomUtilisateur);
                 statement.setString(2, motDePasse);
-                statement.setInt(3, IP);
+                statement.setString(3, IP);
                 statement.executeUpdate();
                 System.out.println("Utilisateur ajouté avec succès à la base de données.");
 
