@@ -13,7 +13,7 @@ public class Serveur {
 
         try {
             // Créer un socket serveur et écouter sur le port 1234
-            serverSocket = new ServerSocket(1234, 0, InetAddress.getByName("134.59.143.49"));
+            serverSocket = new ServerSocket(1234, 0, InetAddress.getLocalHost());
         } catch (IOException e) {
             System.out.println("Erreur lors de la création du socket serveur.");
             System.exit(1);
