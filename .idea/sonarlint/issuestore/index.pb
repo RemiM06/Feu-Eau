@@ -43,17 +43,9 @@ w
 G.idea/sonarlint/issuestore/2/2/221ada2b44158a59dc97175b1994f1f6540ad15e,3\3\3329ac71c5e3b86d4098f1252f65d723a09a3c41
 w
 G.idea/sonarlint/issuestore/c/0/c06e79359d1685e485402bb3e51fbe476dc8be8e,7\4\74b7f0a7d4d26dfebaab741fdf94ea1c30539c49
-^
-.src/main/java/com/feueau/sae/level/LEVEL2.java,c\0\c06e79359d1685e485402bb3e51fbe476dc8be8e
 Y
 )src/main/java/com/feueau/sae/Lanceur.java,2\d\2d6a364d76f5d9eaf7b27cdc982173642b5c10f2
-^
-.src/main/java/com/feueau/sae/level/LEVEL3.java,e\d\edb1db73cbbfb2ea9d4e2faa56fad80968ed3321
 \
 ,src/main/java/com/feueau/sae/Controller.java,e\d\edcb3e42c8792c755d0b325c48988d1e3079c47e
-^
-.src/main/java/com/feueau/sae/level/LEVEL1.java,d\a\da53139a232078443807f574e146303419af836a
-]
--src/main/java/com/feueau/sae/level/Level.java,f\3\f38e653ddb5fe11dc1f2813005e875526d32283b
 _
 /src/main/java/com/feueau/sae/partie/Partie.java,5\d\5dd4ba0b40e8df6b3a547a7fae34232e1c717453

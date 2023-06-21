@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 public class Utilisateur {
 
     public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse, String IP) {
-        String url = "jdbc:mysql://http://134.59.143.50:3306/sae_feueau";
+        String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
 
