@@ -2,36 +2,44 @@ package com.feueau.sae.partie;
 
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
+import com.feueau.service.entity.Bloc;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.util.HashSet;
 
 public class Partie {
 
-    Scene scene;
-    Group root;
-    Level level;
+    private Scene scene;
+    private Group root;
+    private Level level;
 
-    Joueur joueur1;
-    Joueur joueur2;
+    private Bloc[][] grille;
+    private Joueur joueur1;
+    private Joueur joueur2;
 
     public Partie(Scene scene, Group root, Level level) {
         this.scene = scene;
         this.root = root;
         this.level = level;
-        ImageView ImgJoueur1 = new ImageView(new Image(""));
-        this.root.getChildren().addAll(ImgJoueur1);
+        this.grille = level.getGrille();
+        GridPane gridPane = new GridPane();
+
+        this.root.getChildren().addAll(gridPane);
         this.initPartie();
     }
 
     public void initPartie() {
-        this.joueur1 = new Joueur(this.level.getxJoueur1(), this.level.getyJoueur1());
-        this.joueur2 = new Joueur(this.level.getxJoueur2(), this.level.getyJoueur2());
+        this.joueur1 = new Joueur(this.level.getxJoueur1(), this.level.getyJoueur1(), "feu");
+        this.joueur2 = new Joueur(this.level.getxJoueur2(), this.level.getyJoueur2(), "eau");
 
         HashSet<KeyCode> tab = new HashSet<KeyCode>();
 
@@ -41,16 +49,13 @@ public class Partie {
                 for (KeyCode k : tab) {
                     //System.out.println(k.getName());
                     if (tab.contains(KeyCode.LEFT)) {
-                        joueur1.gauche();
+                        deplacementGaucheJoueur(joueur1);
                     }
                     if (tab.contains(KeyCode.RIGHT)) {
-                        joueur1.droite();
+                        deplacementDroitJoueur(joueur1);
                     }
                     if (tab.contains(KeyCode.UP)) {
-                        joueur1.haut();
-                    }
-                    if (tab.contains(KeyCode.DOWN)) {
-                        joueur1.bas();
+                        deplacementHautJoueur(joueur1);
                     }
                     System.out.println(joueur1);
                 }
@@ -71,13 +76,34 @@ public class Partie {
     }
 
     public void deplacementGaucheJoueur(Joueur joueur) {
-
+        int x = joueur.getX();
+        int y = joueur.getY();
+        if (!this.grille[y][x-1].isEtat()) {
+            joueur.gauche();
+        }
+        else {
+            System.out.println("l'emplacement n'est pas null");
+        }
     }
     public void deplacementDroitJoueur(Joueur joueur) {
-
+        int x = joueur.getX();
+        int y = joueur.getY();
+        if (!this.grille[y][x+1].isEtat()) {
+            joueur.droite();
+        }
+        else {
+            System.out.println("l'emplacement n'est pas null");
+        }
     }
     public void deplacementHautJoueur(Joueur joueur) {
-
+        int x = joueur.getX();
+        int y = joueur.getY();
+        if (!this.grille[y+1][x].isEtat()) {
+            joueur.haut();
+        }
+        else {
+            System.out.println("l'emplacement n'est pas null");
+        }
     }
 
     public Scene getScene() {

@@ -8,6 +8,7 @@ import com.feueau.sae.partie.Partie;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 public class AppSAE extends Application {
 
@@ -54,11 +56,18 @@ public class AppSAE extends Application {
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
-        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
+        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
+            try {
+                PopUpConnection.showLoginDialog();
+            } catch (UnknownHostException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
-                    Scene sceneJeu = new Scene(reglesPane, 700, 400);
-                    Partie partie = new Partie(sceneJeu, new Level("Level 1"));
+                    Group root = new Group();
+                    Scene sceneJeu = new Scene(root, 700, 400);
+                    Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
                     stageMain.setScene(partie.getScene());
                 }
         );
@@ -79,7 +88,7 @@ public class AppSAE extends Application {
         backGroundImage.appliquerBackground(scene);
 
 
-        stageMain.setFullScreen(true);
+        stageMain.setFullScreen(false);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();

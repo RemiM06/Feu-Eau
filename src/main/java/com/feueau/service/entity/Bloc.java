@@ -19,8 +19,15 @@ public class Bloc {
     }
 
     public void changementEtat() {
-
         this.etat = !this.etat;
+    }
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public Color getCouleur() {
+        return couleur;
     }
 
     public double getX() {
