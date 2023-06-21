@@ -1,5 +1,6 @@
 package com.feueau.sae.menus;
 
+import com.feueau.network.recuperation.IPUtilisateur;
 import com.feueau.sae.menus.composants.CreerBouton;
 import com.feueau.sae.menus.composants.PopUpInscription;
 import javafx.geometry.Pos;
@@ -22,7 +23,7 @@ public class PopUpConnection {
         DialogPane dialogPane = dialogConnexion.getDialogPane();
         dialogPane.setPrefWidth(300);
 
-        InetAddress adresse = InetAddress.getLocalHost();
+        String ipAdress = IPUtilisateur.getIPAddress();
 
         Label usernameLabel = new Label("Nom d'utilisateur:");
         TextField usernameTextField = new TextField();
@@ -31,7 +32,9 @@ public class PopUpConnection {
         TextField passwordTextField = new TextField();
 
         Label ipLabel = new Label("Votre adresse IP:" +
-                adresse.getHostAddress());
+                ipAdress);
+
+
 
 
         VBox content = new VBox(10);
@@ -42,11 +45,11 @@ public class PopUpConnection {
 
         ButtonType loginButtonType = new ButtonType("Se connecter");
         ButtonType registerButtonType = new ButtonType("S'inscrire");
-
+/*
         registerButtonType.setOnAction(event -> {
             new PopUpInscription();
 
-        });
+        });*/
 
 
 
@@ -58,9 +61,8 @@ public class PopUpConnection {
             if (dialogButton == loginButtonType) {
 
                 String username = usernameTextField.getText();
-                String adresseIP = adresse.getHostAddress();
                 System.out.println("Connexion - Nom d'utilisateur : " + username);
-                System.out.println("Connexion - IPAdress : " + adresseIP);
+                System.out.println("Connexion - IPAdress : " + ipAdress);
 
             }
             else{
