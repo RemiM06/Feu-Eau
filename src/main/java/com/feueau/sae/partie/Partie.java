@@ -3,7 +3,10 @@ package com.feueau.sae.partie;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
 import javafx.animation.AnimationTimer;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 import java.util.HashSet;
@@ -11,16 +14,18 @@ import java.util.HashSet;
 public class Partie {
 
     Scene scene;
-
+    Group root;
     Level level;
 
     Joueur joueur1;
     Joueur joueur2;
 
-    public Partie(Scene scene, Level level) {
+    public Partie(Scene scene, Group root, Level level) {
         this.scene = scene;
+        this.root = root;
         this.level = level;
-
+        ImageView ImgJoueur1 = new ImageView(new Image(""));
+        this.root.getChildren().addAll(ImgJoueur1);
         this.initPartie();
     }
 
@@ -63,6 +68,16 @@ public class Partie {
                 aT.stop();
         });
         System.out.println("initPartie");
+    }
+
+    public void deplacementGaucheJoueur(Joueur joueur) {
+
+    }
+    public void deplacementDroitJoueur(Joueur joueur) {
+
+    }
+    public void deplacementHautJoueur(Joueur joueur) {
+
     }
 
     public Scene getScene() {
