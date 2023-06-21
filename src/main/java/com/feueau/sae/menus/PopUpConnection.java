@@ -43,10 +43,10 @@ public class PopUpConnection {
         ButtonType loginButtonType = new ButtonType("Se connecter");
         ButtonType registerButtonType = new ButtonType("S'inscrire");
 
-        registerButtonType.setOnAction(event -> {
+       /* registerButtonType.setOnAction(event -> {
             new PopUpInscription();
 
-        });
+        });*/
 
 
 
