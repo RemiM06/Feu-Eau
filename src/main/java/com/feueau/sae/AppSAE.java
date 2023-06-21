@@ -8,7 +8,6 @@ import com.feueau.sae.partie.Partie;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -58,9 +57,8 @@ public class AppSAE extends Application {
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> PopUpConnection.showLoginDialog());
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
-                    Group root = new Group();
-                    Scene sceneJeu = new Scene(root, 700,400);
-                    Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+                    Scene sceneJeu = new Scene(reglesPane, 700, 400);
+                    Partie partie = new Partie(sceneJeu, new Level("Level 1"));
                     stageMain.setScene(partie.getScene());
                 }
         );
