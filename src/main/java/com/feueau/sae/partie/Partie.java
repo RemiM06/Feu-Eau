@@ -64,7 +64,8 @@ public class Partie {
 
     public ImageView generationImageJoueur(Joueur joueur) {
 
-        ImageView joueurImageView = new ImageView(new Image("C:\\Users\\sr209685\\IdeaProjects\\SAE-Feu-Eau\\src\\main\\resources\\img\\personnage1.png"));
+        String imageUrl = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
+        ImageView joueurImageView = new ImageView(new Image(imageUrl));
         joueurImageView.setFitWidth(scene.getWidth() / level.getNombreCol());
         joueurImageView.setFitHeight(scene.getHeight() / level.getNombreRow());
         joueurImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
