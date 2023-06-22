@@ -53,7 +53,7 @@ public class AppSAE extends Application {
 
 
         //Mise en place du background
-        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.jpg");
+        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
