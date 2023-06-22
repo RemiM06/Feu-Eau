@@ -11,6 +11,7 @@ public class CreerBouton {
         Button bouton = new Button(text);
         bouton.setOnAction(actionEvent -> action.run());
 
+
         HBox.setHgrow(bouton, Priority.ALWAYS);
         HBox hboxBouton = new HBox(bouton);
         hboxBouton.setAlignment(position);

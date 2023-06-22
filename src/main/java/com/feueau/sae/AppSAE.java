@@ -42,6 +42,8 @@ public class AppSAE extends Application {
         BorderPane niveauxPane = new BorderPane();
         this.stageMain = stageMain;
 
+
+
         //Titre
         Label titreAcceuil = new Label("Feu & Eau");
         titreAcceuil.setStyle("-fx-font-size: 72px;");
@@ -53,7 +55,7 @@ public class AppSAE extends Application {
 
 
         //Mise en place du background
-        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
+        backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
@@ -86,6 +88,9 @@ public class AppSAE extends Application {
 
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
+
+        //Import fichier de style
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
 
         stageMain.setFullScreen(false);
