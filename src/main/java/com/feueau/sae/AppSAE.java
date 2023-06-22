@@ -1,6 +1,7 @@
 package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 import com.feueau.sae.menus.composants.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
 import javafx.application.Application;
@@ -21,8 +22,7 @@ public class AppSAE extends Application {
         AppSAE.launch(args);
     }
 
-    private Scene jeuScene;
-    private Scene gameScene;
+    private Scene niveauxScene;
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private Stage stageMain;
@@ -36,6 +36,7 @@ public class AppSAE extends Application {
 
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
+        BorderPane niveauxPane = new BorderPane();
         this.stageMain = stageMain;
 
         //Titre
@@ -45,23 +46,26 @@ public class AppSAE extends Application {
         //Regles
         reglesScene = new Scene(reglesPane, 700, 400);
 
+        niveauxScene = new Scene(niveauxPane, 700, 400);
+
+
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
-            try {
-                PopUpConnection.showLoginDialog();
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
+            PopUpConnection.showLoginDialog();
         });
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
+
+        Button choixNiveau = creerBouton("TEST", Pos.CENTER, () ->{
+            ChoixNiveau.levelSelector(niveauxScene, stageMain);
+        });
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
+        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, choixNiveau);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre

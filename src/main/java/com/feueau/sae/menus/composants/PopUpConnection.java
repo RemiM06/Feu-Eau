@@ -3,7 +3,6 @@ package com.feueau.sae.menus.composants;
 import com.feueau.datas.Utilisateur;
 import com.feueau.network.recuperation.IPUtilisateur;
 import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
@@ -11,7 +10,7 @@ import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
-    public static void showLoginDialog() throws UnknownHostException {
+    public static void showLoginDialog() {
         Dialog<Void> dialogConnexion = new Dialog<>();
         dialogConnexion.setTitle("Connexion/Inscription");
 
@@ -43,9 +42,19 @@ public class PopUpConnection {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
 
-            System.out.println("Connexion - Nom d'utilisateur : " + username);
-            System.out.println("Connexion - IPAdress : " + adresseIP);
-            System.out.println("Connexion - Mot de Passe : " + password);
+            if(usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()){
+                event.consume();
+                Alertes.showAlert("Remplissez tous les champs avant de les valider");
+
+            }
+            else{
+
+                System.out.println("Inscription - Nom d'utilisateur : " + username);
+                System.out.println("Inscription - IPAdress : " + adresseIP);
+                System.out.println("Inscription - Mot de Passe : " + password);
+                Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+            }
+
 
 
 
@@ -56,11 +65,21 @@ public class PopUpConnection {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
 
-            System.out.println("Inscription - Nom d'utilisateur : " + username);
-            System.out.println("Inscription - IPAdress : " + adresseIP);
-            System.out.println("Inscription - Mot de Passe : " + password);
 
-            Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+
+             if(usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()){
+                 event.consume();
+                 Alertes.showAlert("Remplissez tous les champs avant de les valider");
+
+             }
+             else{
+                 System.out.println("Inscription - Nom d'utilisateur : " + username);
+                 System.out.println("Inscription - IPAdress : " + adresseIP);
+                 System.out.println("Inscription - Mot de Passe : " + password);
+                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+             }
+
+
 
         });
 
