@@ -2,36 +2,38 @@ package com.feueau.sae.joueur;
 
 public class Joueur {
 
-    private double y=1.0;
-    private double x=1.0;
+    private int y=1;
+    private int x=1;
+    private String type;
 
     public Joueur() {
     }
-    public Joueur(double y, double x) {
+    public Joueur(int y, int x, String type) {
         this.y=y;
         this.x=x;
+        this.type=type;
     }
-    public double getY() {
+    public int getY() {
         return y;
     }
-    public double getX() {
+    public int getX() {
         return x;
     }
 
     public void gauche() {
-        this.x = ((this.x*10) - 1)/10.0;
+        this.x = this.x-1;
     }
 
     public void droite() {
-        this.x = ((this.x*10) + 1)/10.0;
+        this.x = this.x+1;
     }
 
     public void haut() {
-        this.y = ((this.y*10) + 1)/10.0;
+        this.y = this.y-1;
     }
 
     public void bas() {
-        this.y = ((this.y*10) - 1)/10.0;
+        this.y = this.y+1;
     }
 
     @Override

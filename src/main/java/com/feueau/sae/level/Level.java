@@ -4,76 +4,83 @@ import com.feueau.service.entity.Bloc;
 import javafx.scene.paint.Color;
 
 public class Level {
-    private int tailleRow=10;
-    private int tailleCol=10;
-    private Bloc[][] grille = new Bloc[this.tailleRow][this.tailleCol];
+    private int nombreRow=18;
+    private int nombreCol=32;
+    private Bloc[][] grille = new Bloc[this.nombreRow][this.nombreCol];
 
-    private double xJoueur1;
-    private double yJoueur1;
-    private double xJoueur2;
-    private double yJoueur2;
+    private int xJoueur1;
+    private int yJoueur1;
+    private int xJoueur2;
+    private int yJoueur2;
 
     public Level(String nom) {
-        for (int row = 0; row < this.tailleRow; row++) {
-            for (int col = 0; col < this.tailleRow; col++) {
-                if ((row == 0 || row == this.tailleRow - 1) || (col == 0 || col == this.tailleCol - 1)) {
+        for (int row = 0; row < this.nombreRow; row++) {
+            for (int col = 0; col < this.nombreCol; col++) {
+                if ((row == 0 || row == this.nombreRow - 1) || (col == 0 || col == this.nombreCol - 1)) {
                     this.grille[row][col] = new Bloc(row, col, "bloc", true, Color.BLACK);
                 } else {
-                    this.grille[row][col] = new Bloc(row, col, "bloc", false, Color.BLACK);
+                    this.grille[row][col] = new Bloc(row, col, "vide", false, Color.TRANSPARENT);
                 }
             }
         }
 
         if (nom == "Level 1") {
-            this.xJoueur1 = 1.0;
-            this.yJoueur1 = 1.0;
-            this.xJoueur2 = 2.0;
-            this.yJoueur2 = 1.0;
+            this.xJoueur1 = 1;
+            this.yJoueur1 = 10;
+            this.xJoueur2 = 2;
+            this.yJoueur2 = 10;
 
-            this.grille[8][8] = new Bloc(8, 8, "bloc", true, Color.BLACK);
-            this.grille[7][8] = new Bloc(7, 8, "bloc", true, Color.BLACK);
-            this.grille[8][7] = new Bloc(8, 7, "bloc", true, Color.BLACK);
-            this.grille[7][7] = new Bloc(7, 7, "bloc", true, Color.BLACK);
-            this.grille[6][8] = new Bloc(6, 8, "bloc", true, Color.BLACK);
-            this.grille[8][6] = new Bloc(8, 6, "bloc", true, Color.BLACK);
-            this.grille[5][3] = new Bloc(5, 3, "bloc", true, Color.BLACK);
-            this.grille[5][4] = new Bloc(5, 4, "bloc", true, Color.BLACK);
-            this.grille[5][5] = new Bloc(5, 5, "bloc", true, Color.BLACK);
-            this.grille[5][6] = new Bloc(5, 6, "bloc", true, Color.BLACK);
+            this.grille[16][26] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[16][27] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[16][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[16][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[16][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+
+            this.grille[15][27] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[15][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[15][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[15][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+
+            this.grille[14][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[14][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[14][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+
+            this.grille[1][29] = new Bloc(1,29,"bloc", true, Color.RED);
+            this.grille[1][30] = new Bloc(1,30,"bloc", true, Color.BLUE);
         }
     }
 
-    public int getTailleRow() {
-        return tailleRow;
+    public int getNombreRow() {
+        return nombreRow;
     }
 
-    public int getTailleCol() {
-        return tailleCol;
+    public int getNombreCol() {
+        return nombreCol;
     }
 
     public Bloc[][] getGrille() {
         return grille;
     }
 
-    public double getxJoueur1() {
+    public int getxJoueur1() {
         return xJoueur1;
     }
 
-    public double getyJoueur1() {
+    public int getyJoueur1() {
         return yJoueur1;
     }
 
-    public double getxJoueur2() {
+    public int getxJoueur2() {
         return xJoueur2;
     }
 
-    public double getyJoueur2() {
+    public int getyJoueur2() {
         return yJoueur2;
     }
 
     public String toString() {
-        for (int col = 0; col < this.tailleCol; col++) {
-            for (int row = 0; row < this.tailleRow; row++) {
+        for (int col = 0; col < this.nombreCol; col++) {
+            for (int row = 0; row < this.nombreRow; row++) {
                 /*if ((joueur1.getY() == row) && (joueur1.getX() == col)) {
                     System.out.print(" j " + " ");
                 }
