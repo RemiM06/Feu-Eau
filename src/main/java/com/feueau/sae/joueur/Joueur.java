@@ -18,15 +18,14 @@ public class Joueur {
         this.x=x;
         this.type=type;
         if (type == "feu") {
-            this.pathImgDroit = getClass().getResource("/img/Akainu-droite.jpg").toExternalForm();
-            this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.jpg").toExternalForm();
+            this.pathImgDroit = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
+            this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.png").toExternalForm();
         }
         if (type == "eau") {
-            this.pathImgDroit = getClass().getResource("/img/Aokiji-droite.jpg").toExternalForm();
-            this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche.jpg").toExternalForm();
+            this.pathImgDroit = getClass().getResource("/img/Aokiji-droite-eau.png").toExternalForm();
+            this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche-eau.png").toExternalForm();
         }
     }
-
     public String getType() {
         return type;
     }

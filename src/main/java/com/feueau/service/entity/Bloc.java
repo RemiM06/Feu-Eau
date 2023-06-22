@@ -8,33 +8,31 @@ public class Bloc {
     private int x;
     private String name;
     private boolean etat;
-    private Color couleur;
 
     private String imagePath;
 
-    public Bloc(int y, int x, String name, boolean etat, Color couleur) {
+    public Bloc(int y, int x, String name, boolean etat) {
         this.y = y;
         this.x = x;
         this.name = name;
         this.etat = etat;
-        this.couleur = couleur;
         if (name == "bloc") {
-            this.imagePath = getClass().getResource("/img/Blocs-blocs.jpg").toExternalForm();
+            this.imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
         }
         if (name == "vide") {
-            this.imagePath = getClass().getResource("/img/Blocs-fonds.jpg").toExternalForm();
+            this.imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
         }
         if (name == "eau") {
-
+            this.imagePath = getClass().getResource("/img/eau.png").toExternalForm();
         }
-        if (name == "feu") {
-
+        if (name == "lave") {
+            this.imagePath = getClass().getResource("/img/lave.png").toExternalForm();
         }
         if (name == "porteFinFeu") {
-
+            this.imagePath = getClass().getResource("/img/RedClosedDoor.png").toExternalForm();
         }
         if (name == "porteFinEau") {
-
+            this.imagePath = getClass().getResource("/img/BlueClosedDoor.png").toExternalForm();
         }
     }
 
@@ -46,9 +44,6 @@ public class Bloc {
         return etat;
     }
 
-    public Color getCouleur() {
-        return couleur;
-    }
 
     public double getX() {
         return x;

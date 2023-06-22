@@ -67,8 +67,8 @@ public class Partie {
         ImageView joueurImageView = new ImageView(new Image(joueur.getPathImgDroit()));
         joueurImageView.setFitWidth(scene.getWidth() / level.getNombreCol());
         joueurImageView.setFitHeight(scene.getHeight() / level.getNombreRow());
-        joueurImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
-        joueurImageView.setLayoutY((joueur.getY() + 1) * (scene.getHeight() / level.getNombreRow()));
+        joueurImageView.setLayoutX((joueur.getX()) * (scene.getWidth() / level.getNombreCol()));
+        joueurImageView.setLayoutY((joueur.getY()) * (scene.getHeight() / level.getNombreRow()));
         return joueurImageView;
     }
 
@@ -91,6 +91,7 @@ public class Partie {
         AnimationTimer aT = new AnimationTimer() {
             @Override
             public void handle(long l) {
+
                 for (KeyCode k : tab) {
                     if (tab.contains(KeyCode.LEFT)) {
                         deplacementGaucheJoueur(joueur1);

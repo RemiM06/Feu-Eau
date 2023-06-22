@@ -17,36 +17,36 @@ public class Level {
         for (int row = 0; row < this.nombreRow; row++) {
             for (int col = 0; col < this.nombreCol; col++) {
                 if ((row == 0 || row == this.nombreRow - 1) || (col == 0 || col == this.nombreCol - 1)) {
-                    this.grille[row][col] = new Bloc(row, col, "bloc", true, Color.BLACK);
+                    this.grille[row][col] = new Bloc(row, col, "bloc", true);
                 } else {
-                    this.grille[row][col] = new Bloc(row, col, "vide", false, Color.TRANSPARENT);
+                    this.grille[row][col] = new Bloc(row, col, "vide", false);
                 }
             }
         }
 
         if (nom == "Level 1") {
             this.xJoueur1 = 1;
-            this.yJoueur1 = 10;
+            this.yJoueur1 = 16;
             this.xJoueur2 = 2;
-            this.yJoueur2 = 10;
+            this.yJoueur2 = 16;
 
-            this.grille[16][26] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[16][27] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[16][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[16][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[16][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[16][26] = new Bloc(16, 30, "bloc", true);
+            this.grille[16][27] = new Bloc(16, 30, "bloc", true);
+            this.grille[16][28] = new Bloc(16, 30, "bloc", true);
+            this.grille[16][29] = new Bloc(16, 30, "bloc", true);
+            this.grille[16][30] = new Bloc(16, 30, "bloc", true);
 
-            this.grille[15][27] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[15][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[15][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[15][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[15][27] = new Bloc(16, 30, "bloc", true);
+            this.grille[15][28] = new Bloc(16, 30, "bloc", true);
+            this.grille[15][29] = new Bloc(16, 30, "bloc", true);
+            this.grille[15][30] = new Bloc(16, 30, "bloc", true);
 
-            this.grille[14][28] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[14][29] = new Bloc(16, 30, "bloc", true, Color.BLACK);
-            this.grille[14][30] = new Bloc(16, 30, "bloc", true, Color.BLACK);
+            this.grille[14][28] = new Bloc(16, 30, "bloc", true);
+            this.grille[14][29] = new Bloc(16, 30, "bloc", true);
+            this.grille[14][30] = new Bloc(16, 30, "bloc", true);
 
-            this.grille[1][29] = new Bloc(1,29,"bloc", true, Color.RED);
-            this.grille[1][30] = new Bloc(1,30,"bloc", true, Color.BLUE);
+            this.grille[1][29] = new Bloc(1,29,"porteFinFeu", false);
+            this.grille[1][30] = new Bloc(1,30,"porteFinEau", false);
         }
     }
 
