@@ -19,10 +19,22 @@ public class Bloc {
         this.etat = etat;
         this.couleur = couleur;
         if (name == "bloc") {
-            this.imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
+            this.imagePath = getClass().getResource("/img/Blocs-blocs.jpg").toExternalForm();
         }
         if (name == "vide") {
-            this.imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
+            this.imagePath = getClass().getResource("/img/Blocs-fonds.jpg").toExternalForm();
+        }
+        if (name == "eau") {
+
+        }
+        if (name == "feu") {
+
+        }
+        if (name == "porteFinFeu") {
+
+        }
+        if (name == "porteFinEau") {
+
         }
     }
 
