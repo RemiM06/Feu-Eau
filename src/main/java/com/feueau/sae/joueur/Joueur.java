@@ -18,12 +18,12 @@ public class Joueur {
         this.x=x;
         this.type=type;
         if (type == "feu") {
-            this.pathImgDroit = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
-            this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.png").toExternalForm();
+            this.pathImgDroit = getClass().getResource("/img/Akainu-droite.jpg").toExternalForm();
+            this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.jpg").toExternalForm();
         }
         if (type == "eau") {
-            this.pathImgDroit = getClass().getResource("/img/Aokiji-droite.png").toExternalForm();
-            this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche.png").toExternalForm();
+            this.pathImgDroit = getClass().getResource("/img/Aokiji-droite.jpg").toExternalForm();
+            this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche.jpg").toExternalForm();
         }
     }
 
