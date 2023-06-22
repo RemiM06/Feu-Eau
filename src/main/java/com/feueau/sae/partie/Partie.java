@@ -136,16 +136,16 @@ public class Partie {
     }
 
     public void deplacementGaucheJoueur(Joueur joueur) {
-        int x = joueur.getX();
-        int y = joueur.getY();
+        int x = joueur.getX().intValue();
+        int y = joueur.getY().intValue();
         if (!this.grille[y][x - 1].isEtat()) {
             joueur.gauche();
             if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutX((x - 1) * (scene.getWidth() / level.getNombreCol()));
+                joueur1ImageView.setLayoutX((joueur.getX() - 1) * (scene.getWidth() / level.getNombreCol()));
                 joueur1ImageView.setImage(new Image(joueur.getPathImgGauche()));
             }
             if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutX((x - 1) * (scene.getWidth() / level.getNombreCol()));
+                joueur2ImageView.setLayoutX((joueur.getX() - 1) * (scene.getWidth() / level.getNombreCol()));
                 joueur2ImageView.setImage(new Image(joueur.getPathImgGauche()));
             }
             System.out.println("deplacement");
@@ -155,16 +155,16 @@ public class Partie {
     }
 
     public void deplacementDroitJoueur(Joueur joueur) {
-        int x = joueur.getX();
-        int y = joueur.getY();
+        int x = joueur.getX().intValue();
+        int y = joueur.getY().intValue();
         if (!this.grille[y][x + 1].isEtat()) {
             joueur.droite();
             if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutX((x + 1) * (scene.getWidth() / level.getNombreCol()));
+                joueur1ImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
                 joueur1ImageView.setImage(new Image(joueur.getPathImgDroit()));
             }
             if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutX((x + 1) * (scene.getWidth() / level.getNombreCol()));
+                joueur2ImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
                 joueur2ImageView.setImage(new Image(joueur.getPathImgDroit()));
             }
             System.out.println("deplacement");
@@ -173,15 +173,15 @@ public class Partie {
         }
     }
     public void deplacementHautJoueur(Joueur joueur) {
-        int x = joueur.getX();
-        int y = joueur.getY();
+        int x = joueur.getX().intValue();
+        int y = joueur.getY().intValue();
         if (!this.grille[y - 1][x].isEtat()) {
             joueur.haut();
             if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutY((y - 1) * (scene.getHeight() / level.getNombreRow()));
+                joueur1ImageView.setLayoutY((joueur.getY() - 1) * (scene.getHeight() / level.getNombreRow()));
             }
             if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutY((y - 1) * (scene.getHeight() / level.getNombreRow()));
+                joueur2ImageView.setLayoutY((joueur.getY() - 1) * (scene.getHeight() / level.getNombreRow()));
             }
             System.out.println("deplacement");
         } else {
@@ -189,15 +189,15 @@ public class Partie {
         }
     }
     public void deplacementBasJoueur(Joueur joueur) {
-        int x = joueur.getX();
-        int y = joueur.getY();
+        int x = joueur.getX().intValue();
+        int y = joueur.getY().intValue();
         if (!this.grille[y + 1][x].isEtat()) {
             joueur.bas();
             if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutY((y + 1) * (scene.getHeight() / level.getNombreRow()));
+                joueur1ImageView.setLayoutY((joueur.getY() + 1) * (scene.getHeight() / level.getNombreRow()));
             }
             if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutY((y + 1) * (scene.getHeight() / level.getNombreRow()));
+                joueur2ImageView.setLayoutY((joueur.getY() + 1) * (scene.getHeight() / level.getNombreRow()));
             }
             System.out.println("deplacement");
         } else {

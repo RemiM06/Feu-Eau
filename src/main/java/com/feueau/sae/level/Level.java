@@ -8,10 +8,10 @@ public class Level {
     private int nombreCol=32;
     private Bloc[][] grille = new Bloc[this.nombreRow][this.nombreCol];
 
-    private int xJoueur1;
-    private int yJoueur1;
-    private int xJoueur2;
-    private int yJoueur2;
+    private Double xJoueur1;
+    private Double yJoueur1;
+    private Double xJoueur2;
+    private Double yJoueur2;
 
     public Level(String nom) {
         for (int row = 0; row < this.nombreRow; row++) {
@@ -25,10 +25,10 @@ public class Level {
         }
 
         if (nom == "Level 1") {
-            this.xJoueur1 = 1;
-            this.yJoueur1 = 16;
-            this.xJoueur2 = 2;
-            this.yJoueur2 = 16;
+            this.xJoueur1 = 1.0;
+            this.yJoueur1 = 16.0;
+            this.xJoueur2 = 2.0;
+            this.yJoueur2 = 16.0;
 
             this.grille[16][26] = new Bloc(16, 30, "bloc", true);
             this.grille[16][27] = new Bloc(16, 30, "bloc", true);
@@ -62,19 +62,19 @@ public class Level {
         return grille;
     }
 
-    public int getxJoueur1() {
+    public double getxJoueur1() {
         return xJoueur1;
     }
 
-    public int getyJoueur1() {
+    public double getyJoueur1() {
         return yJoueur1;
     }
 
-    public int getxJoueur2() {
+    public double getxJoueur2() {
         return xJoueur2;
     }
 
-    public int getyJoueur2() {
+    public double getyJoueur2() {
         return yJoueur2;
     }
 

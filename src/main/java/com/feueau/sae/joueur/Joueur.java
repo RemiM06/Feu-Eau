@@ -5,15 +5,15 @@ import javafx.scene.image.ImageView;
 
 public class Joueur {
 
-    private int y=1;
-    private int x=1;
+    private Double y=1.0;
+    private Double x=1.0;
     private String type;
 
     private String pathImgDroit;
     private String pathImgGauche;
     public Joueur() {
     }
-    public Joueur(int y, int x, String type) {
+    public Joueur(Double y, Double x, String type) {
         this.y=y;
         this.x=x;
         this.type=type;
@@ -38,27 +38,27 @@ public class Joueur {
         return pathImgGauche;
     }
 
-    public int getY() {
+    public Double getY() {
         return y;
     }
-    public int getX() {
+    public Double getX() {
         return x;
     }
 
     public void gauche() {
-        this.x = this.x-1;
+        this.x = ((this.x)*10-1)/10.0;
     }
 
     public void droite() {
-        this.x = this.x+1;
+        this.x = ((this.x)*10+1)/10.0;
     }
 
     public void haut() {
-        this.y = this.y-1;
+        this.y = ((this.y)*10-1)/10.0;
     }
 
     public void bas() {
-        this.y = this.y+1;
+        this.y = ((this.y)*10+1)/10.0;
     }
 
     @Override
