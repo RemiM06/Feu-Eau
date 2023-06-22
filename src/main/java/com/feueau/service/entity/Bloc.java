@@ -10,12 +10,20 @@ public class Bloc {
     private boolean etat;
     private Color couleur;
 
+    private String imagePath;
+
     public Bloc(int y, int x, String name, boolean etat, Color couleur) {
         this.y = y;
         this.x = x;
         this.name = name;
         this.etat = etat;
         this.couleur = couleur;
+        if (name == "bloc") {
+            this.imagePath = "/img/carre-noir-racisme-systemique-brutalite-policiere.png";
+        }
+        if (name == "vide") {
+            this.imagePath = "/images.png";
+        }
     }
 
     public void changementEtat() {
@@ -36,6 +44,10 @@ public class Bloc {
 
     public void setX(int x) {
         this.x = x;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getY() {

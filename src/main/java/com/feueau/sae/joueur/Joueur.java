@@ -29,11 +29,11 @@ public class Joueur {
     }
 
     public void haut() {
-        this.y = this.y+1;
+        this.y = this.y-1;
     }
 
     public void bas() {
-        this.y = this.y-1;
+        this.y = this.y+1;
     }
 
     @Override
