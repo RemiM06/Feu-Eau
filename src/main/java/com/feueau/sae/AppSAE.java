@@ -62,9 +62,10 @@ public class AppSAE extends Application {
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
                     Group root = new Group();
-                    Scene sceneJeu = new Scene(root, 700, 400);
+                    Scene sceneJeu = new Scene(root,700,400);
                     Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
                     stageMain.setScene(partie.getScene());
+                    stageMain.setFullScreen(true);
                 }
         );
 
@@ -88,7 +89,7 @@ public class AppSAE extends Application {
         backGroundImage.appliquerBackground(scene);
 
 
-        stageMain.setFullScreen(false);
+        stageMain.setFullScreen(true);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();

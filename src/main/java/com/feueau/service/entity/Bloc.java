@@ -19,10 +19,10 @@ public class Bloc {
         this.etat = etat;
         this.couleur = couleur;
         if (name == "bloc") {
-            this.imagePath = "/img/carre-noir-racisme-systemique-brutalite-policiere.png";
+            this.imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
         }
         if (name == "vide") {
-            this.imagePath = "/images.png";
+            this.imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
         }
     }
 
