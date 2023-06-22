@@ -2,7 +2,6 @@ package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
 import com.feueau.sae.menus.composants.ChoixNiveau;
-import com.feueau.sae.menus.composants.PopUpConnection;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.menus.PopUpConnection;
 import com.feueau.sae.menus.composants.CreerBouton;
@@ -62,11 +61,7 @@ public class AppSAE extends Application {
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
-            try {
-                PopUpConnection.showLoginDialog();
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
+            PopUpConnection.showLoginDialog();
         });
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
