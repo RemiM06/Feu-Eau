@@ -12,7 +12,10 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +31,7 @@ public class AppSAE extends Application {
     private Scene niveauxScene;
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
+    private BackGroundImage titreImage;
     private Stage stageMain;
 
     private Button creerBouton(String texte, Pos position, Runnable action){
@@ -42,9 +46,11 @@ public class AppSAE extends Application {
         BorderPane niveauxPane = new BorderPane();
         this.stageMain = stageMain;
 
+
+
         //Titre
-        Label titreAcceuil = new Label("Feu & Eau");
-        titreAcceuil.setStyle("-fx-font-size: 72px;");
+        Label titreAcceuil = new Label();
+        titreAcceuil.getStyleClass().add("title-pixelart");
 
         //Regles
         reglesScene = new Scene(reglesPane, 700, 400);
@@ -53,13 +59,16 @@ public class AppSAE extends Application {
 
 
         //Mise en place du background
-        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
+        backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
+
+
+        //Chargement de la police
 
         //Boutons
-        Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
+        Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
             PopUpConnection.showLoginDialog();
         });
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
+        Button reglesBouton = creerBouton("Regles", Pos.CENTER, () ->
                 {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
@@ -68,9 +77,24 @@ public class AppSAE extends Application {
                 }
         );
 
-        Button choixNiveau = creerBouton("TEST", Pos.CENTER, () ->{
+        Button choixNiveau = creerBouton("RIEN", Pos.CENTER, () ->{
             ChoixNiveau.levelSelector(niveauxScene, stageMain);
         });
+
+        reglesBouton.getStyleClass().add("one-piece-button");
+        jouerBouton.getStyleClass().add("one-piece-button");
+        choixNiveau.getStyleClass().add("one-piece-button");
+
+        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
+            stageMain.close();
+        });
+
+        //VBox boutonQuitter
+        VBox quitterVBox = new VBox(10);
+        quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
+        quitterVBox.getChildren().addAll(closeBouton);
+        rootPane.setBottom(quitterVBox);
+
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
@@ -84,17 +108,30 @@ public class AppSAE extends Application {
         titreVBox.getChildren().addAll(titreAcceuil);
         rootPane.setTop(titreVBox);
 
+        //Image titre
+        Image image = new Image(getClass().getResourceAsStream("/img/Titre.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(1110); // Définissez la largeur souhaitée de l'image
+        imageView.setFitHeight(153); // Définissez la hauteur souhaitée de l'image
+
+        // Ajoutez l'ImageView à votre scène ou à un autre conteneur approprié
+
+
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
 
         //Import fichier de style
-        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
-        stageMain.setFullScreen(false);
+
+
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
+        titreVBox.getChildren().add(imageView);
+        stageMain.setFullScreen(true);
         stageMain.show();
+
     }
 
 
