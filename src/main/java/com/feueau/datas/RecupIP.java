@@ -7,7 +7,7 @@ public class RecupIP {
 
     public static String RecupIPAvecPseudo(String NomUtilisateur) {
 
-        String url = "jdbc:mysql://localhost:3306/sae_feueau";
+        String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
 

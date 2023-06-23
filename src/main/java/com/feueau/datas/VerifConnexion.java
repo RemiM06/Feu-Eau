@@ -11,7 +11,7 @@ public class VerifConnexion {
 
     public static int Verif(String NomUtilisateur, String MotDePasse) {
 
-        String url = "jdbc:mysql://localhost:3306/sae_feueau";
+        String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
 
