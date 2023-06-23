@@ -62,7 +62,7 @@ public class AppSAE extends Application {
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
                     Group root = new Group();
-                    Scene sceneJeu = new Scene(root,700,400);
+                    Scene sceneJeu = new Scene(root,800,450);
                     Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
                     stageMain.setScene(partie.getScene());
                     stageMain.setFullScreen(true);

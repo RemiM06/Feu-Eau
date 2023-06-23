@@ -67,8 +67,8 @@ public class Partie {
         ImageView joueurImageView = new ImageView(new Image(joueur.getPathImgDroit()));
         joueurImageView.setFitWidth(scene.getWidth() / level.getNombreCol());
         joueurImageView.setFitHeight(scene.getHeight() / level.getNombreRow());
-        joueurImageView.setLayoutX((joueur.getX()) * (scene.getWidth() / level.getNombreCol()));
-        joueurImageView.setLayoutY((joueur.getY()) * (scene.getHeight() / level.getNombreRow()));
+        joueurImageView.setTranslateX((joueur.getX()) * (scene.getWidth() / level.getNombreCol()));
+        joueurImageView.setTranslateY((joueur.getY()) * (scene.getHeight() / level.getNombreRow()));
         return joueurImageView;
     }
 
@@ -86,123 +86,47 @@ public class Partie {
     }
 
     public void initPartie() {
-                HashSet<KeyCode> tab = new HashSet<KeyCode>();
-
-        AnimationTimer aT = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-
-                for (KeyCode k : tab) {
-                    if (tab.contains(KeyCode.LEFT)) {
-                        deplacementGaucheJoueur(joueur1);
-                    }
-                    if (tab.contains(KeyCode.RIGHT)) {
-                        deplacementDroitJoueur(joueur1);
-                    }
-                    if (tab.contains(KeyCode.UP)) {
-                        deplacementHautJoueur(joueur1);
-                    }
-                    if (tab.contains(KeyCode.DOWN)) {
-                        deplacementBasJoueur(joueur1);
-                    }
-
-                    if (tab.contains(KeyCode.Q)) {
-                        deplacementGaucheJoueur(joueur2);
-                    }
-                    if (tab.contains(KeyCode.D)) {
-                        deplacementDroitJoueur(joueur2);
-                    }
-                    if (tab.contains(KeyCode.Z)) {
-                        deplacementHautJoueur(joueur2);
-                    }
-                    if (tab.contains(KeyCode.S)) {
-                        deplacementBasJoueur(joueur2);
-                    }
-                }
-            }
-        };
 
         this.scene.setOnKeyPressed(e -> {
-            boolean wasEmpty = tab.isEmpty();
-            if(tab.add(e.getCode()) && wasEmpty)
-                aT.start();
+            if (e.getCode() == KeyCode.RIGHT) {
+                joueur1.setxVelocity(5.5);
+            }
+            if (e.getCode() == KeyCode.LEFT) {
+                joueur1.setxVelocity(-5.5);
+            }
+            if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
+                joueur1.setJumping(true);
+            }
         });
 
         this.scene.setOnKeyReleased(e -> {
-            if(tab.remove(e.getCode()) && tab.isEmpty())
-                aT.stop();
+            if (e.getCode() == KeyCode.RIGHT) {
+                joueur1.setxVelocity(0.0);
+            }
+            if (e.getCode() == KeyCode.LEFT) {
+                joueur1.setxVelocity(0.0);
+            }
+            if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
+                joueur1.setJumping(false);
+            }
         });
+        new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                if (joueur1.isJumping()) {
+                    System.out.println(joueur1.getyVelocity());
+                    joueur1.setyVelocity(joueur1.getyVelocity() + 0.6);
+                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
+
+                    if (joueur1ImageView.getTranslateY() >= (scene.getHeight()/level.getNombreRow())*16) {
+                        joueur1ImageView.setTranslateY((scene.getHeight()/level.getNombreRow()*16));
+                        joueur1.setJumping(false);
+                    }
+                }
+                joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
+            }
+        }.start();
         System.out.println("initPartie");
-    }
-
-    public void deplacementGaucheJoueur(Joueur joueur) {
-        int x = joueur.getX().intValue();
-        int y = joueur.getY().intValue();
-        if (!this.grille[y][x - 1].isEtat()) {
-            joueur.gauche();
-            if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutX((joueur.getX() - 1) * (scene.getWidth() / level.getNombreCol()));
-                joueur1ImageView.setImage(new Image(joueur.getPathImgGauche()));
-            }
-            if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutX((joueur.getX() - 1) * (scene.getWidth() / level.getNombreCol()));
-                joueur2ImageView.setImage(new Image(joueur.getPathImgGauche()));
-            }
-            System.out.println("deplacement");
-        } else {
-            System.out.println("l'emplacement n'est pas null");
-        }
-    }
-
-    public void deplacementDroitJoueur(Joueur joueur) {
-        int x = joueur.getX().intValue();
-        int y = joueur.getY().intValue();
-        if (!this.grille[y][x + 1].isEtat()) {
-            joueur.droite();
-            if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
-                joueur1ImageView.setImage(new Image(joueur.getPathImgDroit()));
-            }
-            if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutX((joueur.getX() + 1) * (scene.getWidth() / level.getNombreCol()));
-                joueur2ImageView.setImage(new Image(joueur.getPathImgDroit()));
-            }
-            System.out.println("deplacement");
-        } else {
-            System.out.println("l'emplacement n'est pas null");
-        }
-    }
-    public void deplacementHautJoueur(Joueur joueur) {
-        int x = joueur.getX().intValue();
-        int y = joueur.getY().intValue();
-        if (!this.grille[y - 1][x].isEtat()) {
-            joueur.haut();
-            if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutY((joueur.getY() - 1) * (scene.getHeight() / level.getNombreRow()));
-            }
-            if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutY((joueur.getY() - 1) * (scene.getHeight() / level.getNombreRow()));
-            }
-            System.out.println("deplacement");
-        } else {
-            System.out.println("l'emplacement n'est pas null");
-        }
-    }
-    public void deplacementBasJoueur(Joueur joueur) {
-        int x = joueur.getX().intValue();
-        int y = joueur.getY().intValue();
-        if (!this.grille[y + 1][x].isEtat()) {
-            joueur.bas();
-            if (joueur.getType() == "feu") {
-                joueur1ImageView.setLayoutY((joueur.getY() + 1) * (scene.getHeight() / level.getNombreRow()));
-            }
-            if (joueur.getType() == "eau") {
-                joueur2ImageView.setLayoutY((joueur.getY() + 1) * (scene.getHeight() / level.getNombreRow()));
-            }
-            System.out.println("deplacement");
-        } else {
-            System.out.println("l'emplacement n'est pas null");
-        }
     }
 
     public Scene getScene() {

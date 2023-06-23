@@ -7,8 +7,10 @@ public class Joueur {
 
     private Double y=1.0;
     private Double x=1.0;
+    private double xVelocity = 0.0;
+    private double yVelocity = 0.0;
     private String type;
-
+    private boolean isJumping = false;
     private String pathImgDroit;
     private String pathImgGauche;
     public Joueur() {
@@ -26,6 +28,37 @@ public class Joueur {
             this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche-eau.png").toExternalForm();
         }
     }
+
+    public boolean isJumping() {
+        return isJumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        if (jumping) {
+            yVelocity = -12.0;
+        }
+        else {
+            yVelocity = 0.0;
+        }
+        isJumping = jumping;
+    }
+
+    public double getxVelocity() {
+        return xVelocity;
+    }
+
+    public double getyVelocity() {
+        return yVelocity;
+    }
+
+    public void setxVelocity(double xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public void setyVelocity(double yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
     public String getType() {
         return type;
     }
@@ -44,21 +77,12 @@ public class Joueur {
     public Double getX() {
         return x;
     }
-
-    public void gauche() {
-        this.x = ((this.x)*10-1)/10.0;
+    public void setX(Double nb) {
+        this.x = ((this.x)*10+nb)/10.0;
     }
 
-    public void droite() {
-        this.x = ((this.x)*10+1)/10.0;
-    }
-
-    public void haut() {
-        this.y = ((this.y)*10-1)/10.0;
-    }
-
-    public void bas() {
-        this.y = ((this.y)*10+1)/10.0;
+    public void setY(Double nb) {
+        this.y = ((this.y)*10+nb)/10.0;
     }
 
     @Override
