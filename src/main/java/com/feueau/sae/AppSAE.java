@@ -90,7 +90,7 @@ public class AppSAE extends Application {
         backGroundImage.appliquerBackground(scene);
 
         //Import fichier de style
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
 
         stageMain.setFullScreen(false);
