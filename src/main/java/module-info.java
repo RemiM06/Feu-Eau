@@ -1,4 +1,4 @@
-module com.aokijiakainu.sae {
+module com.feueau.sae {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

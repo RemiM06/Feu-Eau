@@ -1,19 +1,19 @@
 package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
-import com.feueau.sae.menus.PopUpConnection;
+import com.feueau.sae.menus.composants.ChoixNiveau;
+import com.feueau.sae.level.Level;
 import com.feueau.sae.menus.composants.CreerBouton;
+import com.feueau.sae.menus.composants.PopUpConnection;
+import com.feueau.sae.partie.Partie;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.net.URL;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -25,8 +25,7 @@ public class AppSAE extends Application {
         AppSAE.launch(args);
     }
 
-    private Scene jeuScene;
-    private Scene gameScene;
+    private Scene niveauxScene;
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private Stage stageMain;
@@ -40,6 +39,7 @@ public class AppSAE extends Application {
 
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
+        BorderPane niveauxPane = new BorderPane();
         this.stageMain = stageMain;
 
         //Titre
@@ -49,23 +49,33 @@ public class AppSAE extends Application {
         //Regles
         reglesScene = new Scene(reglesPane, 700, 400);
 
+        niveauxScene = new Scene(niveauxPane, 700, 400);
+
+
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
-            try {
-                PopUpConnection.showLoginDialog();
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
+            PopUpConnection.showLoginDialog();
         });
-        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () -> stageMain.setScene(reglesScene));
+        Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
+                {
+                    Group root = new Group();
+                    Scene sceneJeu = new Scene(root, 700, 400);
+                    Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+                    stageMain.setScene(partie.getScene());
+                }
+        );
+
+        Button choixNiveau = creerBouton("TEST", Pos.CENTER, () ->{
+            ChoixNiveau.levelSelector(niveauxScene, stageMain);
+        });
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
+        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, choixNiveau);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre
@@ -76,6 +86,9 @@ public class AppSAE extends Application {
 
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
+
+        //Import fichier de style
+        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
 
         stageMain.setFullScreen(false);
