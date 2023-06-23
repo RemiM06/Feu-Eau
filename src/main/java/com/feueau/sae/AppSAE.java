@@ -53,7 +53,7 @@ public class AppSAE extends Application {
 
 
         //Mise en place du background
-        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.svg");
+        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
@@ -86,6 +86,9 @@ public class AppSAE extends Application {
 
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
+
+        //Import fichier de style
+        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
 
         stageMain.setFullScreen(false);
