@@ -2,16 +2,19 @@ package com.feueau.sae.menus.composants;
 
 import com.feueau.datas.Utilisateur;
 import com.feueau.network.recuperation.IPUtilisateur;
+import com.feueau.sae.AppSAE;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
-    public static void showLoginDialog() {
+    public static void showLoginDialog(Stage primaryStage) {
         Dialog<Void> dialogConnexion = new Dialog<>();
+        dialogConnexion.initOwner(primaryStage);
         dialogConnexion.setTitle("Connexion/Inscription");
 
         DialogPane dialogPane = dialogConnexion.getDialogPane();
@@ -53,6 +56,7 @@ public class PopUpConnection {
                 System.out.println("Inscription - IPAdress : " + adresseIP);
                 System.out.println("Inscription - Mot de Passe : " + password);
                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                CreerRejoindre.creerRejoindre(primaryStage);
             }
 
 
@@ -77,6 +81,10 @@ public class PopUpConnection {
                  System.out.println("Inscription - IPAdress : " + adresseIP);
                  System.out.println("Inscription - Mot de Passe : " + password);
                  Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+
+                 CreerRejoindre.creerRejoindre(primaryStage);
+
+
              }
 
 

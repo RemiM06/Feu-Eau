@@ -67,14 +67,8 @@ a
 1src/main/java/com/feueau/service/entity/Bloc.java,b\b\bb8e62d51e1587e4d665d4f719b4d0c863c3327d
 ]
 -src/main/java/com/feueau/sae/level/Level.java,f\3\f38e653ddb5fe11dc1f2813005e875526d32283b
-_
-/src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
 c
 3src/main/java/com/feueau/service/entity/Player.java,0\7\0712cb700d19f88565e5c696068598d5b0201f41
-Z
-*src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
-r
-Bsrc/main/java/com/feueau/sae/menus/composants/PopUpConnection.java,4\0\4085cfc55058f099b514cc834ac6b773e5c2daaa
 _
 /src/main/java/com/feueau/sae/partie/Partie.java,5\d\5dd4ba0b40e8df6b3a547a7fae34232e1c717453
 ^
