@@ -59,7 +59,7 @@ public class AppSAE extends Application {
 
         //Boutons
         Button jouerBouton = creerBouton("JOUER", Pos.CENTER, () -> {
-            PopUpConnection.showLoginDialog();
+            PopUpConnection.showLoginDialog(stageMain);
         });
         Button reglesBouton = creerBouton("REGLES", Pos.CENTER, () ->
                 {
@@ -74,10 +74,20 @@ public class AppSAE extends Application {
             ChoixNiveau.levelSelector(niveauxScene, stageMain);
         });
 
+        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
+            stageMain.close();
+        });
+
+        //VBox boutonQuitter
+        VBox quitterVBox = new VBox(10);
+        quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
+        quitterVBox.getChildren().addAll(closeBouton);
+        rootPane.setBottom(quitterVBox);
+
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, choixNiveau);
+        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, choixNiveau, closeBouton);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre
@@ -89,11 +99,13 @@ public class AppSAE extends Application {
         Scene scene = new Scene(rootPane, 700, 400);
         backGroundImage.appliquerBackground(scene);
 
-        //Import fichier de style
-        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        String username = System.getProperty("user.name");
+        System.out.println("Nom d'utilisateur : " + username);
 
 
-        stageMain.setFullScreen(false);
+
+
+        stageMain.setFullScreen(true);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();

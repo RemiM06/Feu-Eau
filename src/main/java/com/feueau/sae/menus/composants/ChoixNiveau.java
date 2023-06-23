@@ -34,7 +34,7 @@ public class ChoixNiveau {
 
         ((BorderPane) sceneNiveaux.getRoot()).setCenter(vboxBoutons);
 
-        backGroundImage = new BackGroundImage("/img/Akainu-vs-Aokiji.png");
+        backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
         backGroundImage.appliquerBackground(sceneNiveaux);
         stageMain.setScene(sceneNiveaux);
     }
