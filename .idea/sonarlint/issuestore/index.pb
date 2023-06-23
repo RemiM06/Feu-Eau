@@ -53,8 +53,6 @@ _
 .src/main/java/com/feueau/sae/level/LEVEL2.java,c\0\c06e79359d1685e485402bb3e51fbe476dc8be8e
 ^
 .src/main/java/com/feueau/sae/level/LEVEL3.java,e\d\edb1db73cbbfb2ea9d4e2faa56fad80968ed3321
-\
-,src/main/java/com/feueau/network/Client.java,d\1\d199b75d12839a56259f06e7432194392e220ab0
 p
 @src/main/java/com/feueau/network/recuperation/IPUtilisateur.java,5\2\52bba3fa50f8c8d50deb9c4127939d7e37a28013
 ]
@@ -67,8 +65,6 @@ c
 3src/main/java/com/feueau/service/entity/Player.java,0\7\0712cb700d19f88565e5c696068598d5b0201f41
 Z
 *src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
-r
-Bsrc/main/java/com/feueau/sae/menus/composants/PopUpConnection.java,4\0\4085cfc55058f099b514cc834ac6b773e5c2daaa
 _
 /src/main/java/com/feueau/sae/partie/Partie.java,5\d\5dd4ba0b40e8df6b3a547a7fae34232e1c717453
 ^
