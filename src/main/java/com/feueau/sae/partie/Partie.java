@@ -89,10 +89,10 @@ public class Partie {
 
         this.scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.RIGHT) {
-                joueur1.setxVelocity(5.5);
+                joueur1.setxVelocity(6);
             }
             if (e.getCode() == KeyCode.LEFT) {
-                joueur1.setxVelocity(-5.5);
+                joueur1.setxVelocity(-6);
             }
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
                 joueur1.setJumping(true);
@@ -114,21 +114,57 @@ public class Partie {
             @Override
             public void handle(long l) {
                 if (joueur1.isJumping()) {
-                    System.out.println(joueur1.getyVelocity());
-                    joueur1.setyVelocity(joueur1.getyVelocity() + 0.6);
-                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
+                    if (checkBlocY(joueur1)) {
+                        joueur1.setyVelocity(joueur1.getyVelocity() + 0.6);
+                        joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
 
-                    if (joueur1ImageView.getTranslateY() >= (scene.getHeight()/level.getNombreRow())*16) {
-                        joueur1ImageView.setTranslateY((scene.getHeight()/level.getNombreRow()*16));
+                        if (joueur1ImageView.getTranslateY() >= (scene.getHeight() / level.getNombreRow()) * 16) {
+                            joueur1ImageView.setTranslateY((scene.getHeight() / level.getNombreRow() * 16));
+                            joueur1.setJumping(false);
+                        }
+                    }
+                    else {
                         joueur1.setJumping(false);
                     }
                 }
-                joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
+                if (true)
+                {
+                    joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
+                    joueur1.setX(joueur1.getxVelocity() / 6.0);
+                }
             }
         }.start();
         System.out.println("initPartie");
     }
 
+    public boolean checkBlocY(Joueur joueur) {
+        //Valeur de X en int
+        int x1 = joueur.getX().intValue();
+        //Valeur de X en int au cas ou le personnage soit sur 2 cases
+        int x2 = joueur.getX().intValue();
+        //Si le personnage est sur 2 cases alors x2 vaut +1 pour verifier les 2 cases
+        if (x2/joueur.getX() != 1)
+        {
+            x2 += 1;
+        }
+        int y = joueur.getY().intValue() - 1;
+        System.out.println("-----------------");
+        System.out.println(y);
+        System.out.println(x1);
+        System.out.println(x2);
+        System.out.println("-----------------");
+        if (grille[y][x1].isEtat() || grille[y][x2].isEtat())
+        {
+
+            System.out.println("Ne peux pas sauter");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkBlocX(Joueur joueur) {
+        return true;
+    }
     public Scene getScene() {
         return scene;
     }
