@@ -66,7 +66,7 @@ public class AppSAE extends Application {
 
         //Boutons
         Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
-            PopUpConnection.showLoginDialog();
+            PopUpConnection.showLoginDialog(stageMain);
         });
         Button reglesBouton = creerBouton("Regles", Pos.CENTER, () ->
                 {

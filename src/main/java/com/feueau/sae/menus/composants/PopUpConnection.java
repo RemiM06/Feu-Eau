@@ -2,16 +2,19 @@ package com.feueau.sae.menus.composants;
 
 import com.feueau.datas.Utilisateur;
 import com.feueau.network.recuperation.IPUtilisateur;
+import com.feueau.sae.AppSAE;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
-    public static void showLoginDialog() {
+    public static void showLoginDialog(Stage primaryStage) {
         Dialog<Void> dialogConnexion = new Dialog<>();
+        dialogConnexion.initOwner(primaryStage);
         dialogConnexion.setTitle("Connexion/Inscription");
 
         DialogPane dialogPane = dialogConnexion.getDialogPane();
@@ -21,11 +24,11 @@ public class PopUpConnection {
         TextField usernameTextField = new TextField();
 
         Label passwordLabel = new Label("Mot de passe:");
-        TextField passwordTextField = new TextField();
+        PasswordField passwordTextField = new PasswordField();
 
         String adresseIP = IPUtilisateur.getIPAddress();
-
         Label ipLabel = new Label("Votre adresse IP: " + adresseIP);
+
 
         VBox content = new VBox(10);
         content.getChildren().addAll(usernameLabel, usernameTextField, ipLabel, passwordLabel, passwordTextField);
@@ -47,12 +50,13 @@ public class PopUpConnection {
                 Alertes.showAlert("Remplissez tous les champs avant de les valider");
 
             }
-            else{
+            else {
 
                 System.out.println("Inscription - Nom d'utilisateur : " + username);
                 System.out.println("Inscription - IPAdress : " + adresseIP);
                 System.out.println("Inscription - Mot de Passe : " + password);
-                Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                //Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                CreerRejoindre.creerRejoindre(primaryStage);
             }
 
 
@@ -76,7 +80,11 @@ public class PopUpConnection {
                  System.out.println("Inscription - Nom d'utilisateur : " + username);
                  System.out.println("Inscription - IPAdress : " + adresseIP);
                  System.out.println("Inscription - Mot de Passe : " + password);
-                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                 //Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+
+                 CreerRejoindre.creerRejoindre(primaryStage);
+
+
              }
 
 
