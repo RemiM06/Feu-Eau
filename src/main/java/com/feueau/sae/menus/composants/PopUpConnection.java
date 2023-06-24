@@ -27,7 +27,7 @@ public class PopUpConnection {
         PasswordField passwordTextField = new PasswordField();
 
         String adresseIP = IPUtilisateur.getIPAddress();
-        Label ipLabel = new Label("Votre adresse IP: " + adresseIP);
+        Label ipLabel = new Label("Votre adresse IP est: " + adresseIP);
 
 
         VBox content = new VBox(10);
@@ -69,8 +69,6 @@ public class PopUpConnection {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
 
-
-
              if(usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()){
                  event.consume();
                  Alertes.showAlert("Remplissez tous les champs avant de les valider");
@@ -86,8 +84,6 @@ public class PopUpConnection {
 
 
              }
-
-
 
         });
 

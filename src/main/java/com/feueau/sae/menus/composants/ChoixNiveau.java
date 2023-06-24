@@ -1,8 +1,11 @@
 package com.feueau.sae.menus.composants;
 
 import com.feueau.sae.graphiques.BackGroundImage;
+import com.feueau.sae.level.Level;
+import com.feueau.sae.partie.Partie;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,57 +14,52 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
+
 public class ChoixNiveau {
 
-    static BackGroundImage backGroundImage;
+static BackGroundImage backGroundImage;
 
-    public static void levelSelector(Scene sceneNiveaux, Stage stageMain) {
+    public static void levelSelector(Stage primaryStage, String nomPartie, String mdpPartie) {
+
+        BorderPane levelSelectorPane = new BorderPane();
+
+        backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
+        primaryStage.setTitle("Veuillez choisir une niveau");
+
+
+        Button niveau1 = creerBouton("NIVEAU 1", Pos.CENTER, () -> {
+            Group root = new Group();
+            Scene sceneJeu = new Scene(root, 700, 400);
+            Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+            primaryStage.setScene(partie.getScene());
+            primaryStage.setFullScreen(true);
+        });
+
+        Button niveau2 = creerBouton("NIVEAU 2", Pos.CENTER, () -> {
+
+        });
+
+        Button niveau3 = creerBouton("NIVEAU 3", Pos.CENTER, () -> {
+
+        });
 
 
 
-        Button niveau1 = new Button("Niveau 1");
-        Button niveau2 = new Button("Niveau 2");
-        Button niveau3 = new Button("Niveau 3");
 
-        niveau1.setOnAction(event -> ouvrirNiveau(sceneNiveaux, "Niveau 1"));
-        niveau2.setOnAction(event -> ouvrirNiveau(sceneNiveaux, "Niveau 2"));
-        niveau3.setOnAction(event -> ouvrirNiveau(sceneNiveaux, "Niveau 3"));
-
+        //VBox boutons niveaux
         VBox vboxBoutons = new VBox(10);
         vboxBoutons.setPadding(new Insets(10));
         vboxBoutons.setAlignment(Pos.CENTER);
         vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3);
+        levelSelectorPane.setCenter(vboxBoutons);
 
-        ((BorderPane) sceneNiveaux.getRoot()).setCenter(vboxBoutons);
+        Scene levelSelectorScene = new Scene(levelSelectorPane);
+        backGroundImage.appliquerBackground(levelSelectorScene);
 
-        backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
-        backGroundImage.appliquerBackground(sceneNiveaux);
-        stageMain.setScene(sceneNiveaux);
-    }
+        primaryStage.setScene(levelSelectorScene);
+        primaryStage.setFullScreen(true);
 
-    private static Scene creerSceneNiveau(String niveau) {
-        GridPane niveauGrid = new GridPane();
-
-        Button bloc1 = new Button();
-        Button bloc2 = new Button();
-        Button bloc3 = new Button();
-
-        niveauGrid.add(bloc1, 0, 0);
-        niveauGrid.add(bloc2, 1, 0);
-        niveauGrid.add(bloc3, 0, 1);
-
-        Label labelNiveau = new Label("Niveau : " + niveau);
-        niveauGrid.add(labelNiveau, 0, 0);
-
-        Scene niveauScene = new Scene(niveauGrid, 700, 400);
-
-        return niveauScene;
-    }
-
-    public static void ouvrirNiveau(Scene scene, String niveau) {
-        Scene niveauScene = creerSceneNiveau(niveau);
-        Stage stage = (Stage) scene.getWindow();
-        stage.setScene(niveauScene);
     }
 
 }

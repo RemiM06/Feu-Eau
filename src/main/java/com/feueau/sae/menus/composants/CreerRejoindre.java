@@ -1,6 +1,7 @@
 package com.feueau.sae.menus.composants;
 
 import com.feueau.sae.graphiques.BackGroundImage;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,10 +27,10 @@ public class CreerRejoindre {
         });
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogCreationPartie(primaryStage);
+            PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
         });
 
-        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
+        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
 
@@ -45,12 +46,12 @@ public class CreerRejoindre {
         creerRejoindreVBox.getChildren().addAll(creerBouton, rejoindreBouton);
         creerRejoindrePane.setCenter(creerRejoindreVBox);
 
-        Scene creerrejoindreScene = new Scene(creerRejoindrePane);
-        backGroundImage.appliquerBackground(creerrejoindreScene);
+        Scene creerRejoindreScene = new Scene(creerRejoindrePane);
+        backGroundImage.appliquerBackground(creerRejoindreScene);
 
 
         // Configuration de la nouvelle scène sur la stage existante
-        primaryStage.setScene(creerrejoindreScene);
+        primaryStage.setScene(creerRejoindreScene);
         primaryStage.setFullScreen(true);
 
     }

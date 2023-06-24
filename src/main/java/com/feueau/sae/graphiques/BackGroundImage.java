@@ -29,10 +29,4 @@ public class BackGroundImage {
         root.setBackground(background);
     }
 
-    public void applyBackground(Stage stage) {
-        Scene scene = stage.getScene();
-        if (scene != null) {
-            appliquerBackground(scene);
-        }
-    }
 }

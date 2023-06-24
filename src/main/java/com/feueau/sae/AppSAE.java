@@ -52,8 +52,7 @@ public class AppSAE extends Application {
         Label titreAcceuil = new Label();
         titreAcceuil.getStyleClass().add("title-pixelart");
 
-        //Regles
-        reglesScene = new Scene(reglesPane, 700, 400);
+
 
         niveauxScene = new Scene(niveauxPane, 700, 400);
 
@@ -74,16 +73,14 @@ public class AppSAE extends Application {
                     Scene sceneJeu = new Scene(root, 700, 400);
                     Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
                     stageMain.setScene(partie.getScene());
+                    stageMain.setFullScreen(true);
                 }
         );
 
-        Button choixNiveau = creerBouton("RIEN", Pos.CENTER, () ->{
-            ChoixNiveau.levelSelector(niveauxScene, stageMain);
-        });
+
 
         reglesBouton.getStyleClass().add("one-piece-button");
         jouerBouton.getStyleClass().add("one-piece-button");
-        choixNiveau.getStyleClass().add("one-piece-button");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
             stageMain.close();
@@ -99,7 +96,7 @@ public class AppSAE extends Application {
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton, choixNiveau);
+        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre

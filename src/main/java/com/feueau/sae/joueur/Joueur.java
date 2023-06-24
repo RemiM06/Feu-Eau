@@ -14,6 +14,7 @@ public class Joueur {
     private String pathImgDroit;
     private String pathImgGauche;
     public Joueur() {
+
     }
     public Joueur(Double y, Double x, String type) {
         this.y=y;
