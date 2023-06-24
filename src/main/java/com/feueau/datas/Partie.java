@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 public class Partie {
 
     public static void AjoutPartie(String nomPartie, String motDePassePartie, int Joueur1, int Joueur2, int NumNiv) {
+
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
         String motDePasseBDD = "";
