@@ -70,7 +70,13 @@ public class AppSAE extends Application {
         );
 
         Button choixNiveau = creerBouton("TEST", Pos.CENTER, () ->{
-            ChoixNiveau.levelSelector(niveauxScene, stageMain);
+            Double gravity = -12.0;
+            for (int i=0;i<10;i++) {
+                gravity = gravity - i/10.0;
+                System.out.println(gravity);
+            }
+
+            //ChoixNiveau.levelSelector(niveauxScene, stageMain);
         });
 
         //VBox boutons
@@ -89,7 +95,7 @@ public class AppSAE extends Application {
         backGroundImage.appliquerBackground(scene);
 
 
-        stageMain.setFullScreen(true);
+        stageMain.setFullScreen(false);
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
         stageMain.setScene(scene);
         stageMain.show();

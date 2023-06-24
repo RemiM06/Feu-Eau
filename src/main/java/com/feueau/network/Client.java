@@ -10,12 +10,13 @@ public class Client {
 
         try {
             // Établir une connexion avec le serveur
-            clientSocket = new Socket("134.59.143.49", 1234);
+            clientSocket = new Socket("192.168.56.1", 1234);
         } catch (UnknownHostException e) {
             System.out.println("Adresse IP du serveur inconnue.");
             System.exit(1);
         } catch (IOException e) {
             System.out.println("Erreur lors de la connexion au serveur.");
+            e.printStackTrace();
             System.exit(1);
         }
 

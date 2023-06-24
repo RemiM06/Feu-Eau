@@ -4,16 +4,12 @@ import javafx.scene.paint.Color;
 
 public class Bloc {
 
-    private int y;
-    private int x;
     private String name;
     private boolean etat;
 
     private String imagePath;
 
-    public Bloc(int y, int x, String name, boolean etat) {
-        this.y = y;
-        this.x = x;
+    public Bloc(String name, boolean etat) {
         this.name = name;
         this.etat = etat;
         if (name == "bloc") {
@@ -44,25 +40,8 @@ public class Bloc {
         return etat;
     }
 
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public String getImagePath() {
         return imagePath;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public String getName() {

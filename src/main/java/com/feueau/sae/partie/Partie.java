@@ -113,31 +113,43 @@ public class Partie {
         new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if (joueur1.isJumping()) {
-                    if (checkBlocY(joueur1)) {
-                        joueur1.setyVelocity(joueur1.getyVelocity() + 0.6);
-                        joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
-
-                        if (joueur1ImageView.getTranslateY() >= (scene.getHeight() / level.getNombreRow()) * 16) {
-                            joueur1ImageView.setTranslateY((scene.getHeight() / level.getNombreRow() * 16));
-                            joueur1.setJumping(false);
-                        }
-                    }
-                    else {
+                // verifie si le joueur est en saut ou en chut libre (même façon de descendre)
+                if (joueur1.isJumping() || checkBlocY(joueur1, "bas")) {
+                    //Vitesse de la chute
+                    System.out.println("------------------");
+                    System.out.println((joueur1.getyVelocity()*10.0 + 6.0)/10.0);
+                    joueur1.setyVelocity((joueur1.getyVelocity()*10.0 + 6.0)/10.0);
+                    //ne fait plus monter le joueur si il y a un obstacle au dessus
+                    if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity() < 0)) {
                         joueur1.setJumping(false);
                     }
+                    if (!checkBlocY(joueur1, "bas") && (joueur1.getyVelocity() > 0)) {
+                        joueur1.setJumping(false);
+                    }
+                    // deplace le joueur
+                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
+                    joueur1.setY(((joueur1.getyVelocity())*10.0 / 6.0)/10.0);
                 }
-                if (true)
+                if (joueur1.getxVelocity() != 0)
                 {
-                    joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
-                    joueur1.setX(joueur1.getxVelocity() / 6.0);
+                    String direction;
+                    if (joueur1.getxVelocity() > 0) {
+                        direction = "droite";
+                    }
+                    else {
+                        direction = "gauche";
+                    }
+                    if (checkBlocX(joueur1, direction)) {
+                        joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
+                        joueur1.setX(joueur1.getxVelocity() / 6.0);
+                    }
                 }
             }
         }.start();
         System.out.println("initPartie");
     }
 
-    public boolean checkBlocY(Joueur joueur) {
+    public boolean checkBlocY(Joueur joueur, String direction) {
         //Valeur de X en int
         int x1 = joueur.getX().intValue();
         //Valeur de X en int au cas ou le personnage soit sur 2 cases
@@ -147,22 +159,47 @@ public class Partie {
         {
             x2 += 1;
         }
-        int y = joueur.getY().intValue() - 1;
-        System.out.println("-----------------");
-        System.out.println(y);
-        System.out.println(x1);
-        System.out.println(x2);
-        System.out.println("-----------------");
-        if (grille[y][x1].isEtat() || grille[y][x2].isEtat())
-        {
-
-            System.out.println("Ne peux pas sauter");
-            return false;
+        int y = joueur.getY().intValue();
+        if (direction == "haut") {
+            if (grille[y][x1].isEtat() || grille[y][x2].isEtat()) {
+                return false;
+            }
+        }
+        if (direction == "bas") {
+            if (grille[y+1][x1].isEtat() || grille[y+1][x2].isEtat()) {
+                return false;
+            }
         }
         return true;
     }
 
-    public boolean checkBlocX(Joueur joueur) {
+    public boolean checkBlocX(Joueur joueur, String direction) {
+        //Valeur de Y en int
+        int y1 = joueur.getY().intValue();
+        //Valeur de Y en int au cas ou le personnage soit sur 2 cases
+        int y2 = joueur.getY().intValue();
+        //Si le personnage est sur 2 cases alors y2 vaut +1 pour verifier les 2 cases
+        if (y2/joueur.getY() != 1)
+        {
+            y2 += 1;
+        }
+
+
+        if (direction == "droite") {
+            Double newX = joueur.getX()+0.1;
+            int x = newX.intValue();
+            if (grille[y1][x+1].isEtat() || grille[y2][x+1].isEtat()) {
+                return false;
+            }
+        }
+        if (direction == "gauche") {
+            Double newX = joueur.getX()-0.1;
+            int x = newX.intValue();
+
+            if (grille[y1][x].isEtat() || grille[y2][x].isEtat()) {
+                return false;
+            }
+        }
         return true;
     }
     public Scene getScene() {

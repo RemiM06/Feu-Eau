@@ -79,10 +79,18 @@ public class Joueur {
     }
     public void setX(Double nb) {
         this.x = ((this.x)*10+nb)/10.0;
+        System.out.print("Coordonnée x a ajouter : ");
+        System.out.print(nb);
+        System.out.print("Coordonnée x : ");
+        System.out.println(this.x);
     }
 
     public void setY(Double nb) {
         this.y = ((this.y)*10+nb)/10.0;
+        System.out.print("Coordonnée y a ajouter : ");
+        System.out.print(nb);
+        System.out.print("Coordonnée y : ");
+        System.out.println(this.y);
     }
 
     @Override
