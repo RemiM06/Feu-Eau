@@ -13,7 +13,8 @@ public class Serveur {
 
         try {
             // Créer un socket serveur et écouter sur le port 1234
-            serverSocket = new ServerSocket(1234, 0, InetAddress.getLocalHost());
+            String ipAddress = "127.0.0.1";
+            serverSocket = new ServerSocket(1234, 0, InetAddress.getByName(ipAddress));
         } catch (IOException e) {
             System.out.println("Erreur lors de la création du socket serveur.");
             System.exit(1);
@@ -38,9 +39,9 @@ public class Serveur {
 }
 
 class ServeurThread implements Runnable {
-    private Socket clientSocket;
-    private BufferedReader input;
-    private PrintWriter output;
+    private final Socket clientSocket;
+    public BufferedReader input;
+    public PrintWriter output;
     private List<ServeurThread> threads;
 
     public ServeurThread(Socket clientSocket, List<ServeurThread> threads) {

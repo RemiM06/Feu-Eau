@@ -9,7 +9,8 @@ public class Client {
         Socket clientSocket = null;
 
         try {
-            clientSocket = new Socket("192.168.56.1", 1234);
+            // Établir une connexion avec le serveur
+            clientSocket = new Socket("134.59.143.50", 1234);
         } catch (UnknownHostException e) {
             System.out.println("Adresse IP du serveur inconnue.");
             System.exit(1);
