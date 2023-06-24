@@ -15,13 +15,18 @@ public class CreerRejoindre {
     static BackGroundImage backGroundImage;
 
     public static void creerRejoindre(Stage primaryStage){
-        BorderPane creerrejoindrePane = new BorderPane();
+
+        BorderPane creerRejoindrePane = new BorderPane();
 
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
         primaryStage.setTitle("Veuillez choisir une option");
 
         Button creerBouton = creerBouton("CREER UNE PARTIE", Pos.CENTER, () ->{
                 PopUpCreerPartie.dialogCreationPartie();
+        });
+
+        Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
+            PopUpCreerPartie.dialogCreationPartie();
         });
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
@@ -32,15 +37,15 @@ public class CreerRejoindre {
         VBox quitterVBox = new VBox(10);
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
         quitterVBox.getChildren().addAll(closeBouton);
-        creerrejoindrePane.setBottom(quitterVBox);
+        creerRejoindrePane.setBottom(quitterVBox);
 
         //VBox boutons
         VBox creerRejoindreVBox = new VBox(10);
         creerRejoindreVBox.setAlignment(Pos.CENTER);
         creerRejoindreVBox.getChildren().addAll(creerBouton);
-        creerrejoindrePane.setCenter(creerRejoindreVBox);
+        creerRejoindrePane.setCenter(creerRejoindreVBox);
 
-        Scene creerrejoindreScene = new Scene(creerrejoindrePane);
+        Scene creerrejoindreScene = new Scene(creerRejoindrePane);
         backGroundImage.appliquerBackground(creerrejoindreScene);
 
 

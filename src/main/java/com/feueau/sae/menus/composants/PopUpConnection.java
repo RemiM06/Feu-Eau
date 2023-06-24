@@ -55,7 +55,7 @@ public class PopUpConnection {
                 System.out.println("Inscription - Nom d'utilisateur : " + username);
                 System.out.println("Inscription - IPAdress : " + adresseIP);
                 System.out.println("Inscription - Mot de Passe : " + password);
-                Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                //Utilisateur.AjoutUtilisateur(username, password, adresseIP);
                 CreerRejoindre.creerRejoindre(primaryStage);
             }
 
@@ -80,7 +80,7 @@ public class PopUpConnection {
                  System.out.println("Inscription - Nom d'utilisateur : " + username);
                  System.out.println("Inscription - IPAdress : " + adresseIP);
                  System.out.println("Inscription - Mot de Passe : " + password);
-                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
+                 //Utilisateur.AjoutUtilisateur(username, password, adresseIP);
 
                  CreerRejoindre.creerRejoindre(primaryStage);
 
