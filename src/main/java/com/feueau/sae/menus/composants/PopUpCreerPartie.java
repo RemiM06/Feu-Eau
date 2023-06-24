@@ -1,45 +1,47 @@
 package com.feueau.sae.menus.composants;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.Optional;
 
 public class PopUpCreerPartie {
 
-    public static void dialogCreationPartie(){
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Créer une partie");
+    public static void dialogCreationPartie(Stage mainStage){
+        Dialog<Pair<String, String>> dialogCreatePartie = new Dialog<>();
+        dialogCreatePartie.initOwner(mainStage);
+        dialogCreatePartie.setTitle("Créer une partie");
+        DialogPane dialogPane = dialogCreatePartie.getDialogPane();
+        dialogPane.setPrefWidth(300);
 
-        // Créez les contrôles pour les champs de nom de partie et de mot de passe
+
+        Label nomPartieLabel = new Label("Nom de la partie que vous souhaitez rejoindre: ");
         TextField nomPartieTextField = new TextField();
-        PasswordField motDePasseField = new PasswordField();
 
-        // Créez le contenu de la dialog
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.addRow(0, new Label("Nom de la partie:"), nomPartieTextField);
-        gridPane.addRow(1, new Label("Mot de passe:"), motDePasseField);
-        dialog.getDialogPane().setContent(gridPane);
+        Label mdpLabel = new Label("Mot de passe de la partie que vous souhaitez rejoindre: ");
+        PasswordField mdpField = new PasswordField();
 
-        // Ajoutez les boutons de validation et d'annulation
+        VBox contentDialog = new VBox(10);
+        contentDialog.getChildren().addAll(nomPartieLabel, mdpLabel, nomPartieTextField, mdpField);
+        dialogPane.setContent(contentDialog);
+
+
         ButtonType validerButtonType = new ButtonType("Valider", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(validerButtonType, ButtonType.CANCEL);
+        dialogCreatePartie.getDialogPane().getButtonTypes().addAll(validerButtonType, ButtonType.CANCEL);
 
-        // Configurez l'action de validation
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == validerButtonType) {
-                String nomPartie = nomPartieTextField.getText();
-                String motDePasse = motDePasseField.getText();
-                return new Pair<>(nomPartie, motDePasse);
-            }
-            return null;
+        Button validateButton = (Button) dialogPane.lookupButton(validerButtonType);
+        validateButton.addEventFilter(ActionEvent.ACTION, event -> {
+
+
+
         });
 
         // Affichez la dialog et attendez la réponse
-        Optional<Pair<String, String>> result = dialog.showAndWait();
+        Optional<Pair<String, String>> result = dialogCreatePartie.showAndWait();
         result.ifPresent(pair -> {
             String nomPartie = pair.getKey();
             String motDePasse = pair.getValue();

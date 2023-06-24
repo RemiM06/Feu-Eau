@@ -22,11 +22,11 @@ public class CreerRejoindre {
         primaryStage.setTitle("Veuillez choisir une option");
 
         Button creerBouton = creerBouton("CREER UNE PARTIE", Pos.CENTER, () ->{
-                PopUpCreerPartie.dialogCreationPartie();
+            PopUpCreerPartie.dialogCreationPartie(primaryStage);
         });
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogCreationPartie();
+            PopUpCreerPartie.dialogCreationPartie(primaryStage);
         });
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
@@ -42,7 +42,7 @@ public class CreerRejoindre {
         //VBox boutons
         VBox creerRejoindreVBox = new VBox(10);
         creerRejoindreVBox.setAlignment(Pos.CENTER);
-        creerRejoindreVBox.getChildren().addAll(creerBouton);
+        creerRejoindreVBox.getChildren().addAll(creerBouton, rejoindreBouton);
         creerRejoindrePane.setCenter(creerRejoindreVBox);
 
         Scene creerrejoindreScene = new Scene(creerRejoindrePane);
