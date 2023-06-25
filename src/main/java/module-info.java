@@ -5,6 +5,7 @@ module com.feueau.sae {
     requires netty.socketio;
     requires engine.io.client;
     requires socket.io.client;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.feueau.sae to javafx.fxml;

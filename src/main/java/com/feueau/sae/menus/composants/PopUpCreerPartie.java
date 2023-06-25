@@ -1,11 +1,15 @@
 package com.feueau.sae.menus.composants;
 
 
+import com.feueau.network.Client;
+import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+
+import java.net.URISyntaxException;
 
 public class PopUpCreerPartie {
 
@@ -48,11 +52,13 @@ public class PopUpCreerPartie {
 
         });
 
+        Serveur.main(new String[]{});
+
         dialogCreatePartie.showAndWait();
 
     }
 
-    public static void dialogRejoindrePartie(Stage primaryStage) {
+    public static void dialogRejoindrePartie(Stage primaryStage) throws URISyntaxException {
 
         Dialog<Void> dialogRejoindrePartie = new Dialog<>();
         dialogRejoindrePartie.initOwner(primaryStage);
@@ -92,6 +98,7 @@ public class PopUpCreerPartie {
         });
 
         dialogRejoindrePartie.showAndWait();
+        Client.main(new String[]{});
 
     }
 }

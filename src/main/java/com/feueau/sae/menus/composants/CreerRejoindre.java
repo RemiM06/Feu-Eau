@@ -10,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.net.URISyntaxException;
+
 import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
 public class CreerRejoindre {
@@ -29,7 +31,11 @@ public class CreerRejoindre {
         creerBouton.getStyleClass().add("one-piece-button-partie");
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            try {
+                PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         });
         rejoindreBouton.getStyleClass().add("one-piece-button-partie");
 

@@ -1,5 +1,7 @@
 package com.feueau.sae.menus.composants;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.network.Serveur;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.partie.Partie;
 import javafx.geometry.Pos;
@@ -16,17 +18,39 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.corundumstudio.socketio.SocketIOClient;
+
 
 public class AttenteJoueurs {
 
-    private static boolean joueur1Connecte = false;
+    private  static boolean joueur1Connecte = false;
     private static boolean joueur2Connecte = false;
 
+    public static void setJoueur1Connecte(boolean value) {
+        joueur1Connecte = value;
+    }
 
+    public static void setJoueur2Connecte(boolean value) {
+        joueur2Connecte = value;
+    }
+
+    private static void updateConnectedClients() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String joueur1ConnecteMsg = objectMapper.writeValueAsString(joueur1Connecte);
+        String joueur2ConnecteMsg = objectMapper.writeValueAsString(joueur2Connecte);
+
+        for (SocketIOClient client : Serveur.getConnectedClients()) {
+            client.sendEvent("joueurConnecte", joueur1ConnecteMsg, joueur2ConnecteMsg);
+        }
+    }
 
     public static void sceneAttente(Stage primaryStage, int numNiveau) {
+        System.out.println(joueur1Connecte);
 
         BorderPane pane = new BorderPane();
+
+
 
 
         Color marron = Color.rgb(101, 67, 33);
@@ -57,7 +81,6 @@ public class AttenteJoueurs {
 
 
         if (joueur1Connecte) {
-
             pane.setLeft(joueur1VBox);
             joueur1VBox.getChildren().add(imageView);
         }
@@ -94,6 +117,8 @@ public class AttenteJoueurs {
         }
         else {
 
+
+
         }
 
         Scene sceneAttente = new Scene(pane);
@@ -110,7 +135,6 @@ public class AttenteJoueurs {
 
 
     }
-
 
 
 
