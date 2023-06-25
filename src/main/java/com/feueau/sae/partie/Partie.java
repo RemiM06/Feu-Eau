@@ -94,7 +94,8 @@ public class Partie {
             @Override
             public void handle(long l) {
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
-                if (joueur1.isJumping() || checkBlocY(joueur1, "bas")) {
+
+                if (joueur1.isJumping() || checkBlocY(joueur1, "bas") || (joueur1.getY().doubleValue()/joueur1.getY().intValue() != 1)) {
                     //Vitesse de la chute
                     joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
 
@@ -109,6 +110,8 @@ public class Partie {
                     joueur1.setY(joueur1.getY().add(joueur1.getyVelocity().divide(new BigDecimal("60.0"))));
 
                     //Verifie si il y a un bloc en dessous et que le joueur descend
+
+
                     if (!(checkBlocY(joueur1, "bas")) && (joueur1.getyVelocity().doubleValue() >= 0)) {
                         //Verifie si le joueur est exactement au niveau du sol, sinon il met a sol la valeur du sol
                         int sol = (joueur1.getY().intValue());
@@ -123,6 +126,7 @@ public class Partie {
                         joueur1.setJumping(false);
                     }
                 }
+
                 //Verifie que le joueur a un mouvement horizontal
                 if (joueur1.getxVelocity().doubleValue() != 0)
                 {
@@ -205,7 +209,7 @@ public class Partie {
         }
         //Si on veut verifier les blocs au dessus du joueur
         if (direction == "haut") {
-            //On enleve 0.38 à notre y soit 2 mouvements pour avoir une marge d'erreur
+            //On enleve 0.19 à notre y soit 1 mouvements pour avoir une marge d'erreur
             Double newY = joueur.getY().doubleValue()-0.19;
             //On ne prend que l'entier de ce newY
             int y = newY.intValue();
@@ -216,7 +220,6 @@ public class Partie {
         }
         //Si on veut verifier les blocs en dessous du joueur
         if (direction == "bas") {
-            //On ajoute 0.38 à notre y soit 2 mouvements pour avoir une marge d'erreur
             Double newY = joueur.getY().doubleValue()+0.38;
             //On ne prend que l'entier de ce newY
             int y = newY.intValue();
@@ -241,7 +244,6 @@ public class Partie {
         }
         //Si on veut verifier les blocs à la droite du joueur
         if (direction == "droite") {
-            //On ajoute 0.1 à notre x soit la position si aucun bloc ne gene
             Double newX = joueur.getX().doubleValue();
             //On ne prend que l'entier de ce newY
             int x = newX.intValue();
