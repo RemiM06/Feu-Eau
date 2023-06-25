@@ -206,7 +206,7 @@ public class Partie {
         //Si on veut verifier les blocs au dessus du joueur
         if (direction == "haut") {
             //On enleve 0.38 à notre y soit 2 mouvements pour avoir une marge d'erreur
-            Double newY = joueur.getY().doubleValue()-0.19;
+            Double newY = joueur.getY().doubleValue()-0.38;
             //On ne prend que l'entier de ce newY
             int y = newY.intValue();
             //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
@@ -241,7 +241,6 @@ public class Partie {
         }
         //Si on veut verifier les blocs à la droite du joueur
         if (direction == "droite") {
-            //On ajoute 0.1 à notre x soit la position si aucun bloc ne gene
             Double newX = joueur.getX().doubleValue();
             //On ne prend que l'entier de ce newY
             int x = newX.intValue();
