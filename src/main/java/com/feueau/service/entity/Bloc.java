@@ -1,39 +1,53 @@
 package com.feueau.service.entity;
 
-import javafx.scene.paint.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Bloc {
-
+    private final String imagePath;
     private int y;
     private int x;
     private String name;
     private boolean etat;
 
-    private String imagePath;
+    private static Map<String, String> imagePathCache = new HashMap<>();
 
     public Bloc(int y, int x, String name, boolean etat) {
         this.y = y;
         this.x = x;
         this.name = name;
         this.etat = etat;
-        if (name == "bloc") {
-            this.imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
+        this.imagePath = getImagePath(name);
+    }
+
+    private String getImagePath(String name) {
+        if (!imagePathCache.containsKey(name)) {
+            String imagePath = null;
+            switch (name) {
+                case "bloc":
+                    imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
+                    break;
+                case "vide":
+                    imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
+                    break;
+                case "eau":
+                    imagePath = getClass().getResource("/img/eau.png").toExternalForm();
+                    break;
+                case "lave":
+                    imagePath = getClass().getResource("/img/lave.png").toExternalForm();
+                    break;
+                case "porteFinFeu":
+                    imagePath = getClass().getResource("/img/RedClosedDoor.png").toExternalForm();
+                    break;
+                case "porteFinEau":
+                    imagePath = getClass().getResource("/img/BlueClosedDoor.png").toExternalForm();
+                    break;
+            }
+            if (imagePath != null) {
+                imagePathCache.put(name, imagePath);
+            }
         }
-        if (name == "vide") {
-            this.imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
-        }
-        if (name == "eau") {
-            this.imagePath = getClass().getResource("/img/eau.png").toExternalForm();
-        }
-        if (name == "lave") {
-            this.imagePath = getClass().getResource("/img/lave.png").toExternalForm();
-        }
-        if (name == "porteFinFeu") {
-            this.imagePath = getClass().getResource("/img/RedClosedDoor.png").toExternalForm();
-        }
-        if (name == "porteFinEau") {
-            this.imagePath = getClass().getResource("/img/BlueClosedDoor.png").toExternalForm();
-        }
+        return imagePathCache.get(name);
     }
 
     public void changementEtat() {
@@ -43,7 +57,6 @@ public class Bloc {
     public boolean isEtat() {
         return etat;
     }
-
 
     public double getX() {
         return x;
