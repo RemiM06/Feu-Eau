@@ -14,9 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -117,6 +120,12 @@ public class AppSAE extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
+        this.primaryStage.initStyle(StageStyle.UNDECORATED);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCode.ESCAPE.equals(event.getCode())) {
+                event.consume();
+            }
+        });
 
 
         stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
