@@ -4,16 +4,22 @@ import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.feueau.sae.menus.composants.AttenteJoueurs.updateConnectedClients;
 
 
 public class Serveur {
 
     private static SocketIOServer serverSocket;
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
+
+    private static final String SERVER_ID = "server";
 
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
@@ -32,6 +38,13 @@ public class Serveur {
 
                 System.out.println("A client has connected");
                 connectedClients.add(client);
+                AttenteJoueurs.setJoueur2Connecte(true);
+
+                try {
+                    updateConnectedClients();
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

@@ -1,5 +1,6 @@
 package com.feueau.network;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -26,20 +27,17 @@ public class Client {
             }
         });
 
-        socket.on("joueurConnecte", new Emitter.Listener() {
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                String joueur1ConnecteMsg = (String) args[0];
-                String joueur2ConnecteMsg = (String) args[1];
+                System.out.println("Connected to server");
 
-                boolean joueur1Connecte = Boolean.parseBoolean(joueur1ConnecteMsg);
-                boolean joueur2Connecte = Boolean.parseBoolean(joueur2ConnecteMsg);
 
-                AttenteJoueurs.setJoueur1Connecte(joueur1Connecte);
-                AttenteJoueurs.setJoueur2Connecte(joueur2Connecte);
+                AttenteJoueurs.setJoueur1Connecte(true);
 
-                System.out.println("Joueur 1 connecté : " + joueur1Connecte);
-                System.out.println("Joueur 2 connecté : " + joueur2Connecte);
+                // Envoyer l'état de connexion des joueurs au serveur
+                socket.emit("joueurConnecte", AttenteJoueurs.isJoueur1Connecte(), AttenteJoueurs.isJoueur2Connecte());
+
             }
         });
 
