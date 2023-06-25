@@ -10,10 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.StageStyle;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -60,6 +62,15 @@ public class Partie {
             this.joueur2ImageView = generationImageJoueur(joueur2);
             this.root.getChildren().addAll(this.gridPane, this.joueur1ImageView, this.joueur2ImageView);
         }));
+
+
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCode.ESCAPE.equals(event.getCode())) {
+                event.consume();
+            }
+        });
+
         this.initPartie();
     }
 

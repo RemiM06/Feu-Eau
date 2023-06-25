@@ -14,9 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -32,19 +35,19 @@ public class AppSAE extends Application {
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private BackGroundImage titreImage;
-    private Stage stageMain;
+    private Stage primaryStage;
 
     private Button creerBouton(String texte, Pos position, Runnable action){
         return CreerBouton.creerBouton(texte, position, action);
     }
 
     @Override
-    public void start(Stage stageMain) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
 
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
         BorderPane niveauxPane = new BorderPane();
-        this.stageMain = stageMain;
+        this.primaryStage = primaryStage;
 
 
 
@@ -65,15 +68,15 @@ public class AppSAE extends Application {
 
         //Boutons
         Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
-            PopUpConnection.showLoginDialog(stageMain);
+            PopUpConnection.showLoginDialog(primaryStage);
         });
         Button reglesBouton = creerBouton("Regles", Pos.CENTER, () ->
                 {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
                     Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
-                    stageMain.setScene(partie.getScene());
-                    stageMain.setFullScreen(true);
+                    primaryStage.setScene(partie.getScene());
+                    primaryStage.setFullScreen(true);
                 }
         );
 
@@ -83,7 +86,7 @@ public class AppSAE extends Application {
         jouerBouton.getStyleClass().add("one-piece-button");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
-            stageMain.close();
+            primaryStage.close();
         });
 
         //VBox boutonQuitter
@@ -121,13 +124,18 @@ public class AppSAE extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
+        this.primaryStage.initStyle(StageStyle.UNDECORATED);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCode.ESCAPE.equals(event.getCode())) {
+                event.consume();
+            }
+        });
 
-
-        stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
-        stageMain.setScene(scene);
+        primaryStage.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
+        this.primaryStage.setScene(scene);
         titreVBox.getChildren().add(imageView);
-        stageMain.setFullScreen(true);
-        stageMain.show();
+        this.primaryStage.setFullScreen(true);
+        this.primaryStage.show();
 
     }
 

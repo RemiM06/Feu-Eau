@@ -1,5 +1,6 @@
 package com.feueau.sae.menus.composants;
 
+import com.feueau.sae.AppSAE;
 import com.feueau.sae.graphiques.BackGroundImage;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -35,12 +36,15 @@ public class CreerRejoindre {
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
+        closeBouton.getStyleClass().add("one-piece-button");
+
 
         //VBox boutonQuitter
         VBox quitterVBox = new VBox(10);
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
         quitterVBox.getChildren().addAll(closeBouton);
         creerRejoindrePane.setBottom(quitterVBox);
+
 
         //VBox boutons
         VBox creerRejoindreVBox = new VBox(10);
