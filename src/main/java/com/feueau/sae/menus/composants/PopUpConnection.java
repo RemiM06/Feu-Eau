@@ -48,6 +48,9 @@ public class PopUpConnection {
         //ButtonType Annuler = new ButtonType("");
        // Annuler = dialogPane.lookupButton(ButtonType);
 
+
+        //Button annulerBouton = (Button) dialogPane.lookupButton(ButtonType.CANCEL);
+
         dialogConnexion.getDialogPane().getButtonTypes().addAll(loginButtonType, registerButtonType, ButtonType.CANCEL);
 
         Button loginButton = (Button) dialogPane.lookupButton(loginButtonType);
