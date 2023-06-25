@@ -82,16 +82,16 @@ public class Joueur {
     }
     public void setX(BigDecimal nb) {
         this.x = this.x.add(nb);
-       /* System.out.println("--------------");
+        System.out.println("--------------");
         System.out.print("x : ");
-        System.out.println(this.x);*/
+        System.out.println(this.x);
     }
 
     public void setY(BigDecimal nb) {
         this.y = nb;
-        /*System.out.println("--------------");
+        System.out.println("--------------");
         System.out.print("y : ");
-        System.out.println(this.y);*/
+        System.out.println(this.y);
     }
 
     @Override
@@ -99,6 +99,12 @@ public class Joueur {
         return "Joueur{" +
                 "y=" + y +
                 ", x=" + x +
+                ", xVelocity=" + xVelocity +
+                ", yVelocity=" + yVelocity +
+                ", type='" + type + '\'' +
+                ", isJumping=" + isJumping +
+                ", pathImgDroit='" + pathImgDroit + '\'' +
+                ", pathImgGauche='" + pathImgGauche + '\'' +
                 '}';
     }
 }
