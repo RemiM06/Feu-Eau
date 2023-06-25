@@ -1,27 +1,31 @@
 package com.feueau.network;
 
-import com.corundumstudio.socketio.Configuration;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIONamespace;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.listener.ConnectListener;
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import io.socket.engineio.client.Socket;
-
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class Client {
     public static void main(String[] args) throws URISyntaxException {
-        Socket socket = new Socket("ws://25.73.216.239:1234");
-        socket.on(Socket.EVENT_OPEN, new Emitter.Listener() {
+
+        Socket socket = IO.socket("http://25.73.216.51:1234");
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.send("hi");
-                socket.close();
+                System.out.println("Connected to server");
+                socket.emit("chat", "Hello from client");
+            }
+        }).on("chat", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String message = (String) args[0];
+                System.out.println("Message received from server: " + message);
             }
         });
-        socket.open();
+
+        socket.connect();
+
     }
 }

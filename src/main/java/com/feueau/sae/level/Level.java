@@ -169,6 +169,7 @@ public class Level {
 
             this.grille[3][12] = new Bloc("bloc", true);
             this.grille[3][11] = new Bloc("bloc", true);
+            this.grille[3][10] = new Bloc("bloc", true);
 
 
 
