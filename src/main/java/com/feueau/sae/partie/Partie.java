@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 
 public class Partie {
@@ -67,8 +68,8 @@ public class Partie {
         ImageView joueurImageView = new ImageView(new Image(joueur.getPathImgDroit()));
         joueurImageView.setFitWidth(scene.getWidth() / level.getNombreCol());
         joueurImageView.setFitHeight(scene.getHeight() / level.getNombreRow());
-        joueurImageView.setTranslateX((joueur.getX()) * (scene.getWidth() / level.getNombreCol()));
-        joueurImageView.setTranslateY((joueur.getY()) * (scene.getHeight() / level.getNombreRow()));
+        joueurImageView.setTranslateX((joueur.getX().intValue()) * (scene.getWidth() / level.getNombreCol()));
+        joueurImageView.setTranslateY((joueur.getY().intValue()) * (scene.getHeight() / level.getNombreRow()));
         return joueurImageView;
     }
 
@@ -89,10 +90,10 @@ public class Partie {
 
         this.scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.RIGHT) {
-                joueur1.setxVelocity(6);
+                joueur1.setxVelocity(new BigDecimal("6.0"));
             }
             if (e.getCode() == KeyCode.LEFT) {
-                joueur1.setxVelocity(-6);
+                joueur1.setxVelocity(new BigDecimal("-6.0"));
             }
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
                 joueur1.setJumping(true);
@@ -101,10 +102,10 @@ public class Partie {
 
         this.scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.RIGHT) {
-                joueur1.setxVelocity(0.0);
+                joueur1.setxVelocity(new BigDecimal("0.0"));
             }
             if (e.getCode() == KeyCode.LEFT) {
-                joueur1.setxVelocity(0.0);
+                joueur1.setxVelocity(new BigDecimal("0.0"));
             }
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
                 joueur1.setJumping(false);
@@ -116,32 +117,33 @@ public class Partie {
                 // verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur1.isJumping() || checkBlocY(joueur1, "bas")) {
                     //Vitesse de la chute
-                    System.out.println("------------------");
-                    System.out.println((joueur1.getyVelocity()*10.0 + 6.0)/10.0);
-                    joueur1.setyVelocity((joueur1.getyVelocity()*10.0 + 6.0)/10.0);
-                    //ne fait plus monter le joueur si il y a un obstacle au dessus
-                    if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity() < 0)) {
+                    joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
+
+                    if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity().doubleValue() < 0)) {
                         joueur1.setJumping(false);
                     }
-                    if (!checkBlocY(joueur1, "bas") && (joueur1.getyVelocity() > 0)) {
+
+                    if (!(checkBlocY(joueur1, "bas")) && (joueur1.getyVelocity().doubleValue() > 0)) {
+                        joueur1ImageView.setTranslateY((joueur1.getY().intValue()+1) * 60);
+                        System.out.println("-------------");
+                        System.out.println(joueur1.getY().intValue() * 60);
                         joueur1.setJumping(false);
                     }
-                    // deplace le joueur
-                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity());
-                    joueur1.setY(((joueur1.getyVelocity())*10.0 / 6.0)/10.0);
+                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity().doubleValue());
+                    joueur1.setY(joueur1.getyVelocity().divide(new BigDecimal("60.0")));
                 }
-                if (joueur1.getxVelocity() != 0)
+                if (joueur1.getxVelocity().doubleValue() != 0)
                 {
                     String direction;
-                    if (joueur1.getxVelocity() > 0) {
+                    if (joueur1.getxVelocity().doubleValue() > 0) {
                         direction = "droite";
                     }
                     else {
                         direction = "gauche";
                     }
                     if (checkBlocX(joueur1, direction)) {
-                        joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity());
-                        joueur1.setX(joueur1.getxVelocity() / 6.0);
+                        joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity().doubleValue());
+                        joueur1.setX(joueur1.getxVelocity().divide(new BigDecimal("60.0")));
                     }
                 }
             }
@@ -155,17 +157,20 @@ public class Partie {
         //Valeur de X en int au cas ou le personnage soit sur 2 cases
         int x2 = joueur.getX().intValue();
         //Si le personnage est sur 2 cases alors x2 vaut +1 pour verifier les 2 cases
-        if (x2/joueur.getX() != 1)
+        if (x2/joueur.getX().doubleValue() != 1)
         {
             x2 += 1;
         }
-        int y = joueur.getY().intValue();
         if (direction == "haut") {
+            Double newY = joueur.getY().doubleValue()-0.19;
+            int y = newY.intValue();
             if (grille[y][x1].isEtat() || grille[y][x2].isEtat()) {
                 return false;
             }
         }
         if (direction == "bas") {
+            Double newY = joueur.getY().doubleValue()+0.19;
+            int y = newY.intValue();
             if (grille[y+1][x1].isEtat() || grille[y+1][x2].isEtat()) {
                 return false;
             }
@@ -179,23 +184,20 @@ public class Partie {
         //Valeur de Y en int au cas ou le personnage soit sur 2 cases
         int y2 = joueur.getY().intValue();
         //Si le personnage est sur 2 cases alors y2 vaut +1 pour verifier les 2 cases
-        if (y2/joueur.getY() != 1)
+        if (y2/joueur.getY().doubleValue() != 1)
         {
             y2 += 1;
         }
-
-
         if (direction == "droite") {
-            Double newX = joueur.getX()+0.1;
+            Double newX = joueur.getX().doubleValue()+0.1;
             int x = newX.intValue();
             if (grille[y1][x+1].isEtat() || grille[y2][x+1].isEtat()) {
                 return false;
             }
         }
         if (direction == "gauche") {
-            Double newX = joueur.getX()-0.1;
+            Double newX = joueur.getX().doubleValue()-0.1;
             int x = newX.intValue();
-
             if (grille[y1][x].isEtat() || grille[y2][x].isEtat()) {
                 return false;
             }

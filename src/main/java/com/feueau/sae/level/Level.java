@@ -3,17 +3,24 @@ package com.feueau.sae.level;
 import com.feueau.service.entity.Bloc;
 import javafx.scene.paint.Color;
 
+import java.math.BigDecimal;
+
 public class Level {
     private int nombreRow=18;
     private int nombreCol=32;
     private Bloc[][] grille = new Bloc[this.nombreRow][this.nombreCol];
 
-    private Double xJoueur1;
-    private Double yJoueur1;
-    private Double xJoueur2;
-    private Double yJoueur2;
+    private BigDecimal xJoueur1;
+    private BigDecimal yJoueur1;
+    private BigDecimal xJoueur2;
+    private BigDecimal yJoueur2;
 
     public Level(String nom) {
+        this.xJoueur1 = new BigDecimal("1.0");
+        this.yJoueur1 = new BigDecimal("16.0");
+        this.xJoueur2 = new BigDecimal("2.0");
+        this.yJoueur2 = new BigDecimal("16.0");
+
         for (int row = 0; row < this.nombreRow; row++) {
             for (int col = 0; col < this.nombreCol; col++) {
                 if ((row == 0 || row == this.nombreRow - 1) || (col == 0 || col == this.nombreCol - 1)) {
@@ -23,12 +30,11 @@ public class Level {
                 }
             }
         }
-
         if (nom == "Level 1") {
-            this.xJoueur1 = 1.0;
-            this.yJoueur1 = 16.0;
-            this.xJoueur2 = 2.0;
-            this.yJoueur2 = 16.0;
+            this.xJoueur1 = new BigDecimal("1.0");
+            this.yJoueur1 = new BigDecimal("16.0");
+            this.xJoueur2 = new BigDecimal("2.0");
+            this.yJoueur2 = new BigDecimal("16.0");
 
             this.grille[15][3] = new Bloc("bloc", true);
             this.grille[14][5] = new Bloc("bloc", true);
@@ -66,19 +72,19 @@ public class Level {
         return grille;
     }
 
-    public double getxJoueur1() {
+    public BigDecimal getxJoueur1() {
         return xJoueur1;
     }
 
-    public double getyJoueur1() {
+    public BigDecimal getyJoueur1() {
         return yJoueur1;
     }
 
-    public double getxJoueur2() {
+    public BigDecimal getxJoueur2() {
         return xJoueur2;
     }
 
-    public double getyJoueur2() {
+    public BigDecimal getyJoueur2() {
         return yJoueur2;
     }
 

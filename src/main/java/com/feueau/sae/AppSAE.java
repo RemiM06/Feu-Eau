@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.UnknownHostException;
 
 public class AppSAE extends Application {
@@ -70,13 +71,7 @@ public class AppSAE extends Application {
         );
 
         Button choixNiveau = creerBouton("TEST", Pos.CENTER, () ->{
-            Double gravity = -12.0;
-            for (int i=0;i<10;i++) {
-                gravity = gravity - i/10.0;
-                System.out.println(gravity);
-            }
-
-            //ChoixNiveau.levelSelector(niveauxScene, stageMain);
+            ChoixNiveau.levelSelector(niveauxScene, stageMain);
         });
 
         //VBox boutons
