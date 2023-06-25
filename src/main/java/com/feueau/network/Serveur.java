@@ -13,7 +13,7 @@ public class Serveur {
 
         try {
             // Créer un socket serveur et écouter sur le port 1234
-            String ipAddress = "127.0.0.1";
+            String ipAddress = "25.73.214.239";
             serverSocket = new ServerSocket(1234, 0, InetAddress.getByName(ipAddress));
         } catch (IOException e) {
             System.out.println("Erreur lors de la création du socket serveur.");

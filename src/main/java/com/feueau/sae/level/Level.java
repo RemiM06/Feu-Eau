@@ -14,6 +14,12 @@ public class Level {
     private Double yJoueur2;
 
     public Level(String nom) {
+
+        this.xJoueur1 = 1.0;
+        this.yJoueur1 = 16.0;
+        this.xJoueur2 = 2.0;
+        this.yJoueur2 = 16.0;
+
         for (int row = 0; row < this.nombreRow; row++) {
             for (int col = 0; col < this.nombreCol; col++) {
                 if ((row == 0 || row == this.nombreRow - 1) || (col == 0 || col == this.nombreCol - 1)) {
@@ -47,7 +53,10 @@ public class Level {
 
             this.grille[1][29] = new Bloc(1,29,"porteFinFeu", false);
             this.grille[1][30] = new Bloc(1,30,"porteFinEau", false);
+
+
         }
+
     }
 
     public int getNombreRow() {
