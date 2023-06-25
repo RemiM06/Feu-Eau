@@ -99,6 +99,7 @@ public class AttenteJoueurs {
             }
 
         if (joueur1Connecte) {
+
             pane.setLeft(joueur1VBox);
             joueur1VBox.getChildren().add(imageView);
         }
