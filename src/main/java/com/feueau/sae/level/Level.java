@@ -30,15 +30,175 @@ public class Level {
                 }
             }
         }
+        if (nom == "Level 2") {
+            this.xJoueur1 = new BigDecimal("1.0");
+            this.yJoueur1 = new BigDecimal("16.0");
+            this.xJoueur2 = new BigDecimal("2.0");
+            this.yJoueur2 = new BigDecimal("16.0");
+
+            this.grille[14][1] = new Bloc("bloc", true);
+            this.grille[14][2] = new Bloc("bloc", true);
+            this.grille[14][3] = new Bloc("bloc", true);
+            this.grille[14][4] = new Bloc("bloc", true);
+            this.grille[14][5] = new Bloc("bloc", true);
+            this.grille[14][6] = new Bloc("bloc", true);
+            this.grille[14][7] = new Bloc("bloc", true);
+            this.grille[14][8] = new Bloc("bloc", true);
+            this.grille[14][9] = new Bloc("bloc", true);
+            this.grille[14][10] = new Bloc("bloc", true);
+            this.grille[14][11] = new Bloc("bloc", true);
+            this.grille[14][12] = new Bloc("bloc", true);
+            this.grille[14][13] = new Bloc("bloc", true);
+            this.grille[14][14] = new Bloc("bloc", true);
+            this.grille[14][15] = new Bloc("bloc", true);
+            this.grille[14][16] = new Bloc("bloc", true);
+            this.grille[14][17] = new Bloc("bloc", true);
+            this.grille[14][18] = new Bloc("bloc", true);
+
+            this.grille[13][1] = new Bloc("bloc", true);
+            this.grille[13][2] = new Bloc("bloc", true);
+            this.grille[12][1] = new Bloc("bloc", true);
+
+            this.grille[11][4] = new Bloc("bloc", true);
+            this.grille[11][5] = new Bloc("bloc", true);
+            this.grille[11][6] = new Bloc("bloc", true);
+            this.grille[11][7] = new Bloc("bloc", true);
+            this.grille[11][8] = new Bloc("bloc", true);
+            this.grille[11][9] = new Bloc("bloc", true);
+            this.grille[11][10] = new Bloc("bloc", true);
+            this.grille[11][11] = new Bloc("bloc", true);
+            this.grille[11][12] = new Bloc("bloc", true);
+            this.grille[11][13] = new Bloc("bloc", true);
+            this.grille[11][14] = new Bloc("bloc", true);
+            this.grille[11][15] = new Bloc("bloc", true);
+
+            this.grille[10][15] = new Bloc("bloc", true);
+            this.grille[9][15] = new Bloc("bloc", true);
+            this.grille[8][15] = new Bloc("bloc", true);
+            this.grille[11][10] = new Bloc("bloc", true);
+            this.grille[10][12] = new Bloc("bloc", true);
+            this.grille[9][13] = new Bloc("bloc", true);
+
+            this.grille[8][14] = new Bloc("bloc", true);
+            this.grille[8][15] = new Bloc("bloc", true);
+            this.grille[8][16] = new Bloc("bloc", true);
+            this.grille[8][17] = new Bloc("bloc", true);
+            this.grille[8][18] = new Bloc("bloc", true);
+            this.grille[8][19] = new Bloc("bloc", true);
+            this.grille[8][20] = new Bloc("bloc", true);
+            this.grille[8][21] = new Bloc("bloc", true);
+            this.grille[8][22] = new Bloc("bloc", true);
+            this.grille[8][23] = new Bloc("bloc", true);
+            this.grille[8][24] = new Bloc("bloc", true);
+            this.grille[8][25] = new Bloc("bloc", true);
+            this.grille[8][26] = new Bloc("bloc", true);
+            this.grille[8][27] = new Bloc("bloc", true);
+            this.grille[8][28] = new Bloc("bloc", true);
+            this.grille[8][29] = new Bloc("bloc", true);
+            this.grille[8][30] = new Bloc("bloc", true);
+
+            this.grille[7][30] = new Bloc("bloc", true);
+            this.grille[6][30] = new Bloc("bloc", true);
+            this.grille[5][30] = new Bloc("bloc", true);
+            this.grille[4][30] = new Bloc("bloc", true);
+
+            this.grille[7][29] = new Bloc("bloc", true);
+            this.grille[6][29] = new Bloc("bloc", true);
+            this.grille[5][29] = new Bloc("bloc", true);
+
+            this.grille[7][28] = new Bloc("bloc", true);
+            this.grille[6][28] = new Bloc("bloc", true);
+
+            this.grille[7][27] = new Bloc("bloc", true);
+
+            this.grille[3][30] = new Bloc("bloc", true);
+            this.grille[3][29] = new Bloc("bloc", true);
+            this.grille[3][28] = new Bloc("bloc", true);
+            this.grille[3][27] = new Bloc("bloc", true);
+            this.grille[3][26] = new Bloc("bloc", true);
+            this.grille[3][25] = new Bloc("bloc", true);
+            this.grille[3][24] = new Bloc("bloc", true);
+            this.grille[3][23] = new Bloc("bloc", true);
+            this.grille[3][22] = new Bloc("bloc", true);
+            this.grille[3][21] = new Bloc("bloc", true);
+            this.grille[3][20] = new Bloc("bloc", true);
+
+            this.grille[7][20] = new Bloc("bloc", true);
+            this.grille[6][20] = new Bloc("bloc", true);
+            this.grille[7][21] = new Bloc("bloc", true);
+            this.grille[7][19] = new Bloc("bloc", true);
+            this.grille[8][19] = new Bloc("bloc", true);
+
+            this.grille[5][17] = new Bloc("bloc", true);
+            this.grille[5][16] = new Bloc("bloc", true);
+            this.grille[5][15] = new Bloc("bloc", true);
+            this.grille[5][14] = new Bloc("bloc", true);
+
+            this.grille[4][15] = new Bloc("bloc", true);
+            this.grille[3][18] = new Bloc("bloc", true);
+            this.grille[3][19] = new Bloc("bloc", true);
+
+            this.grille[16][26] = new Bloc("bloc", true);
+            this.grille[16][27] = new Bloc("bloc", true);
+            this.grille[16][28] = new Bloc("bloc", true);
+            this.grille[16][29] = new Bloc("bloc", true);
+            this.grille[16][30] = new Bloc("bloc", true);
+
+            this.grille[15][27] = new Bloc("bloc", true);
+            this.grille[15][28] = new Bloc("bloc", true);
+            this.grille[15][29] = new Bloc("bloc", true);
+            this.grille[15][30] = new Bloc("bloc", true);
+
+            this.grille[14][28] = new Bloc("bloc", true);
+            this.grille[14][29] = new Bloc("bloc", true);
+            this.grille[14][30] = new Bloc("bloc", true);
+
+            this.grille[7][10] = new Bloc("bloc", true);
+            this.grille[7][9] = new Bloc("bloc", true);
+            this.grille[7][8] = new Bloc("bloc", true);
+            this.grille[7][7] = new Bloc("bloc", true);
+
+            this.grille[6][9] = new Bloc("bloc", true);
+            this.grille[6][8] = new Bloc("bloc", true);
+            this.grille[6][7] = new Bloc("bloc", true);
+
+            this.grille[5][8] = new Bloc("bloc", true);
+            this.grille[5][7] = new Bloc("bloc", true);
+
+            this.grille[4][7] = new Bloc("bloc", true);
+
+            this.grille[3][12] = new Bloc("bloc", true);
+            this.grille[3][11] = new Bloc("bloc", true);
+
+
+
+            this.grille[14][23] = new Bloc("bloc", true);
+
+            this.grille[13][22] = new Bloc("bloc", true);
+
+            this.grille[12][19] = new Bloc("bloc", true);
+            this.grille[12][20] = new Bloc("bloc", true);
+            this.grille[12][21] = new Bloc("bloc", true);
+
+            this.grille[2][29] = new Bloc("porteFinFeu", false);
+            this.grille[2][30] = new Bloc("porteFinEau", false);
+        }
+
         if (nom == "Level 1") {
             this.xJoueur1 = new BigDecimal("1.0");
             this.yJoueur1 = new BigDecimal("16.0");
             this.xJoueur2 = new BigDecimal("2.0");
             this.yJoueur2 = new BigDecimal("16.0");
 
-            this.grille[15][3] = new Bloc("bloc", true);
-            this.grille[14][5] = new Bloc("bloc", true);
-            this.grille[13][7] = new Bloc("bloc", true);
+            this.grille[16][6] = new Bloc("bloc", true);
+            this.grille[16][5] = new Bloc("bloc", true);
+            this.grille[15][6] = new Bloc("bloc", true);
+            this.grille[14][7] = new Bloc("bloc", true);
+            this.grille[13][9] = new Bloc("bloc", true);
+            this.grille[12][11] = new Bloc("bloc", true);
+            this.grille[11][13] = new Bloc("bloc", true);
+            this.grille[10][15] = new Bloc("bloc", true);
+
 
             this.grille[16][26] = new Bloc("bloc", true);
             this.grille[16][27] = new Bloc("bloc", true);
@@ -64,8 +224,19 @@ public class Level {
             this.grille[12][20] = new Bloc("bloc", true);
             this.grille[12][21] = new Bloc("bloc", true);
 
-            this.grille[1][29] = new Bloc("porteFinFeu", false);
-            this.grille[1][30] = new Bloc("porteFinEau", false);
+
+            this.grille[9][17] = new Bloc("bloc", true);
+            this.grille[10][17] = new Bloc("bloc", true);
+            this.grille[11][17] = new Bloc("bloc", true);
+            this.grille[12][17] = new Bloc("bloc", true);
+            this.grille[13][17] = new Bloc("bloc", true);
+            this.grille[14][17] = new Bloc("bloc", true);
+            this.grille[15][17] = new Bloc("bloc", true);
+            this.grille[16][17] = new Bloc("bloc", true);
+
+
+            this.grille[13][29] = new Bloc("porteFinFeu", false);
+            this.grille[13][30] = new Bloc("porteFinEau", false);
         }
     }
 

@@ -1,53 +1,35 @@
 package com.feueau.service.entity;
 
-import java.util.HashMap;
-import java.util.Map;
+import javafx.scene.paint.Color;
 
 public class Bloc {
-    private final String imagePath;
-    private int y;
-    private int x;
+
     private String name;
     private boolean etat;
 
-    private static Map<String, String> imagePathCache = new HashMap<>();
+    private String imagePath;
 
-    public Bloc(int y, int x, String name, boolean etat) {
-        this.y = y;
-        this.x = x;
+    public Bloc(String name, boolean etat) {
         this.name = name;
         this.etat = etat;
-        this.imagePath = getImagePath(name);
-    }
-
-    private String getImagePath(String name) {
-        if (!imagePathCache.containsKey(name)) {
-            String imagePath = null;
-            switch (name) {
-                case "bloc":
-                    imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
-                    break;
-                case "vide":
-                    imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
-                    break;
-                case "eau":
-                    imagePath = getClass().getResource("/img/eau.png").toExternalForm();
-                    break;
-                case "lave":
-                    imagePath = getClass().getResource("/img/lave.png").toExternalForm();
-                    break;
-                case "porteFinFeu":
-                    imagePath = getClass().getResource("/img/RedClosedDoor.png").toExternalForm();
-                    break;
-                case "porteFinEau":
-                    imagePath = getClass().getResource("/img/BlueClosedDoor.png").toExternalForm();
-                    break;
-            }
-            if (imagePath != null) {
-                imagePathCache.put(name, imagePath);
-            }
+        if (name == "bloc") {
+            this.imagePath = getClass().getResource("/img/Blocs-blocs.png").toExternalForm();
         }
-        return imagePathCache.get(name);
+        if (name == "vide") {
+            this.imagePath = getClass().getResource("/img/Blocs-fonds.png").toExternalForm();
+        }
+        if (name == "eau") {
+            this.imagePath = getClass().getResource("/img/eau.png").toExternalForm();
+        }
+        if (name == "lave") {
+            this.imagePath = getClass().getResource("/img/lave.png").toExternalForm();
+        }
+        if (name == "porteFinFeu") {
+            this.imagePath = getClass().getResource("/img/RedClosedDoor.png").toExternalForm();
+        }
+        if (name == "porteFinEau") {
+            this.imagePath = getClass().getResource("/img/BlueClosedDoor.png").toExternalForm();
+        }
     }
 
     public void changementEtat() {
@@ -58,24 +40,8 @@ public class Bloc {
         return etat;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public String getImagePath() {
         return imagePath;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public String getName() {
