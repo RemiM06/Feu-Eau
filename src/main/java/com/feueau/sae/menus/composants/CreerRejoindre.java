@@ -25,10 +25,12 @@ public class CreerRejoindre {
         Button creerBouton = creerBouton("CREER UNE PARTIE", Pos.CENTER, () ->{
             PopUpCreerPartie.dialogCreationPartie(primaryStage);
         });
+        creerBouton.getStyleClass().add("one-piece-button-partie");
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
             PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
         });
+        rejoindreBouton.getStyleClass().add("one-piece-button-partie");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
@@ -53,6 +55,8 @@ public class CreerRejoindre {
         // Configuration de la nouvelle scène sur la stage existante
         primaryStage.setScene(creerRejoindreScene);
         primaryStage.setFullScreen(true);
+
+        creerRejoindreScene.getStylesheets().add(ChoixNiveau.class.getResource("/styles.css").toExternalForm());
 
     }
 

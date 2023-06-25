@@ -4,16 +4,22 @@ import com.feueau.datas.Utilisateur;
 import com.feueau.network.recuperation.IPUtilisateur;
 import com.feueau.sae.AppSAE;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
     public static void showLoginDialog(Stage primaryStage) {
+
+
+
         Dialog<Void> dialogConnexion = new Dialog<>();
+        dialogConnexion.initStyle(StageStyle.UNDECORATED);
         dialogConnexion.initOwner(primaryStage);
         dialogConnexion.setTitle("Connexion/Inscription");
 
@@ -31,12 +37,16 @@ public class PopUpConnection {
 
 
         VBox content = new VBox(10);
+        content.setAlignment(Pos.BASELINE_CENTER);
         content.getChildren().addAll(usernameLabel, usernameTextField, ipLabel, passwordLabel, passwordTextField);
+        content.getStyleClass().add("vbox-content");
 
         dialogPane.setContent(content);
 
         ButtonType loginButtonType = new ButtonType("Se connecter");
         ButtonType registerButtonType = new ButtonType("S'inscrire");
+        //ButtonType Annuler = new ButtonType("");
+       // Annuler = dialogPane.lookupButton(ButtonType);
 
         dialogConnexion.getDialogPane().getButtonTypes().addAll(loginButtonType, registerButtonType, ButtonType.CANCEL);
 
@@ -86,6 +96,14 @@ public class PopUpConnection {
              }
 
         });
+
+        dialogPane.getStyleClass().add("dialog-pane");
+        usernameLabel.getStyleClass().add("label");
+        usernameTextField.getStyleClass().add("text-field");
+        passwordLabel.getStyleClass().add("label");
+        passwordTextField.getStyleClass().add("password-field");
+        loginButton.getStyleClass().add("button");
+        registerButton.getStyleClass().add("button");
 
         dialogConnexion.showAndWait();
     }

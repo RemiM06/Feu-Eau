@@ -38,7 +38,7 @@ public class Partie {
         this.grille = level.getGrille();
         this.gridPane = generationGridPane();
 
-        this.joueur1 = new Joueur(this.level.getyJoueur1(), this.level.getxJoueur1(), "feu");
+        this.joueur1 = new Joueur(this.level.       getyJoueur1(), this.level.getxJoueur1(), "feu");
         this.joueur2 = new Joueur(this.level.getyJoueur2(), this.level.getxJoueur2(), "eau");
         this.joueur1ImageView = generationImageJoueur(joueur1);
         this.joueur2ImageView = generationImageJoueur(joueur2);

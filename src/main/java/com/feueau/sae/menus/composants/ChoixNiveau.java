@@ -35,14 +35,25 @@ static BackGroundImage backGroundImage;
             primaryStage.setScene(partie.getScene());
             primaryStage.setFullScreen(true);
         });
+        niveau1.getStyleClass().add("one-piece-button");
 
         Button niveau2 = creerBouton("NIVEAU 2", Pos.CENTER, () -> {
-
+            Group root = new Group();
+            Scene sceneJeu2 = new Scene(root, 700, 400);
+            Partie partie2 = new Partie(sceneJeu2, root, new Level("Level 2"));
+            primaryStage.setScene(partie2.getScene());
+            primaryStage.setFullScreen(true);
         });
+        niveau2.getStyleClass().add("one-piece-button");
 
         Button niveau3 = creerBouton("NIVEAU 3", Pos.CENTER, () -> {
-
+            Group root = new Group();
+            Scene sceneJeu3 = new Scene(root, 700, 400);
+            Partie partie3 = new Partie(sceneJeu3, root, new Level("Level 3"));
+            primaryStage.setScene(partie3.getScene());
+            primaryStage.setFullScreen(true);
         });
+        niveau3.getStyleClass().add("one-piece-button");
 
 
 
@@ -59,6 +70,8 @@ static BackGroundImage backGroundImage;
 
         primaryStage.setScene(levelSelectorScene);
         primaryStage.setFullScreen(true);
+
+        levelSelectorScene.getStylesheets().add(ChoixNiveau.class.getResource("/styles.css").toExternalForm());
 
     }
 
