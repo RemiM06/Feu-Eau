@@ -50,6 +50,8 @@ public class AttenteJoueurs {
         String joueur1ConnecteMsg = objectMapper.writeValueAsString(joueur1Connecte);
         String joueur2ConnecteMsg = objectMapper.writeValueAsString(joueur2Connecte);
 
+
+
         for (SocketIOClient client : Serveur.getConnectedClients()) {
             client.sendEvent("joueurConnecte", joueur1ConnecteMsg, joueur2ConnecteMsg);
         }
