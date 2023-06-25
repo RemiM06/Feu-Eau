@@ -1,72 +1,31 @@
 package com.feueau.network;
 
-import java.net.*;
-import java.io.*;
-import java.util.Scanner;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Client {
-    public static void main(String[] args) {
-        Socket clientSocket = null;
+    public static void main(String[] args) throws URISyntaxException {
 
-        try {
-            // Établir une connexion avec le serveur
-            clientSocket = new Socket("134.59.143.50", 1234);
-        } catch (UnknownHostException e) {
-            System.out.println("Adresse IP du serveur inconnue.");
-            System.exit(1);
-        } catch (IOException e) {
-            System.out.println("Erreur lors de la connexion au serveur.");
-            System.exit(1);
-        }
-
-        try {
-            // Créer les flux d'entrée/sortie pour communiquer avec le serveur
-            BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
-
-            // Demander et envoyer le nom du joueur au serveur
-            System.out.print("Entrez votre nom : ");
-            Scanner scanner = new Scanner(System.in);
-            String nomJoueur = scanner.nextLine();
-            output.println(nomJoueur);
-
-            // Lire et afficher le message de bienvenue du serveur
-            String messageBienvenue = input.readLine();
-            System.out.println("Serveur : " + messageBienvenue);
-
-            // Thread pour recevoir les messages des autres joueurs
-            Thread receiveThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        String message;
-                        while ((message = input.readLine()) != null) {
-                            System.out.println(message);
-                        }
-                    } catch (IOException e) {
-                        System.out.println("Erreur lors de la réception du message du serveur.");
-                        System.exit(1);
-                    }
-                }
-            });
-            receiveThread.start();
-
-            // Envoyer les messages au serveur
-            while (true) {
-                String message = scanner.nextLine();
-                output.println(message);
+        Socket socket = IO.socket("http://25.73.216.51:1234");
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("Connected to server");
+                socket.emit("chat", "Hello from client");
             }
-
-        } catch (IOException e) {
-            System.out.println("Erreur lors de la communication avec le serveur.");
-            System.exit(1);
-        } finally {
-            try {
-                // Fermer les flux et le socket
-                clientSocket.close();
-            } catch (IOException e) {
-                System.out.println("Erreur lors de la fermeture du socket client.");
+        }).on("chat", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String message = (String) args[0];
+                System.out.println("Message received from server: " + message);
             }
-        }
+        });
+
+        socket.connect();
+
     }
 }
