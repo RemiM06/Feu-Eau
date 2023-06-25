@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class Partie {
     private Scene scene;
     private Group root;
     private Level level;
-
+    private String etatPartie;
     private GridPane gridPane;
     private Bloc[][] grille;
     private Joueur joueur1;
@@ -31,9 +32,13 @@ public class Partie {
     private Joueur joueur2;
     private ImageView joueur2ImageView;
 
-    public Partie(Scene scene, Group root, Level level) {
-        this.scene = scene;
-        this.root = root;
+    public Partie(Stage stageMain, Level level) {
+
+        this.root = new Group();
+        this.scene = new Scene(root, 700, 400);
+        stageMain.setScene(scene);
+        stageMain.setFullScreen(true);
+
         this.level = level;
         this.initPartie();
     }
@@ -65,6 +70,8 @@ public class Partie {
         this.grille = level.getGrille();
         this.gridPane = generationGridPane();
 
+        this.etatPartie = "enCours";
+
         this.joueur1 = new Joueur(this.level.getyJoueur1(), this.level.getxJoueur1(), "feu");
         this.joueur2 = new Joueur(this.level.getyJoueur2(), this.level.getxJoueur2(), "eau");
         this.joueur1ImageView = generationImageJoueur(joueur1);
@@ -93,8 +100,12 @@ public class Partie {
         AnimationTimer aT = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                if (etatPartie == "perdu")
+                {
+                    stop();
+                    initPartie();
+                }
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
-
                 if (joueur1.isJumping() || checkBlocY(joueur1, "bas") || (joueur1.getY().doubleValue()/joueur1.getY().intValue() != 1)) {
                     //Vitesse de la chute
                     joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
@@ -146,7 +157,23 @@ public class Partie {
                         //Change la position de l'image et du joueur
                         joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity().doubleValue());
                         joueur1.setX(joueur1.getxVelocity().divide(new BigDecimal("60.0")));
+
                     }
+                }
+                if ((grille[joueur1.getY().intValue()][joueur1.getX().intValue()].getName() == "porteFinFeu") && (grille[joueur2.getY().intValue()][joueur2.getX().intValue()].getName() == "porteFinEau"))
+                {
+                    //Victoire
+                    System.out.println("Victoire");
+                }
+                int x1 = joueur1.getX().intValue();
+                int x2 = joueur1.getX().intValue();
+                if (joueur1.getX().doubleValue()/x2 != 1) {
+                    x2 += 1;
+                }
+                if ((grille[joueur1.getY().intValue()+1][x1].getName() == "eau") || (grille[joueur1.getY().intValue()+1][x2].getName() == "eau"))
+                {
+                    joueur1ImageView.setTranslateY((joueur1.getY().intValue()) * 60);
+                    etatPartie = "perdu";
                 }
             }
         };
@@ -192,7 +219,6 @@ public class Partie {
                 joueur1.setJumping(false);
             }
         });
-
         System.out.println("initPartie");
     }
 
@@ -210,7 +236,7 @@ public class Partie {
         //Si on veut verifier les blocs au dessus du joueur
         if (direction == "haut") {
             //On enleve 0.19 à notre y soit 1 mouvements pour avoir une marge d'erreur
-            Double newY = joueur.getY().doubleValue()-0.19;
+            Double newY = joueur.getY().subtract(new BigDecimal("0.19")).doubleValue();
             //On ne prend que l'entier de ce newY
             int y = newY.intValue();
             //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
@@ -220,7 +246,7 @@ public class Partie {
         }
         //Si on veut verifier les blocs en dessous du joueur
         if (direction == "bas") {
-            Double newY = joueur.getY().doubleValue()+0.38;
+            Double newY = joueur.getY().add(new BigDecimal("0.38")).doubleValue();
             //On ne prend que l'entier de ce newY
             int y = newY.intValue();
             //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
@@ -255,7 +281,7 @@ public class Partie {
         //Si on veut verifier les blocs à la gauche du joueur
         if (direction == "gauche") {
             //On enleve 0.1 à notre x soit la position si aucun bloc ne gene
-            Double newX = joueur.getX().doubleValue()-0.1;
+            Double newX = joueur.getX().subtract(new BigDecimal("0.1")).doubleValue();
             //On ne prend que l'entier de ce newY
             int x = newX.intValue();
             //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
@@ -266,6 +292,7 @@ public class Partie {
         //Si il n'y a pas de bloc nous empechant de passer on renvoi vrai
         return true;
     }
+
     public Scene getScene() {
         return scene;
     }
