@@ -3,12 +3,14 @@ package com.feueau.sae.joueur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.math.BigDecimal;
+
 public class Joueur {
 
-    private Double y=1.0;
-    private Double x=1.0;
-    private double xVelocity = 0.0;
-    private double yVelocity = 0.0;
+    private BigDecimal y = new BigDecimal("1.0");
+    private BigDecimal x = new BigDecimal("1.0");
+    private BigDecimal xVelocity = new BigDecimal("0.0");
+    private BigDecimal yVelocity = new BigDecimal("0.0");
     private String type;
     private boolean isJumping = false;
     private String pathImgDroit;
@@ -16,7 +18,7 @@ public class Joueur {
     public Joueur() {
 
     }
-    public Joueur(Double y, Double x, String type) {
+    public Joueur(BigDecimal y, BigDecimal x, String type) {
         this.y=y;
         this.x=x;
         this.type=type;
@@ -36,27 +38,27 @@ public class Joueur {
 
     public void setJumping(boolean jumping) {
         if (jumping) {
-            yVelocity = -12.0;
+            yVelocity = new BigDecimal("-12.0");
         }
         else {
-            yVelocity = 0.0;
+            yVelocity = new BigDecimal("0.0");
         }
         isJumping = jumping;
     }
 
-    public double getxVelocity() {
+    public BigDecimal getxVelocity() {
         return xVelocity;
     }
 
-    public double getyVelocity() {
+    public BigDecimal getyVelocity() {
         return yVelocity;
     }
 
-    public void setxVelocity(double xVelocity) {
+    public void setxVelocity(BigDecimal xVelocity) {
         this.xVelocity = xVelocity;
     }
 
-    public void setyVelocity(double yVelocity) {
+    public void setyVelocity(BigDecimal yVelocity) {
         this.yVelocity = yVelocity;
     }
 
@@ -72,18 +74,24 @@ public class Joueur {
         return pathImgGauche;
     }
 
-    public Double getY() {
+    public BigDecimal getY() {
         return y;
     }
-    public Double getX() {
+    public BigDecimal getX() {
         return x;
     }
-    public void setX(Double nb) {
-        this.x = ((this.x)*10+nb)/10.0;
+    public void setX(BigDecimal nb) {
+        this.x = this.x.add(nb);
+       /* System.out.println("--------------");
+        System.out.print("x : ");
+        System.out.println(this.x);*/
     }
 
-    public void setY(Double nb) {
-        this.y = ((this.y)*10+nb)/10.0;
+    public void setY(BigDecimal nb) {
+        this.y = nb;
+        /*System.out.println("--------------");
+        System.out.print("y : ");
+        System.out.println(this.y);*/
     }
 
     @Override
