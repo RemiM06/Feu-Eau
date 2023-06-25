@@ -1,5 +1,6 @@
 package com.feueau.sae.menus.composants;
 
+import com.feueau.sae.AppSAE;
 import com.feueau.sae.graphiques.BackGroundImage;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -8,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.net.URISyntaxException;
 
 import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
@@ -28,19 +31,26 @@ public class CreerRejoindre {
         creerBouton.getStyleClass().add("one-piece-button-partie");
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            try {
+                PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         });
         rejoindreBouton.getStyleClass().add("one-piece-button-partie");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
+        closeBouton.getStyleClass().add("one-piece-button");
+
 
         //VBox boutonQuitter
         VBox quitterVBox = new VBox(10);
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
         quitterVBox.getChildren().addAll(closeBouton);
         creerRejoindrePane.setBottom(quitterVBox);
+
 
         //VBox boutons
         VBox creerRejoindreVBox = new VBox(10);

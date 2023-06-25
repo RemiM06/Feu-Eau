@@ -244,6 +244,7 @@ public class Partie {
         }
         //Si on veut verifier les blocs à la droite du joueur
         if (direction == "droite") {
+            //On ajoute 0.1 à notre x soit la position si aucun bloc ne gene
             Double newX = joueur.getX().doubleValue();
             //On ne prend que l'entier de ce newY
             int x = newX.intValue();
