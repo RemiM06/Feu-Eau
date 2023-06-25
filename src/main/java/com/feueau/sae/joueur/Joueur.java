@@ -88,7 +88,7 @@ public class Joueur {
     }
 
     public void setY(BigDecimal nb) {
-        this.y = this.y.add(nb);
+        this.y = nb;
         /*System.out.println("--------------");
         System.out.print("y : ");
         System.out.println(this.y);*/

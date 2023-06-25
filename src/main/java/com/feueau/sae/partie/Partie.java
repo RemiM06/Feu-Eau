@@ -87,61 +87,94 @@ public class Partie {
     }
 
     public void initPartie() {
-
+        //Actions des touches lorsqu'elles sont enfoncées
         this.scene.setOnKeyPressed(e -> {
+            //Si la flèche de droite est enfoncée
             if (e.getCode() == KeyCode.RIGHT) {
+                //Met la vitesse horizontal à 6.0
                 joueur1.setxVelocity(new BigDecimal("6.0"));
             }
+            //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.LEFT) {
+                //Met la vitesse horizontal à -6.0
                 joueur1.setxVelocity(new BigDecimal("-6.0"));
             }
-            if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
+            //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
+            if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
+                //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
             }
         });
-
+        //Actions des touches lorsqu'elles sont relachées
         this.scene.setOnKeyReleased(e -> {
+            //Si la flèche de droite est relachée
             if (e.getCode() == KeyCode.RIGHT) {
+                //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
             }
+            //Si la flèche de gauche est relachée
             if (e.getCode() == KeyCode.LEFT) {
+                //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
             }
+            //Si la flèche du haut est relachée et que le joueur n'est pas entrain de sauter
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
+                //Met sa variable de saut à faux pour savoir qu'il n'est pas entrain de sauter et met sa vitesse vertical à 0.0
                 joueur1.setJumping(false);
             }
         });
+
+        //Partie du programme qui tourne en boucle
         new AnimationTimer() {
             @Override
             public void handle(long l) {
-                // verifie si le joueur est en saut ou en chut libre (même façon de descendre)
+                //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur1.isJumping() || checkBlocY(joueur1, "bas")) {
                     //Vitesse de la chute
                     joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
 
+                    //Verifie si il y a un bloc au dessus et que le joueur monte
                     if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity().doubleValue() < 0)) {
-                        joueur1.setJumping(false);
+                        //Met sa vitesse de mouvement vertical à 0 pour arreter de le faire monter
+                        joueur1.setyVelocity(new BigDecimal("0.0"));
                     }
 
-                    if (!(checkBlocY(joueur1, "bas")) && (joueur1.getyVelocity().doubleValue() > 0)) {
-                        joueur1ImageView.setTranslateY((joueur1.getY().intValue()+1) * 60);
-                        System.out.println("-------------");
-                        System.out.println(joueur1.getY().intValue() * 60);
+                    //Change la position du joueur et de son image
+                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity().doubleValue());
+                    joueur1.setY(joueur1.getY().add(joueur1.getyVelocity().divide(new BigDecimal("60.0"))));
+
+                    //Verifie si il y a un bloc en dessous et que le joueur descend
+                    if (!(checkBlocY(joueur1, "bas")) && (joueur1.getyVelocity().doubleValue() >= 0)) {
+                        //Verifie si le joueur est exactement au niveau du sol, sinon il met a sol la valeur du sol
+                        int sol = (joueur1.getY().intValue());
+                        if (sol/joueur1.getY().doubleValue() != 1)
+                        {
+                            sol += 1;
+                        }
+                        //Change la position du joueur et de son image pour qu'elle soit au niveau du sol
+                        joueur1ImageView.setTranslateY((sol) * 60);
+                        joueur1.setY(new BigDecimal(sol));
+                        //Change le boolean de saut du joueur pour qu'il puisse a nouveau sauter et qu'il arrete de descendre
                         joueur1.setJumping(false);
                     }
-                    joueur1ImageView.setTranslateY(joueur1ImageView.getTranslateY() + joueur1.getyVelocity().doubleValue());
-                    joueur1.setY(joueur1.getyVelocity().divide(new BigDecimal("60.0")));
                 }
+                //Verifie que le joueur a un mouvement horizontal
                 if (joueur1.getxVelocity().doubleValue() != 0)
                 {
                     String direction;
+                    //Si le joueur se déplace vers la droite, change la valeur de direction et change l'image du joueur
                     if (joueur1.getxVelocity().doubleValue() > 0) {
                         direction = "droite";
+                        joueur1ImageView.setImage(new Image(joueur1.getPathImgDroit()));
                     }
+                    //Sinon c'est qu'il se déplace vers la gauche, change la valeur de direction et l'image du joueur
                     else {
                         direction = "gauche";
+                        joueur1ImageView.setImage(new Image(joueur1.getPathImgGauche()));
                     }
+                    //Verifie si le joueur n'a pas de bloc devant lui
                     if (checkBlocX(joueur1, direction)) {
+                        //Change la position de l'image et du joueur
                         joueur1ImageView.setTranslateX(joueur1ImageView.getTranslateX() + joueur1.getxVelocity().doubleValue());
                         joueur1.setX(joueur1.getxVelocity().divide(new BigDecimal("60.0")));
                     }
@@ -151,6 +184,7 @@ public class Partie {
         System.out.println("initPartie");
     }
 
+    //Verification de la presence d'un bloc solide au dessus ou en dessus en fonction du parametre direction
     public boolean checkBlocY(Joueur joueur, String direction) {
         //Valeur de X en int
         int x1 = joueur.getX().intValue();
@@ -161,20 +195,29 @@ public class Partie {
         {
             x2 += 1;
         }
+        //Si on veut verifier les blocs au dessus du joueur
         if (direction == "haut") {
-            Double newY = joueur.getY().doubleValue()-0.19;
+            //On enleve 0.38 à notre y soit 2 mouvements pour avoir une marge d'erreur
+            Double newY = joueur.getY().doubleValue()-0.38;
+            //On ne prend que l'entier de ce newY
             int y = newY.intValue();
+            //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
             if (grille[y][x1].isEtat() || grille[y][x2].isEtat()) {
                 return false;
             }
         }
+        //Si on veut verifier les blocs en dessous du joueur
         if (direction == "bas") {
-            Double newY = joueur.getY().doubleValue()+0.19;
+            //On ajoute 0.38 à notre y soit 2 mouvements pour avoir une marge d'erreur
+            Double newY = joueur.getY().doubleValue()+0.38;
+            //On ne prend que l'entier de ce newY
             int y = newY.intValue();
+            //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
             if (grille[y+1][x1].isEtat() || grille[y+1][x2].isEtat()) {
                 return false;
             }
         }
+        //Si il n'y a pas de bloc nous empechant de passer on renvoi vrai
         return true;
     }
 
@@ -188,20 +231,29 @@ public class Partie {
         {
             y2 += 1;
         }
+        //Si on veut verifier les blocs à la droite du joueur
         if (direction == "droite") {
+            //On ajoute 0.1 à notre x soit la position si aucun bloc ne gene
             Double newX = joueur.getX().doubleValue()+0.1;
+            //On ne prend que l'entier de ce newY
             int x = newX.intValue();
+            //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
             if (grille[y1][x+1].isEtat() || grille[y2][x+1].isEtat()) {
                 return false;
             }
         }
+        //Si on veut verifier les blocs à la gauche du joueur
         if (direction == "gauche") {
+            //On enleve 0.1 à notre x soit la position si aucun bloc ne gene
             Double newX = joueur.getX().doubleValue()-0.1;
+            //On ne prend que l'entier de ce newY
             int x = newX.intValue();
+            //Si un des deux bloc est solide alors on renvoi faux, il y a un bloc nous empechant de passer
             if (grille[y1][x].isEtat() || grille[y2][x].isEtat()) {
                 return false;
             }
         }
+        //Si il n'y a pas de bloc nous empechant de passer on renvoi vrai
         return true;
     }
     public Scene getScene() {

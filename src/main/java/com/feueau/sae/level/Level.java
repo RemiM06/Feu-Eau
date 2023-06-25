@@ -55,6 +55,15 @@ public class Level {
             this.grille[14][29] = new Bloc("bloc", true);
             this.grille[14][30] = new Bloc("bloc", true);
 
+
+            this.grille[14][23] = new Bloc("bloc", true);
+
+            this.grille[13][22] = new Bloc("bloc", true);
+
+            this.grille[12][19] = new Bloc("bloc", true);
+            this.grille[12][20] = new Bloc("bloc", true);
+            this.grille[12][21] = new Bloc("bloc", true);
+
             this.grille[1][29] = new Bloc("porteFinFeu", false);
             this.grille[1][30] = new Bloc("porteFinEau", false);
         }
