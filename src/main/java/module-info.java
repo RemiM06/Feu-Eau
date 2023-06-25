@@ -3,8 +3,8 @@ module com.feueau.sae {
     requires javafx.fxml;
     requires java.sql;
     requires netty.socketio;
-    requires engine.io.client;
     requires socket.io.client;
+    requires engine.io.client;
 
 
     opens com.feueau.sae to javafx.fxml;
