@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 public class Partie {
 
-    public static void AjoutPartie(String nomPartie, String motDePassePartie, int Joueur1, int Joueur2, int NumNiv) {
+    public static void AjoutPartie(String nomPartie, String motDePassePartie, int idJoueur1, int idJoueur2, int NumNiv) {
 
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
@@ -40,7 +40,7 @@ public class Partie {
                 String sql2 = "SELECT COUNT(*) FROM partie WHERE ID_Joueur2 = ?";
                 int count2=0;
                 try (PreparedStatement statement = connexion.prepareStatement(sql2)) {
-                    statement.setInt(1, Joueur2);
+                    statement.setInt(1, idJoueur2);
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
                             count2 = resultSet.getInt(1);
@@ -61,7 +61,7 @@ public class Partie {
                 } else {
                     String sql4 = "UPDATE partie SET ID_Joueur2 = ? WHERE Nom = ?";
                     try (PreparedStatement statement = connexion.prepareStatement(sql4)) {
-                        statement.setInt(1, Joueur2);
+                        statement.setInt(1, idJoueur2);
                         statement.setString(2, nomPartie);
                         statement.executeUpdate();
                         System.out.println("Mise à jour réussie de la colonne ID_Joueur2.");
@@ -74,7 +74,7 @@ public class Partie {
                 try (PreparedStatement statement = connexion.prepareStatement(sql2)) {
                     statement.setString(1, nomPartie);
                     statement.setString(2, motDePassePartie);
-                    statement.setInt(3, Joueur1);
+                    statement.setInt(3, idJoueur1);
                     statement.executeUpdate();
                     System.out.println("Utilisateur ajouté avec succès à la base de données.");
                 } catch (SQLException e) {
