@@ -6,10 +6,17 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.feueau.sae.AppSAE;
+import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +30,8 @@ public class Serveur {
     public static List<SocketIOClient> getConnectedClients() {
         return connectedClients;
     }
+
+    private static Joueur joueur = new Joueur();
 
     public static void main(String[] args) {
         Configuration config = new Configuration();
@@ -55,5 +64,38 @@ public class Serveur {
 
         server.start();
         System.out.println("SocketIO server started");
+
+        try {
+            ServerSocket serverSocket = new ServerSocket(1235);
+            System.out.println("Server started");
+
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Client connected: " + socket);
+
+                DataInputStream input = new DataInputStream(socket.getInputStream());
+                DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+
+                // Assume player1 is the player object on the server.
+                Thread thread = new Thread(() -> {
+                    while (true) {
+                        try {
+                            String data = input.readUTF();
+                            String[] playerData = data.split(",");
+                            joueur.setX(new BigDecimal(playerData[0]));
+                            joueur.setY(new BigDecimal(playerData[1]));
+                            joueur.setxVelocity(new BigDecimal(playerData[2]));
+                            joueur.setyVelocity(new BigDecimal(playerData[3]));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                thread.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
