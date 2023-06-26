@@ -201,13 +201,9 @@ public class Level {
             this.grille[9][1] = new Bloc("bloc", true);
             this.grille[9][2] = new Bloc("bloc", true);
             this.grille[10][3] = new Bloc("bloc", true);
-            this.grille[10][4] = new Bloc("bloc", true);
             this.grille[10][5] = new Bloc("bloc", true);
-            this.grille[11][6] = new Bloc("bloc", true);
             this.grille[11][7] = new Bloc("bloc", true);
-            this.grille[12][8] = new Bloc("bloc", true);
             this.grille[12][9] = new Bloc("bloc", true);
-            this.grille[13][10] = new Bloc("bloc", true);
             this.grille[13][11] = new Bloc("bloc", true);
             this.grille[14][12] = new Bloc("bloc", true);
             this.grille[14][13] = new Bloc("bloc", true);
@@ -246,9 +242,7 @@ public class Level {
             this.grille[17][26] = new Bloc("feu", true);
             this.grille[17][27] = new Bloc("feu", true);
 
-            this.grille[12][20] = new Bloc("bloc", true);
-            this.grille[13][24] = new Bloc("bloc", true);
-            this.grille[15][26] = new Bloc("bloc", true);
+            this.grille[11][23] = new Bloc("bloc", true);
             this.grille[16][28] = new Bloc("bloc", true);
 
             this.grille[16][29] = new Bloc("porteFinFeu", false);

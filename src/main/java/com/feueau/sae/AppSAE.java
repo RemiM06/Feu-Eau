@@ -41,6 +41,14 @@ public class AppSAE extends Application {
     @Override
     public void start(Stage stageMain) throws IOException {
 
+        try {
+            String[] command = {"java", "-Xmx1024m", "VotreClasse"};
+            Process process = Runtime.getRuntime().exec(command);
+            // ... Manipulation du processus si nécessaire
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
         BorderPane niveauxPane = new BorderPane();
