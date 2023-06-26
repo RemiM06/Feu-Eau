@@ -61,7 +61,23 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>              </dependencies>
+    </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.4</version>
+      </dependency>
+      <dependency>
+          <groupId>com.corundumstudio.socketio</groupId>
+          <artifactId>netty-socketio</artifactId>
+          <version>1.7.16</version>
+      </dependency>
+      <dependency>
+          <groupId>io.socket</groupId>
+          <artifactId>socket.io-client</artifactId>
+          <version>1.0.0</version>
+      </dependency>
+  </dependencies>
 
   <build>
         <plugins>

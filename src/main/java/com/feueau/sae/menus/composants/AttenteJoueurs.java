@@ -128,21 +128,21 @@ public class AttenteJoueurs {
             if(numNiveau == 1) {
                 Group root = new Group();
                 Scene sceneJeu = new Scene(root, 700, 400);
-                Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+                Partie partie = new Partie(primaryStage, new Level("Level 1"));
                 primaryStage.setScene(partie.getScene());
                 primaryStage.setFullScreen(true);
             }
             else if(numNiveau == 2) {
                 Group root = new Group();
                 Scene sceneJeu = new Scene(root, 700, 400);
-                Partie partie = new Partie(sceneJeu, root, new Level("Level 2"));
+                Partie partie = new Partie(primaryStage, new Level("Level 2"));
                 primaryStage.setScene(partie.getScene());
                 primaryStage.setFullScreen(true);
             }
             else if(numNiveau == 3) {
                 Group root = new Group();
                 Scene sceneJeu = new Scene(root, 700, 400);
-                Partie partie = new Partie(sceneJeu, root, new Level("Level 3"));
+                Partie partie = new Partie(primaryStage,  new Level("Level 3"));
                 primaryStage.setScene(partie.getScene());
                 primaryStage.setFullScreen(true);
             }

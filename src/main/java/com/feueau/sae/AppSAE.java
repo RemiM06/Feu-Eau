@@ -70,6 +70,7 @@ public class AppSAE extends Application {
         titreAcceuil.getStyleClass().add("title-pixelart");
 
 
+
         niveauxScene = new Scene(niveauxPane, 700, 400);
 
 
@@ -84,7 +85,7 @@ public class AppSAE extends Application {
         Button reglesBouton = creerBouton("Regles", Pos.CENTER, () -> {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
-                    Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+                    Partie partie = new Partie(primaryStage,  new Level("Level 1"));
                     primaryStage.setScene(partie.getScene());
                     primaryStage.setFullScreen(true);
                 }
