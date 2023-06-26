@@ -37,8 +37,6 @@ w
 G.idea/sonarlint/issuestore/c/0/c06e79359d1685e485402bb3e51fbe476dc8be8e,7\4\74b7f0a7d4d26dfebaab741fdf94ea1c30539c49
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-`
-0src/main/java/com/feueau/datas/ConnexionBDD.java,1\9\19122fbecac476d01d03f2172734f3eab033f2c9
 ^
 .src/main/java/com/feueau/sae/level/LEVEL2.java,c\0\c06e79359d1685e485402bb3e51fbe476dc8be8e
 ^

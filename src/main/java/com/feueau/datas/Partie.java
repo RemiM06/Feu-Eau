@@ -11,8 +11,8 @@ public class Partie {
     public static void AjoutPartie(String nomPartie, String motDePassePartie, int idJoueur1, int idJoueur2, int NumNiv) {
 
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
-        String utilisateurBDD = "root";
-        String motDePasseBDD = "";
+        String utilisateurBDD = "mr012420";
+        String motDePasseBDD = "Rqznu7ey";
 
         Connection connexion = null;
 
@@ -37,10 +37,10 @@ public class Partie {
             }
 
             if (count1 >= 1) {
-                String sql2 = "SELECT COUNT(*) FROM partie WHERE ID_Joueur2 = ?";
+                String sql2 = "SELECT ID_Joueur2 FROM partie WHERE Nom = ?";
                 int count2=0;
                 try (PreparedStatement statement = connexion.prepareStatement(sql2)) {
-                    statement.setInt(1, idJoueur2);
+                    statement.setString(1, nomPartie);
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
                             count2 = resultSet.getInt(1);
