@@ -63,8 +63,6 @@ b
 2src/main/java/com/feueau/service/entity/Porte.java,2\2\221ada2b44158a59dc97175b1994f1f6540ad15e
 c
 3src/main/java/com/feueau/service/entity/Player.java,0\7\0712cb700d19f88565e5c696068598d5b0201f41
-Z
-*src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
 ^
 .src/main/java/com/feueau/sae/jeu/jeuScene.java,5\7\576053fc606c69b01c4162b466aa1e047813c7c5
 _
