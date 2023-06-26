@@ -32,7 +32,7 @@ public class Serveur {
     }
     public static void main(String[] args) {
         Configuration config = new Configuration();
-        config.setHostname("25.31.110.196");
+        config.setHostname("134.59.143.49");
         config.setPort(1234);
 
 
