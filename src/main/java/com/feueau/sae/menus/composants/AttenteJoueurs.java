@@ -26,6 +26,16 @@ import com.corundumstudio.socketio.SocketIOClient;
 
 public class AttenteJoueurs {
 
+    private static int levelNum = 1;
+
+    public static int getLevelNum() {
+        return levelNum;
+    }
+
+    public static void incrementLevelNum() {
+        levelNum = (levelNum % 3) + 1;
+    }
+
     private static boolean joueur1Connecte = true;
     private static boolean joueur2Connecte = false;
 
@@ -62,9 +72,11 @@ public class AttenteJoueurs {
 
     public static void sceneAttente(Stage primaryStage, int numNiveau) {
 
-        System.out.println(joueur1Connecte);
-        BorderPane pane = new BorderPane();
 
+
+        System.out.println(joueur1Connecte);
+        System.out.println(joueur2Connecte);
+        BorderPane pane = new BorderPane();
 
         Color marron = Color.rgb(101, 67, 33);
         BackgroundFill backgroundFill = new BackgroundFill(marron, null, null);
@@ -93,7 +105,6 @@ public class AttenteJoueurs {
 
         Platform.runLater(() ->{
 
-
             try {
                 updateConnectedClients();
             } catch (JsonProcessingException e) {
@@ -113,7 +124,6 @@ public class AttenteJoueurs {
 
 
         if(joueur1Connecte && joueur2Connecte) {
-
 
             if(numNiveau == 1) {
                 Group root = new Group();

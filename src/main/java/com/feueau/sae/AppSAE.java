@@ -27,7 +27,10 @@ import java.net.UnknownHostException;
 public class AppSAE extends Application {
 
 
-    public static void lancement(String[] args) {
+
+    private static Scene currentScene;
+    public static void lancement(Scene scene, String[] args) {
+        currentScene = scene;
         AppSAE.launch(args);
     }
 
@@ -35,10 +38,23 @@ public class AppSAE extends Application {
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private BackGroundImage titreImage;
-    private Stage primaryStage;
+    public static Stage primaryStage;
+    private static Scene sceneAttente;
 
     private Button creerBouton(String texte, Pos position, Runnable action){
         return CreerBouton.creerBouton(texte, position, action);
+    }
+
+    public static void setSceneAttente(Scene scene){
+        sceneAttente = scene;
+        if(primaryStage != null){
+            primaryStage.setScene(sceneAttente);
+
+        }
+    }
+
+    public static Scene getScene(){
+        return primaryStage.getScene();
     }
 
     @Override
@@ -49,12 +65,9 @@ public class AppSAE extends Application {
         BorderPane niveauxPane = new BorderPane();
         this.primaryStage = primaryStage;
 
-
-
         //Titre
         Label titreAcceuil = new Label();
         titreAcceuil.getStyleClass().add("title-pixelart");
-
 
 
         niveauxScene = new Scene(niveauxPane, 700, 400);
@@ -63,15 +76,12 @@ public class AppSAE extends Application {
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
 
-
-        //Chargement de la police
-
         //Boutons
         Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
             PopUpConnection.showLoginDialog(primaryStage);
         });
-        Button reglesBouton = creerBouton("Regles", Pos.CENTER, () ->
-                {
+
+        Button reglesBouton = creerBouton("Regles", Pos.CENTER, () -> {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
                     Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
@@ -85,7 +95,7 @@ public class AppSAE extends Application {
         reglesBouton.getStyleClass().add("one-piece-button");
         jouerBouton.getStyleClass().add("one-piece-button");
 
-        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
+        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
 
@@ -138,6 +148,8 @@ public class AppSAE extends Application {
         this.primaryStage.show();
 
     }
+
+
 
 
 }
