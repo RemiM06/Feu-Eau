@@ -70,7 +70,8 @@ public class AttenteJoueurs {
 
 
 
-    public static void sceneAttente(Stage primaryStage, int numNiveau) {
+    public static void sceneAttente(Stage primaryStage, int numNiveau)  {
+
 
 
 
@@ -125,6 +126,12 @@ public class AttenteJoueurs {
 
 
         if(joueur1Connecte && joueur2Connecte) {
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             if(numNiveau == 1) {
                 Partie partie = new Partie(primaryStage, new Level("Level 1"));
