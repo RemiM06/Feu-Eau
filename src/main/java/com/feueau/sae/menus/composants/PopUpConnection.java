@@ -14,9 +14,10 @@ import java.net.UnknownHostException;
 
 public class PopUpConnection {
 
+    private static String username;
+
+
     public static void showLoginDialog(Stage primaryStage) {
-
-
 
         Dialog<Void> dialogConnexion = new Dialog<>();
         dialogConnexion.initStyle(StageStyle.UNDECORATED);
@@ -70,12 +71,17 @@ public class PopUpConnection {
                 System.out.println("Inscription - Mot de Passe : " + password);
                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
                 CreerRejoindre.creerRejoindre(primaryStage);
+                username = usernameTextField.getText();
             }
 
 
 
 
         });
+
+
+
+
 
         Button registerButton = (Button) dialogPane.lookupButton(registerButtonType);
         registerButton.addEventFilter(ActionEvent.ACTION, event -> {
@@ -96,9 +102,13 @@ public class PopUpConnection {
                  CreerRejoindre.creerRejoindre(primaryStage);
 
 
+
+
              }
 
         });
+
+
 
         dialogPane.getStyleClass().add("dialog-pane");
         usernameLabel.getStyleClass().add("label");
@@ -109,6 +119,11 @@ public class PopUpConnection {
         registerButton.getStyleClass().add("button");
 
         dialogConnexion.showAndWait();
+    }
+
+
+    public static String getUsername() {
+        return username;
     }
 }
 

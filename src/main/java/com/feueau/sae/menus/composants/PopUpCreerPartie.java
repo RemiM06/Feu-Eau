@@ -1,6 +1,9 @@
 package com.feueau.sae.menus.composants;
 
 
+import com.feueau.datas.Partie;
+import com.feueau.datas.RecupIDJoueur;
+import com.feueau.datas.VerifConnexionPartie;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
@@ -12,6 +15,10 @@ import javafx.util.Pair;
 import java.net.URISyntaxException;
 
 public class PopUpCreerPartie {
+
+    private static String J1;
+
+    private static String J2;
 
     public static void dialogCreationPartie(Stage primaryStage){
 
@@ -46,7 +53,8 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-                //Partie.AjoutPartie(nomPartie, mdpPartie, );
+                int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(J1 = PopUpConnection.getUsername());
+                Partie.AjoutPartie(nomPartie, mdpPartie, IDJ1, 0,0);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
 
@@ -91,7 +99,17 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-                //ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+                if(VerifConnexionPartie.Verif(nomPartie,mdpPartie)==1){
+                    int IDJ2 = RecupIDJoueur.RecupIDAvecPseudo(J2 = PopUpConnection.getUsername());
+                    int IDJ1 = 0;
+                    Partie.AjoutPartie(nomPartie,mdpPartie,IDJ1,IDJ2,0);
+                }
+                else {
+                    event.consume();
+                    Alertes.showAlert("Nom de partie ou Mot de passe incorrect.");
+                }
+                int numNiveau = 1;
+                AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
 
             }
 

@@ -6,7 +6,7 @@ public class Utilisateur {
 
     public static void AjoutUtilisateur(String nomUtilisateur, String motDePasse, String IP) {
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
-        String utilisateurBDD = "remim";
+        String utilisateurBDD = "mr012420";
         String motDePasseBDD = "Rqznu7ey";
 
         Connection connexion = null;

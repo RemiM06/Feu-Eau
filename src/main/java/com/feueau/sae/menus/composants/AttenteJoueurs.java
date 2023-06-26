@@ -72,9 +72,6 @@ public class AttenteJoueurs {
 
     public static void sceneAttente(Stage primaryStage, int numNiveau)  {
 
-
-
-
         System.out.println(joueur1Connecte);
         System.out.println(joueur2Connecte);
         BorderPane pane = new BorderPane();
