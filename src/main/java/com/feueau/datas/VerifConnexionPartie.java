@@ -1,15 +1,11 @@
 package com.feueau.datas;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Objects;
 
-public class VerifConnexion {
+public class VerifConnexionPartie {
 
-    public static int Verif(String NomUtilisateur, String MotDePasse) {
+    public static int Verif(String Nom, String MotDePasse) {
 
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
@@ -27,10 +23,10 @@ public class VerifConnexion {
         try {
             connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
 
-            String sql = "SELECT Mdp FROM player WHERE Username = ?";
+            String sql = "SELECT Mdp FROM partie WHERE Nom = ?";
             String resMdp = null;
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
-                statement.setString(1, NomUtilisateur);
+                statement.setString(1, Nom);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         resMdp = resultSet.getString(1);
