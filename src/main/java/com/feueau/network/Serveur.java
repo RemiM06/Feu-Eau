@@ -1,24 +1,30 @@
 package com.feueau.network;
 
+import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
+import com.corundumstudio.socketio.listener.DataListener;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.sae.AppSAE;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static com.feueau.sae.menus.composants.AttenteJoueurs.updateConnectedClients;
+import static com.feueau.sae.AppSAE.primaryStage;
 
 
 public class Serveur {
 
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
-    private static final String SERVER_ID = "server";
+    private static Map<String, String> gameState = new ConcurrentHashMap<>();
 
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
@@ -27,6 +33,9 @@ public class Serveur {
         Configuration config = new Configuration();
         config.setHostname("25.73.216.51");
         config.setPort(1234);
+
+
+
 
         final SocketIOServer server = new SocketIOServer(config);
 
@@ -38,12 +47,18 @@ public class Serveur {
                 connectedClients.add(client);
                 AttenteJoueurs.setJoueur2Connecte(true);
 
+                Platform.runLater(() ->{
+                    AttenteJoueurs.sceneAttente(primaryStage, AttenteJoueurs.getLevelNum());
+                });
+
+            if(AttenteJoueurs.isJoueur1Connecte() && AttenteJoueurs.isJoueur2Connecte()){
                 try {
-                    updateConnectedClients();
+                    AttenteJoueurs.updateConnectedClients();
+                    AppSAE.setSceneAttente(AppSAE.getScene());
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
-            }
+            }}
         });
 
         server.addEventListener("chat", String.class, (client, data, ackSender) -> {
@@ -52,6 +67,23 @@ public class Serveur {
             AttenteJoueurs.setJoueur2Connecte(true);
         });
 
-        server.start();
+        server.addEventListener("move", String.class, new DataListener<String>() {
+            @Override
+            public void onData(SocketIOClient client, String direction, AckRequest ackRequest) {
+                // Mettre à jour l'état du jeu en fonction de l'action du joueur
+                gameState.put(client.getSessionId().toString(), direction);
+
+                // Envoyer l'état du jeu mis à jour à tous les clients
+                server.getBroadcastOperations().sendEvent("gameState", gameState);
+            }
+        });
+
+        Thread serverThread = new Thread(() ->{
+            server.start();
+            System.out.println("SocketIO server started");
+
+        });
+
+        serverThread.start();
     }
 }

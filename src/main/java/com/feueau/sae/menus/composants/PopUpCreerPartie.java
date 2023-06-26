@@ -91,14 +91,15 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+
             }
 
         });
 
-        dialogRejoindrePartie.showAndWait();
+
         Client.main(new String[]{});
+        dialogRejoindrePartie.showAndWait();
 
     }
 }
