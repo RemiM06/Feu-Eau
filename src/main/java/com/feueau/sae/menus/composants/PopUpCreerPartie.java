@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 import javafx.util.Pair;
 
 import java.net.URISyntaxException;
