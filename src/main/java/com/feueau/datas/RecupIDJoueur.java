@@ -23,7 +23,7 @@ public class RecupIDJoueur {
             connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
 
             String sql = "SELECT ID FROM player WHERE Username = ?";
-            int resID = 0;
+            int resID = 1;
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
                 statement.setString(1, NomUtilisateur);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -47,6 +47,6 @@ public class RecupIDJoueur {
             }
         }
 
-        return 0;
+        return 2;
     }
 }

@@ -1,9 +1,7 @@
 package com.feueau.sae.menus.composants;
 
 
-import com.feueau.datas.Partie;
-import com.feueau.datas.RecupIDJoueur;
-import com.feueau.datas.VerifConnexionPartie;
+import com.feueau.datas.*;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
@@ -19,6 +17,11 @@ public class PopUpCreerPartie {
     private static String J1;
 
     private static String J2;
+
+    public static void setJoueur1(String username) {
+        J1 = username;
+    }
+
 
     public static void dialogCreationPartie(Stage primaryStage){
 
@@ -40,8 +43,12 @@ public class PopUpCreerPartie {
         dialogPane.setContent(contentDialog);
 
 
+
+
         ButtonType validerButtonType = new ButtonType("Valider", ButtonBar.ButtonData.OK_DONE);
         dialogCreatePartie.getDialogPane().getButtonTypes().addAll(validerButtonType, ButtonType.CANCEL);
+
+        String username = PopUpConnection.getUsername();
 
         Button validateButton = (Button) dialogPane.lookupButton(validerButtonType);
         validateButton.addEventFilter(ActionEvent.ACTION, event -> {
@@ -53,8 +60,10 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-                int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(J1 = PopUpConnection.getUsername());
-                Partie.AjoutPartie(nomPartie, mdpPartie, IDJ1, 0,0);
+                PopUpCreerPartie.setJoueur1(PopUpConnection.getUsername());
+                int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(username);
+                System.out.println(username);
+                AjoutPartieServeur.AjoutPS(nomPartie, mdpPartie, IDJ1);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
 
@@ -101,8 +110,7 @@ public class PopUpCreerPartie {
             else{
                 if(VerifConnexionPartie.Verif(nomPartie,mdpPartie)==1){
                     int IDJ2 = RecupIDJoueur.RecupIDAvecPseudo(J2 = PopUpConnection.getUsername());
-                    int IDJ1 = 0;
-                    Partie.AjoutPartie(nomPartie,mdpPartie,IDJ1,IDJ2,0);
+                    AjoutPartieClient.AjoutPC(nomPartie, IDJ2);
                 }
                 else {
                     event.consume();
@@ -113,10 +121,16 @@ public class PopUpCreerPartie {
 
             }
 
+
+
         });
+
+
 
         dialogRejoindrePartie.showAndWait();
         Client.main(new String[]{});
+
+
 
     }
 }

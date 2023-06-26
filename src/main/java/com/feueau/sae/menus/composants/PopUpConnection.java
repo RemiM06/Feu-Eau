@@ -66,12 +66,14 @@ public class PopUpConnection {
             }
             else {
 
-                System.out.println("Inscription - Nom d'utilisateur : " + username);
-                System.out.println("Inscription - IPAdress : " + adresseIP);
-                System.out.println("Inscription - Mot de Passe : " + password);
+                System.out.println("Connection - Nom d'utilisateur : " + username);
+                System.out.println("Connection - IPAdress : " + adresseIP);
+                System.out.println("Connection - Mot de Passe : " + password);
                 Utilisateur.AjoutUtilisateur(username, password, adresseIP);
                 CreerRejoindre.creerRejoindre(primaryStage);
+
                 username = usernameTextField.getText();
+                PopUpConnection.username = username;
             }
 
 
@@ -117,6 +119,9 @@ public class PopUpConnection {
         passwordTextField.getStyleClass().add("password-field");
         loginButton.getStyleClass().add("button");
         registerButton.getStyleClass().add("button");
+
+        username = usernameTextField.getText();
+
 
         dialogConnexion.showAndWait();
     }
