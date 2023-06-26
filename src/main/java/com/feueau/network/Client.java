@@ -52,14 +52,27 @@ public class Client {
             }
         });
 
+        socket.on("playerMovement", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                MouvementJoueur movement = (MouvementJoueur) args[0];
+                System.out.println("Received player movement from server: " + movement.getPlayerId());
+
+                // Mettez à jour l'affichage du jeu ici en fonction des informations contenues dans 'movement'
+            }
+        });
+
 
         socket.connect();
 
+        MouvementJoueur movement = new MouvementJoueur();
+        movement.setPlayerId("player1");
+        movement.setX(10);
+        movement.setY(20);
 
-    }
+        socket.emit("playerMovement", movement);
 
-    public static void sendMove(String direction) {
-        socket.emit("move", direction);
+
     }
 
 

@@ -70,6 +70,12 @@ public class Serveur {
 
         });
 
+        server.addEventListener("playerMovement", MouvementJoueur.class, (client, data, ackSender) -> {
+            System.out.println("Received player movement from client: " + data.getPlayerId());
+            // Diffusez les mouvements du joueur à tous les autres clients
+            server.getBroadcastOperations().sendEvent("playerMovement", data);
+        });
+
         server.addEventListener("move", String.class, new DataListener<String>() {
             @Override
             public void onData(SocketIOClient client, String direction, AckRequest ackRequest) {
