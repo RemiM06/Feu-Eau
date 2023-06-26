@@ -12,6 +12,8 @@ Q.idea/sonarlint/securityhotspotstore/2/2/221ada2b44158a59dc97175b1994f1f6540ad1
 w
 G.idea/sonarlint/issuestore/a/2/a23fecf281bfe300797f845cbd9ec9025ab4ec47,f\a\facc07777446e98d19b6484a06f0f1aa128b20dc
 
+Q.idea/sonarlint/securityhotspotstore/c/e/ceafcb00c0bac06362664443a978b67d2b95df1d,4\3\43bab2fc90572d40a144ab6eff39f5d09d97d64c
+
 Q.idea/sonarlint/securityhotspotstore/c/4/c43ab771a0baf5b291001cf5208ae3cc08bb6c26,8\8\8823574c2b5165c79bed56ae80564a0faa6d3c02
 
 Q.idea/sonarlint/securityhotspotstore/c/0/c06e79359d1685e485402bb3e51fbe476dc8be8e,0\c\0c1d156a71ff34f04668fd67f5f274df1afd09ad
@@ -29,12 +31,20 @@ G.idea/sonarlint/issuestore/c/4/c43ab771a0baf5b291001cf5208ae3cc08bb6c26,c\9\c9
 Q.idea/sonarlint/securityhotspotstore/0/f/0f666c2236f057468cb8d7cb6f98f343151f47f4,c\c\cc2e915c9f7cd4b475427db6aeae747b9774ea04
 w
 G.idea/sonarlint/issuestore/1/d/1d6f137ed1f3d2f0a99dd6a0a153e6f9abc39407,b\c\bc99b66679fe4527d1d1aa3626f3c5d275e23e2b
+w
+G.idea/sonarlint/issuestore/c/e/ceafcb00c0bac06362664443a978b67d2b95df1d,d\5\d53945181466177e2b0267cd1948bf835fbb013d
 
 Q.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,2\c\2cabb939da04d3de3a200bf2b575690e1a16316d
 w
 G.idea/sonarlint/issuestore/2/2/221ada2b44158a59dc97175b1994f1f6540ad15e,3\3\3329ac71c5e3b86d4098f1252f65d723a09a3c41
 w
 G.idea/sonarlint/issuestore/c/0/c06e79359d1685e485402bb3e51fbe476dc8be8e,7\4\74b7f0a7d4d26dfebaab741fdf94ea1c30539c49
+b
+2src/main/java/com/feueau/sae/menus/Connection.java,6\7\67b7ef89d05e234f2429807bccb98f2f783764d2
+N
+src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+_
+/src/main/java/com/feueau/sae/menus/Acceuil.java,a\b\aba923b0c4d8d9accb7f10f122f38559eafe564a
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 `
@@ -43,6 +53,8 @@ G.idea/sonarlint/issuestore/c/0/c06e79359d1685e485402bb3e51fbe476dc8be8e,7\4\74
 .src/main/java/com/feueau/sae/level/LEVEL2.java,c\0\c06e79359d1685e485402bb3e51fbe476dc8be8e
 ^
 .src/main/java/com/feueau/sae/level/LEVEL3.java,e\d\edb1db73cbbfb2ea9d4e2faa56fad80968ed3321
+p
+@src/main/java/com/feueau/network/recuperation/IPUtilisateur.java,5\2\52bba3fa50f8c8d50deb9c4127939d7e37a28013
 b
 2src/main/java/com/feueau/service/entity/Porte.java,2\2\221ada2b44158a59dc97175b1994f1f6540ad15e
 ]
@@ -51,11 +63,9 @@ _
 /src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
 c
 3src/main/java/com/feueau/service/entity/Player.java,0\7\0712cb700d19f88565e5c696068598d5b0201f41
-Z
-*src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
+^
+.src/main/java/com/feueau/sae/jeu/jeuScene.java,5\7\576053fc606c69b01c4162b466aa1e047813c7c5
+_
+/src/main/java/com/feueau/sae/jeu/NiveauGen.java,7\9\79eef929c5e9a45e5597d542dd597c91607b061a
 M
 src/main/resources/styles.css,9\5\950ef63c412827937f23fc5bfdbdde2ad837019e
-n
->src/main/java/com/feueau/sae/menus/composants/CreerBouton.java,d\2\d2c806986a165368cbfa81577223f19cd6944695
-n
->src/main/java/com/feueau/sae/menus/composants/ChoixNiveau.java,8\9\899b2afa8c30325ce83dcef461f7e69c9fb6fbbe
