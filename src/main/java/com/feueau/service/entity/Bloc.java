@@ -21,7 +21,7 @@ public class Bloc {
         if (name == "eau") {
             this.imagePath = getClass().getResource("/img/eau.png").toExternalForm();
         }
-        if (name == "lave") {
+        if (name == "feu") {
             this.imagePath = getClass().getResource("/img/lave.png").toExternalForm();
         }
         if (name == "porteFinFeu") {

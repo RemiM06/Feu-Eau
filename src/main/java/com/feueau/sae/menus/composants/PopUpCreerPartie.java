@@ -91,8 +91,8 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
+                //ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
 
-                ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
 
         });

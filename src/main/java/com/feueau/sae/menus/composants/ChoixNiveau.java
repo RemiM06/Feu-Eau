@@ -34,7 +34,7 @@ static BackGroundImage backGroundImage;
         Button niveau1 = creerBouton("NIVEAU 1", Pos.CENTER, () -> {
             Group root = new Group();
             Scene sceneJeu = new Scene(root, 700, 400);
-            Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
+            Partie partie = new Partie(primaryStage,  new Level("Level 1"));
             primaryStage.setScene(partie.getScene());
             primaryStage.setFullScreen(true);
         });
@@ -51,7 +51,7 @@ static BackGroundImage backGroundImage;
         Button niveau3 = creerBouton("NIVEAU 3", Pos.CENTER, () -> {
             Group root = new Group();
             Scene sceneJeu3 = new Scene(root, 700, 400);
-            Partie partie3 = new Partie(sceneJeu3, root, new Level("Level 3"));
+            Partie partie3 = new Partie(primaryStage,  new Level("Level 3"));
             primaryStage.setScene(partie3.getScene());
             primaryStage.setFullScreen(true);
         });
