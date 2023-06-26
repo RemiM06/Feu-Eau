@@ -47,8 +47,6 @@ b
 2src/main/java/com/feueau/service/entity/Porte.java,2\2\221ada2b44158a59dc97175b1994f1f6540ad15e
 ]
 -src/main/java/com/feueau/sae/level/Level.java,f\3\f38e653ddb5fe11dc1f2813005e875526d32283b
-_
-/src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
 c
 3src/main/java/com/feueau/service/entity/Player.java,0\7\0712cb700d19f88565e5c696068598d5b0201f41
 Z
