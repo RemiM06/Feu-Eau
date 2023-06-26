@@ -1,14 +1,12 @@
 package com.feueau.sae.menus.composants;
 
 
-import com.feueau.datas.Partie;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import com.feueau.sae.menus.composants.ChoixNiveau;
 import javafx.util.Pair;
 
 import java.net.URISyntaxException;
@@ -50,7 +48,6 @@ public class PopUpCreerPartie {
             else{
                 //Partie.AjoutPartie(nomPartie, mdpPartie, );
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
-
             }
 
         });
@@ -94,16 +91,14 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-
-                ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+                //ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
 
             }
 
         });
 
-
-        Client.main(new String[]{});
         dialogRejoindrePartie.showAndWait();
+        Client.main(new String[]{});
 
     }
 }
