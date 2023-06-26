@@ -1,6 +1,7 @@
 package com.feueau.sae.menus.composants;
 
 
+import com.feueau.datas.Partie;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
@@ -47,8 +48,9 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-
+                //Partie.AjoutPartie(nomPartie, mdpPartie, );
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+
             }
 
         });
@@ -92,6 +94,7 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
+
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
 
             }
