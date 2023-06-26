@@ -69,7 +69,9 @@ public class Serveur {
             ServerSocket serverSocket = new ServerSocket(1235);
             System.out.println("Server started");
 
-            while (true) {
+            final boolean[] acceptConnections = {true};
+
+            while (acceptConnections[0]) {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected: " + socket);
 
@@ -78,7 +80,7 @@ public class Serveur {
 
                 // Assume player1 is the player object on the server.
                 Thread thread = new Thread(() -> {
-                    while (true) {
+                    while (acceptConnections[0]) {
                         try {
                             String data = input.readUTF();
                             String[] playerData = data.split(",");
@@ -88,6 +90,7 @@ public class Serveur {
                             joueur.setyVelocity(new BigDecimal(playerData[3]));
                         } catch (IOException e) {
                             e.printStackTrace();
+                            acceptConnections[0] = false; // Sort de la boucle en cas d'erreur de lecture
                         }
                     }
                 });
