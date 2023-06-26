@@ -1,13 +1,15 @@
 package com.feueau.sae.menus.composants;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.partie.Partie;
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -24,7 +26,17 @@ import com.corundumstudio.socketio.SocketIOClient;
 
 public class AttenteJoueurs {
 
-    private  static boolean joueur1Connecte = false;
+    private static int levelNum = 1;
+
+    public static int getLevelNum() {
+        return levelNum;
+    }
+
+    public static void incrementLevelNum() {
+        levelNum = (levelNum % 3) + 1;
+    }
+
+    private static boolean joueur1Connecte = true;
     private static boolean joueur2Connecte = false;
 
     public static void setJoueur1Connecte(boolean value) {
@@ -34,31 +46,42 @@ public class AttenteJoueurs {
     public static void setJoueur2Connecte(boolean value) {
         joueur2Connecte = value;
     }
+    public static boolean isJoueur1Connecte() {
+        return joueur1Connecte;
+    }
 
-    private static void updateConnectedClients() throws JsonProcessingException {
+    public static boolean isJoueur2Connecte() {
+        return joueur2Connecte;
+    }
+
+
+    public static void updateConnectedClients() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String joueur1ConnecteMsg = objectMapper.writeValueAsString(joueur1Connecte);
         String joueur2ConnecteMsg = objectMapper.writeValueAsString(joueur2Connecte);
 
+
+
         for (SocketIOClient client : Serveur.getConnectedClients()) {
             client.sendEvent("joueurConnecte", joueur1ConnecteMsg, joueur2ConnecteMsg);
         }
+
     }
 
+
+
     public static void sceneAttente(Stage primaryStage, int numNiveau) {
+
+
+
         System.out.println(joueur1Connecte);
-
+        System.out.println(joueur2Connecte);
         BorderPane pane = new BorderPane();
-
-
-
 
         Color marron = Color.rgb(101, 67, 33);
         BackgroundFill backgroundFill = new BackgroundFill(marron, null, null);
         Background backgroundAttente = new Background(backgroundFill);
         pane.setBackground(backgroundAttente);
-
-        Label titreAttente = new Label("ATTENTE DES JOUEURS");
 
         //VBox Gauche
         VBox joueur1VBox = new VBox();
@@ -80,6 +103,14 @@ public class AttenteJoueurs {
         ImageView imageViewJ2 = new ImageView(imageJ2);
 
 
+        Platform.runLater(() ->{
+
+            try {
+                updateConnectedClients();
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
         if (joueur1Connecte) {
             pane.setLeft(joueur1VBox);
             joueur1VBox.getChildren().add(imageView);
@@ -91,7 +122,9 @@ public class AttenteJoueurs {
         }
 
 
+
         if(joueur1Connecte && joueur2Connecte) {
+
             if(numNiveau == 1) {
                 Group root = new Group();
                 Scene sceneJeu = new Scene(root, 700, 400);
@@ -119,7 +152,9 @@ public class AttenteJoueurs {
 
 
 
-        }
+        } });
+
+
 
         Scene sceneAttente = new Scene(pane);
 
@@ -135,6 +170,7 @@ public class AttenteJoueurs {
 
 
     }
+
 
 
 
