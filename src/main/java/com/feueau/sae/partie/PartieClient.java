@@ -304,25 +304,24 @@ public class PartieClient {
         Client.setMessageListener(newMessage -> {
             Platform.runLater(() -> {
                 System.out.println(newMessage);
-                if (newMessage == "droiteP"){
-                    System.out.println(joueur1);
+                if (newMessage.equals("droiteP")){
                     joueur1.setxVelocity(new BigDecimal("6.0"));
                 }
-                if (newMessage == "gaucheP") {
+                if (newMessage.equals("gaucheP")) {
                     joueur1.setxVelocity(new BigDecimal("-6.0"));
                 }
-                if (newMessage == "hautP") {
+                if (newMessage.equals("hautP")) {
                     if (!joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                         joueur1.setJumping(true);
                     }
                 }
-                if (newMessage == "droiteR") {
+                if (newMessage.equals("droiteR")) {
                     joueur1.setxVelocity(new BigDecimal("0.0"));
                 }
-                if (newMessage == "gaucheR") {
+                if (newMessage.equals("gaucheR")) {
                     joueur1.setxVelocity(new BigDecimal("0.0"));
                 }
-                if (newMessage == "hautR") {
+                if (newMessage.equals("hautR")) {
                     if(!joueur1.isJumping()){
                         joueur1.setJumping(false);
                     }
