@@ -126,6 +126,9 @@ public class PopUpCreerPartie {
                     AjoutPartieClient.AjoutPC(nomPartie, IDJ2);
                     int numNiveau = 1;
                     AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
+
+                    nomPartie = nomPartieTextField.getText();
+                    PopUpCreerPartie.nomPartie = nomPartie;
                 }
                 else {
                     event.consume();
