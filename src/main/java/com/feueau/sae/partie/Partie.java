@@ -104,7 +104,7 @@ public class Partie {
         this.joueur2ImageView = generationImageJoueur(joueur2);
 
         Button retourBouton = creerBouton("Retour", Pos.BOTTOM_LEFT, () -> {
-            ChoixNiveau.levelSelectorLocal(primaryStage);
+            ChoixNiveau.levelSelectorLocal(stage);
         });
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         retourBouton.getStyleClass().add("button");
@@ -275,7 +275,7 @@ public class Partie {
                 if ((grille[joueur1.getY().intValue()][joueur1.getX().intValue()].getName() == "porteFinFeu") && (grille[joueur2.getY().intValue()][joueur2.getX().intValue()].getName() == "porteFinEau"))
                 {
                     stop();
-                    stage.setScene(sceneVictoire);
+                    ChoixNiveau.levelSelectorLocal(stage);
                     stage.setFullScreen(true);
                 }
             }

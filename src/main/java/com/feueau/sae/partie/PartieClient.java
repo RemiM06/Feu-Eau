@@ -4,11 +4,14 @@ import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 import com.feueau.service.entity.Bloc;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -17,6 +20,9 @@ import javafx.stage.Stage;
 
 
 import java.math.BigDecimal;
+
+import static com.feueau.sae.AppSAE.primaryStage;
+import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
 public class PartieClient {
 
