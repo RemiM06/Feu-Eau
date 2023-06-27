@@ -36,9 +36,6 @@ public class Serveur {
         config.setHostname(monIp);
         config.setPort(1234);
 
-
-
-
         serverSocket = new SocketIOServer(config);
 
 
