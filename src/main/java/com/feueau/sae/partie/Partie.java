@@ -1,5 +1,7 @@
 package com.feueau.sae.partie;
 
+import com.corundumstudio.socketio.protocol.Packet;
+import com.corundumstudio.socketio.protocol.PacketType;
 import com.feueau.datas.RecupIDJoueur;
 import com.feueau.datas.RecupIPavecPartie;
 import com.feueau.network.Client;
@@ -288,19 +290,19 @@ public class Partie {
             if (e.getCode() == KeyCode.D) {
                 //Met la vitesse horizontal à 6.0
                 joueur2.setxVelocity(new BigDecimal("6.0"));
-                Client.socket.emit("mess","touche droite pressed");
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche droite pressed");
             }
             //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.Q) {
                 //Met la vitesse horizontal à -6.0
                 joueur2.setxVelocity(new BigDecimal("-6.0"));
-                Client.socket.emit("mess","touche gauche pressed");
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche gauche pressed");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.Z && !joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur2.setJumping(true);
-                Client.socket.emit("mess","touche haute  pressed");
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche haute pressed");
             }
 //////
             if (e.getCode() == KeyCode.R) {
@@ -434,12 +436,4 @@ public class Partie {
         return joueur2;
     }
 
-    public static void sendMove(String direction) {
-        if(direction != "right" || direction != "left" || direction != "up")
-        {
-            return;
-        }
-
-        Client.socket.emit(direction);
-    }
 }

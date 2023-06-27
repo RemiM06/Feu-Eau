@@ -23,7 +23,7 @@ import static com.feueau.sae.AppSAE.primaryStage;
 
 public class Serveur {
 
-    private static SocketIOServer serverSocket;
+    public static SocketIOServer serverSocket;
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
     public static List<SocketIOClient> getConnectedClients(){
@@ -69,6 +69,7 @@ public class Serveur {
             AttenteJoueurs.setJoueur2Connecte(true);
 
         });
+
 
         server.addEventListener("mess", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
