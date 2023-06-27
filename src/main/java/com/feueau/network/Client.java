@@ -21,6 +21,8 @@ import static com.feueau.sae.AppSAE.primaryStage;
 public class Client {
 
     public static Socket socket;
+
+    public static String argsOutsideClass = null;
     public static void main(String[] args) throws URISyntaxException {
         String IpAjoin = RecupIPavecPartie.RecupIP(args[0]);
         socket = IO.socket("http://"+IpAjoin+":1234");
@@ -52,6 +54,7 @@ public class Client {
             @Override
             public void call(Object... args) {
                 System.out.println(args[0]);
+                argsOutsideClass = (String) args[0];
         }});
 
         socket.connect();

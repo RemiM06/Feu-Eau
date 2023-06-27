@@ -24,6 +24,7 @@ import static com.feueau.sae.AppSAE.primaryStage;
 public class Serveur {
 
     public static SocketIOServer serverSocket;
+
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
     public static List<SocketIOClient> getConnectedClients(){
