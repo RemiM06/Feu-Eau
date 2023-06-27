@@ -168,7 +168,7 @@ public class AttenteJoueurs {
             }
         });
 
-
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(sceneAttente);
         primaryStage.setFullScreen(true);
 
