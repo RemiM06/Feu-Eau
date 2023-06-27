@@ -84,12 +84,7 @@ public class AppSAE extends Application {
         });
 
         Button reglesBouton = creerBouton("JEU EN LOCAL", Pos.CENTER, () -> {
-                    Group root = new Group();
-                    Scene sceneJeu = new Scene(root, 700, 400);
-                    Partie partie = new Partie(primaryStage,  new Level("Level 1"));
-                    primaryStage.setFullScreenExitHint("");
-                    primaryStage.setScene(partie.getScene());
-                    primaryStage.setFullScreen(true);
+                    ChoixNiveau.levelSelectorLocal(primaryStage);
                 }
         );
 

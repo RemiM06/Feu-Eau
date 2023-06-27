@@ -22,6 +22,8 @@ public class PopUpCreerPartie {
         J1 = username;
     }
 
+    private static String NomPartie;
+
 
     public static void dialogCreationPartie(Stage primaryStage){
 
@@ -62,7 +64,7 @@ public class PopUpCreerPartie {
             else{
                 PopUpCreerPartie.setJoueur1(PopUpConnection.getUsername());
                 int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(username);
-                System.out.println("totootototot   " + username);
+
                 AjoutPartieServeur.AjoutPS(nomPartie, mdpPartie, IDJ1);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
@@ -129,7 +131,7 @@ public class PopUpCreerPartie {
 
 
         dialogRejoindrePartie.showAndWait();
-        Client.main(new String[]{});
+        Client.main(new String[]{nomPartieTextField.getText()});
 
 
 
