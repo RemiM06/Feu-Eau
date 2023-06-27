@@ -276,33 +276,28 @@ public class Partie {
             if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à -6.0
                 joueur1.setxVelocity(new BigDecimal("-6.0"));
-                Client.socket.emit("mess","touche gauche pressed");
 
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
-                Client.socket.emit("mess","touche haute pressed");
             }
 //////
             //Si la flèche de droite est enfoncée
             if (e.getCode() == KeyCode.D) {
                 //Met la vitesse horizontal à 6.0
                 joueur2.setxVelocity(new BigDecimal("6.0"));
-                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche droite pressed");
             }
             //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.Q) {
                 //Met la vitesse horizontal à -6.0
                 joueur2.setxVelocity(new BigDecimal("-6.0"));
-                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche gauche pressed");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.Z && !joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur2.setJumping(true);
-                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche haute pressed");
             }
 //////
             if (e.getCode() == KeyCode.R) {
