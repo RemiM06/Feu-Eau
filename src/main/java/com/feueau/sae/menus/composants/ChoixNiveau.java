@@ -81,7 +81,7 @@ static BackGroundImage backGroundImage;
         });
 
 
-
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(levelSelectorScene);
         primaryStage.setFullScreen(true);
 

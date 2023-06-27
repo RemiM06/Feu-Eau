@@ -70,6 +70,7 @@ public class CreerRejoindre {
 
 
         // Configuration de la nouvelle scène sur la stage existante
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(creerRejoindreScene);
         primaryStage.setFullScreen(true);
 
