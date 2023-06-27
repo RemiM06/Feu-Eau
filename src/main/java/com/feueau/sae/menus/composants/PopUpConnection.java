@@ -1,6 +1,7 @@
 package com.feueau.sae.menus.composants;
 
 import com.feueau.datas.Utilisateur;
+import com.feueau.datas.VerifConnexionUser;
 import com.feueau.network.recuperation.IPUtilisateur;
 import com.feueau.sae.AppSAE;
 import javafx.event.ActionEvent;
@@ -65,15 +66,22 @@ public class PopUpConnection {
 
             }
             else {
+                if(VerifConnexionUser.Verif(username,password)==1){
+                    CreerRejoindre.creerRejoindre(primaryStage);
 
-                System.out.println("Connection - Nom d'utilisateur : " + username);
-                System.out.println("Connection - IPAdress : " + adresseIP);
-                System.out.println("Connection - Mot de Passe : " + password);
-                Utilisateur.AjoutUtilisateur(username, password, adresseIP);
-                CreerRejoindre.creerRejoindre(primaryStage);
+                    username = usernameTextField.getText();
+                    PopUpConnection.username = username;
+                } else {
+                    event.consume();
+                    Alertes.showAlert("Nom d'utilisateur ou Mot de passe incorrect.");
+                }
 
-                username = usernameTextField.getText();
-                PopUpConnection.username = username;
+                System.out.println("Connexion - Nom d'utilisateur : " + username);
+                System.out.println("Connexion - IPAdress : " + adresseIP);
+                System.out.println("Connexion - Mot de Passe : " + password);
+
+
+
             }
 
 
@@ -100,9 +108,10 @@ public class PopUpConnection {
                  System.out.println("Inscription - IPAdress : " + adresseIP);
                  System.out.println("Inscription - Mot de Passe : " + password);
                  Utilisateur.AjoutUtilisateur(username, password, adresseIP);
-
                  CreerRejoindre.creerRejoindre(primaryStage);
 
+                 username = usernameTextField.getText();
+                 PopUpConnection.username = username;
 
 
 
