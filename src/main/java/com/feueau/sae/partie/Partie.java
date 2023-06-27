@@ -8,17 +8,22 @@ import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 import com.feueau.service.entity.Bloc;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -26,6 +31,9 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+
+import static com.feueau.sae.AppSAE.primaryStage;
+import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
 public class Partie {
 
@@ -44,15 +52,21 @@ public class Partie {
 
     public Partie(Stage stage, Level level) {
 
+
+
         this.stage = stage;
         this.sceneVictoire = stage.getScene();
         this.root = new Group();
+
         this.scene = new Scene(root, 700, 400);
+
         stage.setScene(scene);
         stage.setFullScreen(true);
 
         this.level = level;
         this.initPartie();
+
+
     }
 
     public ImageView generationImageJoueur(Joueur joueur) {
@@ -89,8 +103,15 @@ public class Partie {
         this.joueur1ImageView = generationImageJoueur(joueur1);
         this.joueur2ImageView = generationImageJoueur(joueur2);
 
+        Button retourBouton = creerBouton("Retour", Pos.BOTTOM_LEFT, () -> {
+            ChoixNiveau.levelSelectorLocal(primaryStage);
+        });
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        retourBouton.getStyleClass().add("button");
+        retourBouton.setFocusTraversable(false);
+
         this.root.getChildren().removeAll();
-        this.root.getChildren().addAll(this.gridPane, this.joueur1ImageView, this.joueur2ImageView);
+        this.root.getChildren().addAll(this.gridPane, retourBouton, this.joueur1ImageView, this.joueur2ImageView);
 
         this.scene.widthProperty().addListener(((observableValue, oldValue, newValue) -> {
             this.root.getChildren().removeAll();
@@ -340,7 +361,10 @@ public class Partie {
             }
 //////
         });
+
+
         System.out.println("initPartie");
+
     }
 
     //Verification de la presence d'un bloc solide au dessus ou en dessus en fonction du parametre direction

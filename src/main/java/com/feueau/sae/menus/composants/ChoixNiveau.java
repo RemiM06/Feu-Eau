@@ -27,6 +27,7 @@ static BackGroundImage backGroundImage;
 private static Scene sceneApp;
 
 
+
     public static void levelSelector(Stage primaryStage, String nomPartie, String mdpPartie) {
 
         BorderPane levelSelectorPane = new BorderPane();
@@ -138,13 +139,13 @@ private static Scene sceneApp;
         });
         niveau6.getStyleClass().add("one-piece-button");
 
-
-        sceneApp = primaryStage.getScene();
-        Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
-            primaryStage.setScene(sceneApp);
-
+        Button quitterBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
+            primaryStage.close();
         });
-        retourBouton.getStyleClass().add("button");
+        quitterBouton.getStyleClass().add("button");
+
+
+
 
 
         //VBox boutons niveaux
@@ -157,7 +158,7 @@ private static Scene sceneApp;
         VBox vboxRetour = new VBox(10);
         vboxRetour.setPadding(new Insets(10));
         vboxRetour.setAlignment(Pos.BOTTOM_LEFT);
-        vboxRetour.getChildren().addAll(retourBouton);
+        vboxRetour.getChildren().addAll(quitterBouton);
         levelSelectorPane.setBottom(vboxRetour);
 
         Scene levelSelectorScene = new Scene(levelSelectorPane);
@@ -172,9 +173,6 @@ private static Scene sceneApp;
                 event.consume();
             }
         });
-        sceneApp.getStylesheets().add(ChoixNiveau.class.getResource("/styles.css").toExternalForm());
-
-
 
 
         primaryStage.setFullScreenExitHint("");

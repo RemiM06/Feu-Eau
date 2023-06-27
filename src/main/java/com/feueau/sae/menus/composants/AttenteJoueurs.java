@@ -132,12 +132,6 @@ public class AttenteJoueurs {
             nomPartie = PopUpCreerPartie.getNomPartie();
             String NumJoueur = Joueur1ou2.verifierIdJoueur(nomPartie,idJoueur);
 
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
             if(numNiveau == 1) {
                 if(NumJoueur.equals("Joueur 1")){
                     PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 1"));
