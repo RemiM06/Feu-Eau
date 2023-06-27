@@ -117,7 +117,9 @@ public class Partie {
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur1.isJumping() || checkBlocY(joueur1, "bas") || (joueur1.getY().doubleValue()/joueur1.getY().intValue() != 1)) {
                     //Vitesse de la chute
-                    joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
+                    if (joueur1.getyVelocity().intValue() < 24) {
+                        joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
+                    }
 
                     //Verifie si il y a un bloc au dessus et que le joueur monte
                     if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity().doubleValue() < 0)) {
