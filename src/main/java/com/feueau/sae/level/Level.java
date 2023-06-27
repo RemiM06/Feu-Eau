@@ -36,6 +36,50 @@ public class Level {
             this.xJoueur2 = new BigDecimal("2.0");
             this.yJoueur2 = new BigDecimal("16.0");
 
+            this.grille[16][7] = new Bloc("bloc", true);
+            this.grille[15][8] = new Bloc("bloc", true);
+            this.grille[14][10] = new Bloc("bloc", true);
+            this.grille[13][12] = new Bloc("bloc", true);
+            this.grille[16][15] = new Bloc("bloc", true);
+            this.grille[15][17] = new Bloc("bloc", true);
+            this.grille[15][20] = new Bloc("bloc", true);
+            this.grille[15][24] = new Bloc("bloc", true);
+
+
+            this.grille[16][29] = new Bloc("porteFinFeu", false);
+            this.grille[16][30] = new Bloc("porteFinEau", false);
+        }
+
+        if (nom == "Level 2") {
+            this.xJoueur1 = new BigDecimal("1.0");
+            this.yJoueur1 = new BigDecimal("16.0");
+            this.xJoueur2 = new BigDecimal("2.0");
+            this.yJoueur2 = new BigDecimal("16.0");
+
+            this.grille[16][7] = new Bloc("bloc", true);
+            this.grille[16][8] = new Bloc("feu", true);
+            this.grille[16][9] = new Bloc("bloc", true);
+            this.grille[16][10] = new Bloc("bloc", true);
+            this.grille[16][11] = new Bloc("eau", true);
+            this.grille[16][12] = new Bloc("bloc", true);
+            this.grille[15][13] = new Bloc("bloc", true);
+            this.grille[14][14] = new Bloc("bloc", true);
+            this.grille[13][15] = new Bloc("bloc", true);
+            this.grille[12][17] = new Bloc("bloc", true);
+
+            this.grille[17][23] = new Bloc("feu", true);
+            this.grille[17][27] = new Bloc("eau", true);
+
+            this.grille[16][29] = new Bloc("porteFinFeu", false);
+            this.grille[16][30] = new Bloc("porteFinEau", false);
+        }
+
+        if (nom == "Level 3") {
+            this.xJoueur1 = new BigDecimal("1.0");
+            this.yJoueur1 = new BigDecimal("16.0");
+            this.xJoueur2 = new BigDecimal("2.0");
+            this.yJoueur2 = new BigDecimal("16.0");
+
             this.grille[14][1] = new Bloc("bloc", true);
             this.grille[14][2] = new Bloc("bloc", true);
             this.grille[14][3] = new Bloc("bloc", true);
@@ -185,7 +229,7 @@ public class Level {
             this.grille[2][30] = new Bloc("porteFinEau", false);
         }
 
-        if (nom == "Level 2") {
+        if (nom == "Level 4") {
             this.xJoueur1 = new BigDecimal("1.0");
             this.yJoueur1 = new BigDecimal("16.0");
             this.xJoueur2 = new BigDecimal("4.0");
@@ -249,7 +293,7 @@ public class Level {
             this.grille[16][30] = new Bloc("porteFinEau", false);
         }
 
-        if (nom == "Level 3") {
+        if (nom == "Level 5") {
             this.xJoueur1 = new BigDecimal("30.0");
             this.yJoueur1 = new BigDecimal("3.0");
             this.xJoueur2 = new BigDecimal("1.0");
@@ -331,7 +375,7 @@ public class Level {
             this.grille[3][29] = new Bloc("porteFinEau", false);
         }
 
-        if (nom == "Level 4") {
+        if (nom == "Level 6") {
             this.xJoueur1 = new BigDecimal("7.0");
             this.yJoueur1 = new BigDecimal("1.0");
             this.xJoueur2 = new BigDecimal("24.0");
@@ -495,7 +539,7 @@ public class Level {
             this.grille[15][17] = new Bloc("porteFinEau", false);
         }
 
-        if (nom == "Level 5") {
+        if (nom == "Level 7") {
             this.xJoueur1 = new BigDecimal("29.0");
             this.yJoueur1 = new BigDecimal("16.0");
             this.xJoueur2 = new BigDecimal("2.0");
@@ -559,7 +603,7 @@ public class Level {
             this.grille[16][30] = new Bloc("porteFinEau", false);
         }
 
-        if (nom == "Level 6") {
+        if (nom == "Level 8") {
             this.xJoueur1 = new BigDecimal("1.0");
             this.yJoueur1 = new BigDecimal("16.0");
             this.xJoueur2 = new BigDecimal("17.0");
