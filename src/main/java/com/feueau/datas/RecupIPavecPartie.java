@@ -2,9 +2,9 @@ package com.feueau.datas;
 
 import java.sql.*;
 
-public class RecupIDJoueur {
+public class RecupIPavecPartie {
 
-    public static int RecupIDAvecPseudo(String NomUtilisateur) {
+    public static String RecupIP(String NomPartie) {
 
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
         String utilisateurBDD = "root";
@@ -22,18 +22,28 @@ public class RecupIDJoueur {
         try {
             connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
 
-            String sql = "SELECT ID FROM player WHERE Username = ?";
-            int resID = 1;
+            String sql = "SELECT ID_Joueur1 FROM partie WHERE Nom = ?";
+            String res = null;
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
-                statement.setString(1, NomUtilisateur);
+                statement.setString(1, NomPartie);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        resID = resultSet.getInt(1);
-                        return resID;
+                        res = resultSet.getString(1);
                     }
                 }
             }
 
+            String sql2 = "SELECT IP FROM player WHERE ID = ?";
+            String res2 = null;
+            try (PreparedStatement statement = connexion.prepareStatement(sql)) {
+                statement.setString(1, res);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        res2 = resultSet.getString(1);
+                        return res2;
+                    }
+                }
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -47,6 +57,7 @@ public class RecupIDJoueur {
             }
         }
 
-        return 2;
+        return null;
     }
+
 }
