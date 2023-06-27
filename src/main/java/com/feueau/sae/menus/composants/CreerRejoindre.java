@@ -49,7 +49,7 @@ public class CreerRejoindre {
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
-        closeBouton.getStyleClass().add("one-piece-button");
+        closeBouton.getStyleClass().add("button");
 
 
         //VBox boutonQuitter

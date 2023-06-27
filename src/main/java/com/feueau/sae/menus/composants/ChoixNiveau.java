@@ -50,7 +50,7 @@ static BackGroundImage backGroundImage;
         Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
             CreerRejoindre.creerRejoindre(primaryStage);
         });
-        retourBouton.getStyleClass().add("one-piece-button");
+        retourBouton.getStyleClass().add("button");
 
 
 
