@@ -73,7 +73,7 @@ public class Serveur {
 
 
         serverSocket.addEventListener("mess", String.class, (client, data, ackSender) -> {
-            System.out.println("Message received from client: " + data);
+            System.out.println(data);
         });
 
         Thread serverThread = new Thread(() ->{
