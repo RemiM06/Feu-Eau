@@ -18,6 +18,7 @@ public class PopUpConnection {
     private static String username;
 
 
+
     public static void showLoginDialog(Stage primaryStage) {
 
         Dialog<Void> dialogConnexion = new Dialog<>();
@@ -80,12 +81,7 @@ public class PopUpConnection {
                 System.out.println("Connexion - IPAdress : " + adresseIP);
                 System.out.println("Connexion - Mot de Passe : " + password);
 
-
-
             }
-
-
-
 
         });
 
@@ -112,7 +108,6 @@ public class PopUpConnection {
 
                  username = usernameTextField.getText();
                  PopUpConnection.username = username;
-
 
 
              }

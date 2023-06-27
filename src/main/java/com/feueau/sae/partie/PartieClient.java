@@ -14,7 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.lang.runtime.SwitchBootstraps;
+
 import java.math.BigDecimal;
 
 public class PartieClient {
