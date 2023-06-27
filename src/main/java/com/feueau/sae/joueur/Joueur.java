@@ -26,6 +26,7 @@ public class Joueur {
         this.y = y;
         this.x = x;
         this.type = type;
+        this.isJumping = false;
         if (type == "feu") {
             this.pathImgDroit = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
             this.pathImgGauche = getClass().getResource("/img/Akainu-gauche.png").toExternalForm();
@@ -34,11 +35,6 @@ public class Joueur {
             this.pathImgDroit = getClass().getResource("/img/Aokiji-droite-eau.png").toExternalForm();
             this.pathImgGauche = getClass().getResource("/img/Aokiji-gauche-eau.png").toExternalForm();
         }
-    }
-
-    public Joueur(BigDecimal y, BigDecimal x, String type, String id) {
-        this(y,x,type);
-        this.id = id;
     }
 
     public boolean isJumping() {
