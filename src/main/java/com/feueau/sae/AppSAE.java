@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -101,10 +102,14 @@ public class AppSAE extends Application {
             primaryStage.close();
         });
 
+
+
         //VBox boutonQuitter
-        VBox quitterVBox = new VBox(10);
+        VBox quitterVBox = new VBox();
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
+        quitterVBox.setFillWidth(true);
         quitterVBox.getChildren().addAll(closeBouton);
+
         rootPane.setBottom(quitterVBox);
 
 
@@ -120,13 +125,15 @@ public class AppSAE extends Application {
         titreVBox.getChildren().addAll(titreAcceuil);
         rootPane.setTop(titreVBox);
 
+
+
         //Image titre
         Image image = new Image(getClass().getResourceAsStream("/img/Titre.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(1110); // Définissez la largeur souhaitée de l'image
         imageView.setFitHeight(153); // Définissez la hauteur souhaitée de l'image
 
-        // Ajoutez l'ImageView à votre scène ou à un autre conteneur approprié
+
 
 
         Scene scene = new Scene(rootPane, 700, 400);
@@ -136,17 +143,28 @@ public class AppSAE extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
-
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                event.consume(); // Empêche l'événement de propagation supplémentaire
+            }
+        });
 
 
         this.primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreenExitKeyCombination(null);
+        this.primaryStage.setResizable(false);
+        this.primaryStage.setFullScreenExitKeyCombination(null);
         primaryStage.setFullScreenExitHint("");
         this.primaryStage.setScene(scene);
         titreVBox.getChildren().add(imageView);
         this.primaryStage.setFullScreen(true);
+
+        this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                event.consume();
+            }
+        });
         this.primaryStage.show();
 
     }
