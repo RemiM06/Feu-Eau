@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.math.BigDecimal;
+import java.sql.*;
 
 public class Joueur {
 
@@ -15,16 +16,20 @@ public class Joueur {
     private boolean isJumping = false;
     private String pathImgDroit;
     private String pathImgGauche;
+
+    private String id;
+
     public Joueur() {
 
     }
     public Joueur(BigDecimal y, BigDecimal x, String type) {
-        this.y=y;
-        this.x=x;
-        this.type=type;
+        this.y = y;
+        this.x = x;
+        this.type = type;
+        this.isJumping = false;
         if (type == "feu") {
             this.pathImgDroit = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
-            this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.png").toExternalForm();
+            this.pathImgGauche = getClass().getResource("/img/Akainu-gauche.png").toExternalForm();
         }
         if (type == "eau") {
             this.pathImgDroit = getClass().getResource("/img/Aokiji-droite-eau.png").toExternalForm();
@@ -82,16 +87,16 @@ public class Joueur {
     }
     public void setX(BigDecimal nb) {
         this.x = this.x.add(nb);
-        /*System.out.println("--------------");
+        System.out.println("--------------");
         System.out.print("x : ");
-        System.out.println(this.x);*/
+        System.out.println(this.x);
     }
 
     public void setY(BigDecimal nb) {
         this.y = nb;
-        /*System.out.println("--------------");
+        System.out.println("--------------");
         System.out.print("y : ");
-        System.out.println(this.y);*/
+        System.out.println(this.y);
     }
 
     @Override
@@ -106,5 +111,51 @@ public class Joueur {
                 ", pathImgDroit='" + pathImgDroit + '\'' +
                 ", pathImgGauche='" + pathImgGauche + '\'' +
                 '}';
+    }
+
+    public String getIp()
+    {
+        String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
+        String utilisateurBDD = "root";
+        String motDePasseBDD = "";
+
+        Connection connexion = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
+
+        try {
+            connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
+
+            String sql = "SELECT IP FROM player WHERE ID = ?";
+            String resID = null;
+            try (PreparedStatement statement = connexion.prepareStatement(sql)) {
+                statement.setString(1, this.id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        resID = resultSet.getString(1);
+                        return resID;
+                    }
+                }
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (connexion != null) {
+                    connexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 }

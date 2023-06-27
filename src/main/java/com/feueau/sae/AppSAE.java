@@ -14,9 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -24,7 +28,10 @@ import java.net.UnknownHostException;
 public class AppSAE extends Application {
 
 
-    public static void lancement(String[] args) {
+
+    private static Scene currentScene;
+    public static void lancement(Scene scene, String[] args) {
+        currentScene = scene;
         AppSAE.launch(args);
     }
 
@@ -32,21 +39,36 @@ public class AppSAE extends Application {
     private Scene reglesScene;
     private BackGroundImage backGroundImage;
     private BackGroundImage titreImage;
-    private Stage stageMain;
+    public static Stage primaryStage;
+
+    private static Scene sceneAttente;
 
     private Button creerBouton(String texte, Pos position, Runnable action){
         return CreerBouton.creerBouton(texte, position, action);
     }
 
+    public static void setSceneAttente(Scene scene){
+        sceneAttente = scene;
+        if(primaryStage != null){
+            primaryStage.setScene(sceneAttente);
+        }
+    }
+
+    public static Scene getScene(){
+        return primaryStage.getScene();
+    }
+
+    public static void setPrimaryStage(Stage stage) {
+        primaryStage = stage;
+    }
+
     @Override
-    public void start(Stage stageMain) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
 
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
         BorderPane niveauxPane = new BorderPane();
-        this.stageMain = stageMain;
-
-
+        this.primaryStage = primaryStage;
 
         //Titre
         Label titreAcceuil = new Label();
@@ -60,43 +82,39 @@ public class AppSAE extends Application {
         //Mise en place du background
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
 
-
-        //Chargement de la police
-
         //Boutons
-        Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
-            PopUpConnection.showLoginDialog(stageMain);
+        Button jouerBouton = creerBouton("JOUER EN LIGNE", Pos.CENTER, () -> {
+            PopUpConnection.showLoginDialog(primaryStage);
         });
-        Button reglesBouton = creerBouton("Regles", Pos.CENTER, () ->
-                {
-                    Group root = new Group();
-                    Scene sceneJeu = new Scene(root, 700, 400);
-                    Partie partie = new Partie(sceneJeu, root, new Level("Level 1"));
-                    stageMain.setScene(partie.getScene());
-                    stageMain.setFullScreen(true);
-                }
-        );
+
+        Button jouerLocalBouton = creerBouton("JEU EN LOCAL", Pos.CENTER, () -> {
+            ChoixNiveau.levelSelectorLocal(primaryStage);
+        });
 
 
 
-        reglesBouton.getStyleClass().add("one-piece-button");
+        jouerLocalBouton.getStyleClass().add("one-piece-button");
         jouerBouton.getStyleClass().add("one-piece-button");
 
-        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () ->{
-            stageMain.close();
+        Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
+            primaryStage.close();
         });
 
+
+
         //VBox boutonQuitter
-        VBox quitterVBox = new VBox(10);
+        VBox quitterVBox = new VBox();
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
+        quitterVBox.setFillWidth(true);
         quitterVBox.getChildren().addAll(closeBouton);
+
         rootPane.setBottom(quitterVBox);
 
 
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
+        boutonsVbox.getChildren().addAll(jouerBouton, jouerLocalBouton);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre
@@ -105,13 +123,15 @@ public class AppSAE extends Application {
         titreVBox.getChildren().addAll(titreAcceuil);
         rootPane.setTop(titreVBox);
 
+
+
         //Image titre
         Image image = new Image(getClass().getResourceAsStream("/img/Titre.png"));
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(1110); // Définissez la largeur souhaitée de l'image
-        imageView.setFitHeight(153); // Définissez la hauteur souhaitée de l'image
+        imageView.setFitWidth(1110);
+        imageView.setFitHeight(153);
 
-        // Ajoutez l'ImageView à votre scène ou à un autre conteneur approprié
+
 
 
         Scene scene = new Scene(rootPane, 700, 400);
@@ -121,15 +141,33 @@ public class AppSAE extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                event.consume();
+            }
+        });
 
 
-        stageMain.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
-        stageMain.setScene(scene);
+        this.primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
+        this.primaryStage.setResizable(false);
+        this.primaryStage.setFullScreenExitKeyCombination(null);
+        primaryStage.setFullScreenExitHint("");
+        this.primaryStage.setScene(scene);
         titreVBox.getChildren().add(imageView);
-        stageMain.setFullScreen(true);
-        stageMain.show();
+        this.primaryStage.setFullScreen(true);
+
+        this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                event.consume();
+            }
+        });
+        this.primaryStage.show();
 
     }
+
+
 
 
 }

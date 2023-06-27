@@ -1,5 +1,6 @@
 package com.feueau.sae.menus.composants;
 
+import com.feueau.sae.AppSAE;
 import com.feueau.sae.graphiques.BackGroundImage;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -8,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.feueau.sae.menus.composants.ChoixNiveau;
+
+import java.net.URISyntaxException;
 
 import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
@@ -23,24 +27,37 @@ public class CreerRejoindre {
         primaryStage.setTitle("Veuillez choisir une option");
 
         Button creerBouton = creerBouton("CREER UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogCreationPartie(primaryStage);
+            try{
+                PopUpCreerPartie.dialogCreationPartie(primaryStage);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         });
         creerBouton.getStyleClass().add("one-piece-button-partie");
 
         Button rejoindreBouton = creerBouton("REJOINDRE UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            try {
+                PopUpCreerPartie.dialogRejoindrePartie(primaryStage);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         });
         rejoindreBouton.getStyleClass().add("one-piece-button-partie");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
+        closeBouton.getStyleClass().add("button");
+
 
         //VBox boutonQuitter
         VBox quitterVBox = new VBox(10);
         quitterVBox.setAlignment(Pos.BOTTOM_LEFT);
         quitterVBox.getChildren().addAll(closeBouton);
         creerRejoindrePane.setBottom(quitterVBox);
+
 
         //VBox boutons
         VBox creerRejoindreVBox = new VBox(10);
@@ -53,6 +70,7 @@ public class CreerRejoindre {
 
 
         // Configuration de la nouvelle scène sur la stage existante
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(creerRejoindreScene);
         primaryStage.setFullScreen(true);
 
