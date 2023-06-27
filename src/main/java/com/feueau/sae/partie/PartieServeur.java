@@ -255,73 +255,68 @@ public class PartieServeur {
         //Actions des touches lorsqu'elles sont enfoncées
         this.scene.setOnKeyPressed(e -> {
             //Si la flèche de droite est enfoncée
-            if (e.getCode() == KeyCode.D) {
+            if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 6.0
                 joueur1.setxVelocity(new BigDecimal("6.0"));
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","droiteP");
             }
             //Si la flèche de gauche est enfoncée
-            if (e.getCode() == KeyCode.Q) {
+            if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à -6.0
                 joueur1.setxVelocity(new BigDecimal("-6.0"));
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","gaucheP");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
-            if (e.getCode() == KeyCode.Z && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
+            if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","hautP");
             }
 //////
-            if (e.getCode() == KeyCode.R) {
-                aT.stop();
-                this.initPartie();
-            }
         });
-
-        switch (Client.argsOutsideClass) {
-            case "droiteP":
-                joueur2.setxVelocity(new BigDecimal("6.0"));
-            case "gaucheP":
-                joueur2.setxVelocity(new BigDecimal("-6.0"));
-            case "hautP":
-                if (!joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
-                    joueur2.setJumping(true);
-                }
-            case "droiteR":
-                joueur2.setxVelocity(new BigDecimal("0.0"));
-            case "gaucheR":
-                joueur2.setxVelocity(new BigDecimal("0.0"));
-            case "hautR":
-                if(!joueur2.isJumping()){
-                    joueur2.setJumping(false);
-                }
-
-        }
-
         //Actions des touches lorsqu'elles sont relachées
         this.scene.setOnKeyReleased(e -> {
 //////
             //Si la flèche de droite est relachée
-            if (e.getCode() == KeyCode.D) {
+            if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","droiteR");
             }
             //Si la flèche de gauche est relachée
-            if (e.getCode() == KeyCode.Q) {
+            if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","gaucheR");
             }
             //Si la flèche du haut est relachée et que le joueur n'est pas entrain de sauter
-            if (e.getCode() == KeyCode.Z && !joueur1.isJumping()) {
+            if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
                 //Met sa variable de saut à faux pour savoir qu'il n'est pas entrain de sauter et met sa vitesse vertical à 0.0
                 joueur1.setJumping(false);
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","hautR");
             }
 //////
         });
+
+        switch (Client.argsOutsideClass) {
+                case "droiteP":
+                    joueur2.setxVelocity(new BigDecimal("6.0"));
+                case "gaucheP":
+                    joueur2.setxVelocity(new BigDecimal("-6.0"));
+                case "hautP":
+                    if (!joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
+                        joueur2.setJumping(true);
+                    }
+                case "droiteR":
+                    joueur2.setxVelocity(new BigDecimal("0.0"));
+                case "gaucheR":
+                    joueur2.setxVelocity(new BigDecimal("0.0"));
+                case "hautR":
+                    if(!joueur2.isJumping()){
+                        joueur2.setJumping(false);
+                    }
+
+            }
         System.out.println("initPartie");
 
     }

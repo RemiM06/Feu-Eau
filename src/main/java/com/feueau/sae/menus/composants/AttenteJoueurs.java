@@ -131,6 +131,7 @@ public class AttenteJoueurs {
             idJoueur = RecupIDJoueur.RecupIDAvecPseudo(PopUpConnection.getUsername());
             nomPartie = PopUpCreerPartie.getNomPartie();
             String NumJoueur = Joueur1ou2.verifierIdJoueur(nomPartie,idJoueur);
+            System.out.println(NumJoueur);
 
             try {
                 Thread.sleep(3000);
