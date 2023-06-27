@@ -21,7 +21,7 @@ public class Client {
     public static void main(String[] args) throws URISyntaxException {
 
 
-        socket = IO.socket("http://134.59.143.49:1234");
+        socket = IO.socket("http://25.73.214.239:1234");
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -53,7 +53,6 @@ public class Client {
                 // Mettre à jour l'affichage du jeu en fonction de gameState
             }
         });
-
 
 
         socket.connect();

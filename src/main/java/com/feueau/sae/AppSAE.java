@@ -78,11 +78,11 @@ public class AppSAE extends Application {
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
 
         //Boutons
-        Button jouerBouton = creerBouton("Jouer", Pos.CENTER, () -> {
+        Button jouerBouton = creerBouton("JOUER EN LIGNE", Pos.CENTER, () -> {
             PopUpConnection.showLoginDialog(primaryStage);
         });
 
-        Button reglesBouton = creerBouton("Regles", Pos.CENTER, () -> {
+        Button reglesBouton = creerBouton("JEU EN LOCAL", Pos.CENTER, () -> {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
                     Partie partie = new Partie(primaryStage,  new Level("Level 1"));

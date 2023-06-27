@@ -1,6 +1,7 @@
 package com.feueau.sae.menus.composants;
 
 
+import com.feueau.datas.*;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import javafx.event.ActionEvent;
@@ -12,6 +13,15 @@ import javafx.util.Pair;
 import java.net.URISyntaxException;
 
 public class PopUpCreerPartie {
+
+    private static String J1;
+
+    private static String J2;
+
+    public static void setJoueur1(String username) {
+        J1 = username;
+    }
+
 
     public static void dialogCreationPartie(Stage primaryStage){
 
@@ -33,8 +43,12 @@ public class PopUpCreerPartie {
         dialogPane.setContent(contentDialog);
 
 
+
+
         ButtonType validerButtonType = new ButtonType("Valider", ButtonBar.ButtonData.OK_DONE);
         dialogCreatePartie.getDialogPane().getButtonTypes().addAll(validerButtonType, ButtonType.CANCEL);
+
+        String username = PopUpConnection.getUsername();
 
         Button validateButton = (Button) dialogPane.lookupButton(validerButtonType);
         validateButton.addEventFilter(ActionEvent.ACTION, event -> {
@@ -46,15 +60,18 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-
+                PopUpCreerPartie.setJoueur1(PopUpConnection.getUsername());
+                int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(username);
+                System.out.println("totootototot   " + username);
+                AjoutPartieServeur.AjoutPS(nomPartie, mdpPartie, IDJ1);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
 
         });
 
-        Serveur.main(new String[]{});
-
         dialogCreatePartie.showAndWait();
+
+        Serveur.main(new String[]{});
 
     }
 
@@ -91,14 +108,30 @@ public class PopUpCreerPartie {
                 Alertes.showAlert("Veillez à remplir tous les champs avant de les valider");
             }
             else{
-                //ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+                if(VerifConnexionPartie.Verif(nomPartie,mdpPartie)==1){
+                    int IDJ2 = RecupIDJoueur.RecupIDAvecPseudo(J2 = PopUpConnection.getUsername());
+                    AjoutPartieClient.AjoutPC(nomPartie, IDJ2);
+                    int numNiveau = 1;
+                    AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
+                }
+                else {
+                    event.consume();
+                    Alertes.showAlert("Nom de partie ou Mot de passe incorrect.");
+                }
+
 
             }
 
+
+
         });
+
+
 
         dialogRejoindrePartie.showAndWait();
         Client.main(new String[]{});
+
+
 
     }
 }

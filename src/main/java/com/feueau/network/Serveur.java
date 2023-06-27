@@ -53,14 +53,14 @@ public class Serveur {
                     AttenteJoueurs.sceneAttente(primaryStage, AttenteJoueurs.getLevelNum());
                 });
 
-            if(AttenteJoueurs.isJoueur1Connecte() && AttenteJoueurs.isJoueur2Connecte()){
-                try {
-                    AttenteJoueurs.updateConnectedClients();
-                    AppSAE.setSceneAttente(AppSAE.getScene());
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-            }}
+                if(AttenteJoueurs.isJoueur1Connecte() && AttenteJoueurs.isJoueur2Connecte()){
+                    try {
+                        AttenteJoueurs.updateConnectedClients();
+                        AppSAE.setSceneAttente(AppSAE.getScene());
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }}
         });
 
         server.addEventListener("chat", String.class, (client, data, ackSender) -> {

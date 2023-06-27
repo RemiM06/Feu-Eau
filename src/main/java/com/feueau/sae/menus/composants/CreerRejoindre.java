@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 
 import java.net.URISyntaxException;
 
@@ -26,7 +27,13 @@ public class CreerRejoindre {
         primaryStage.setTitle("Veuillez choisir une option");
 
         Button creerBouton = creerBouton("CREER UNE PARTIE", Pos.CENTER, () ->{
-            PopUpCreerPartie.dialogCreationPartie(primaryStage);
+            try{
+                PopUpCreerPartie.dialogCreationPartie(primaryStage);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         });
         creerBouton.getStyleClass().add("one-piece-button-partie");
 
