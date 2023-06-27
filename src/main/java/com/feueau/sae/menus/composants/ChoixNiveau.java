@@ -132,16 +132,10 @@ private static Scene sceneApp;
         niveau5.getStyleClass().add("one-piece-button");
 
 
-        sceneApp = primaryStage.getScene();
-        Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
-            primaryStage.setScene(sceneApp);
-
-
         Button quitterBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
-        retourBouton.getStyleClass().add("button");
-        quitterBouton.getStyleClass().add("one-piece-button");
+        quitterBouton.getStyleClass().add("button");
 
 
 

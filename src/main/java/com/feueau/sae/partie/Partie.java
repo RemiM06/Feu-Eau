@@ -14,12 +14,16 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -29,6 +33,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 
 import static com.feueau.sae.AppSAE.primaryStage;
+import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 
 public class Partie {
 
@@ -47,15 +52,21 @@ public class Partie {
 
     public Partie(Stage stage, Level level) {
 
+
+
         this.stage = stage;
         this.sceneVictoire = stage.getScene();
         this.root = new Group();
+
         this.scene = new Scene(root, 700, 400);
+
         stage.setScene(scene);
         stage.setFullScreen(true);
 
         this.level = level;
         this.initPartie();
+
+
     }
 
     public ImageView generationImageJoueur(Joueur joueur) {
@@ -375,7 +386,14 @@ public class Partie {
             }
 //////
         });
+
+        Button retourBouton = creerBouton("Retour", Pos.BOTTOM_LEFT, () -> {
+            ChoixNiveau.levelSelectorLocal(primaryStage);
+        });
+        retourBouton.getStyleClass().add("button");
+        root.getChildren().add(retourBouton);
         System.out.println("initPartie");
+
     }
 
     //Verification de la presence d'un bloc solide au dessus ou en dessus en fonction du parametre direction
