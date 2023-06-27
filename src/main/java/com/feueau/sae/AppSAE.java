@@ -40,6 +40,7 @@ public class AppSAE extends Application {
     private BackGroundImage backGroundImage;
     private BackGroundImage titreImage;
     public static Stage primaryStage;
+
     private static Scene sceneAttente;
 
     private Button creerBouton(String texte, Pos position, Runnable action){
@@ -50,12 +51,15 @@ public class AppSAE extends Application {
         sceneAttente = scene;
         if(primaryStage != null){
             primaryStage.setScene(sceneAttente);
-
         }
     }
 
     public static Scene getScene(){
         return primaryStage.getScene();
+    }
+
+    public static void setPrimaryStage(Stage stage) {
+        primaryStage = stage;
     }
 
     @Override
@@ -83,14 +87,13 @@ public class AppSAE extends Application {
             PopUpConnection.showLoginDialog(primaryStage);
         });
 
-        Button reglesBouton = creerBouton("JEU EN LOCAL", Pos.CENTER, () -> {
-                    ChoixNiveau.levelSelectorLocal(primaryStage);
-                }
-        );
+        Button jouerLocalBouton = creerBouton("JEU EN LOCAL", Pos.CENTER, () -> {
+            ChoixNiveau.levelSelectorLocal(primaryStage);
+        });
 
 
 
-        reglesBouton.getStyleClass().add("one-piece-button");
+        jouerLocalBouton.getStyleClass().add("one-piece-button");
         jouerBouton.getStyleClass().add("one-piece-button");
 
         Button closeBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
@@ -111,7 +114,7 @@ public class AppSAE extends Application {
         //VBox boutons
         VBox boutonsVbox = new VBox(10);
         boutonsVbox.setAlignment(Pos.CENTER);
-        boutonsVbox.getChildren().addAll(jouerBouton, reglesBouton);
+        boutonsVbox.getChildren().addAll(jouerBouton, jouerLocalBouton);
         rootPane.setCenter(boutonsVbox);
 
         //VBox titre
@@ -125,8 +128,8 @@ public class AppSAE extends Application {
         //Image titre
         Image image = new Image(getClass().getResourceAsStream("/img/Titre.png"));
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(1110); // Définissez la largeur souhaitée de l'image
-        imageView.setFitHeight(153); // Définissez la hauteur souhaitée de l'image
+        imageView.setFitWidth(1110);
+        imageView.setFitHeight(153);
 
 
 
@@ -140,7 +143,7 @@ public class AppSAE extends Application {
 
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
-                event.consume(); // Empêche l'événement de propagation supplémentaire
+                event.consume();
             }
         });
 
