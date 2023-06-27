@@ -290,7 +290,6 @@ public class Partie {
             if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 6.0
                 joueur1.setxVelocity(new BigDecimal("6.0"));
-                Client.socket.emit("mess","touche droite pressed");
 
             }
             //Si la flèche de gauche est enfoncée

@@ -139,6 +139,16 @@ private static Scene sceneApp;
         });
         niveau6.getStyleClass().add("one-piece-button");
 
+        Button niveau7 = creerBouton("NIVEAU 7", Pos.CENTER, () -> {
+            Partie partie = new Partie(primaryStage,  new Level("Level 7"));
+        });
+        niveau7.getStyleClass().add("one-piece-button");
+
+        Button niveau8 = creerBouton("NIVEAU 8", Pos.CENTER, () -> {
+            Partie partie = new Partie(primaryStage,  new Level("Level 8"));
+        });
+        niveau6.getStyleClass().add("one-piece-button");
+
         Button quitterBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
