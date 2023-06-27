@@ -29,7 +29,8 @@ public class RecupIDJoueur {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         resID = resultSet.getInt(1);
-                        return resID;
+                        System.out.println(resID);
+                        //return resID;
                     }
                 }
             }
@@ -49,4 +50,11 @@ public class RecupIDJoueur {
 
         return 0;
     }
+
+    public static void main(String[] args){
+        int a = RecupIPAvecPseudo("remi");
+        System.out.println(a);
+    }
+
 }
+
