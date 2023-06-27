@@ -57,8 +57,6 @@ p
 @src/main/java/com/feueau/network/recuperation/IPUtilisateur.java,5\2\52bba3fa50f8c8d50deb9c4127939d7e37a28013
 ]
 -src/main/java/com/feueau/sae/level/Level.java,f\3\f38e653ddb5fe11dc1f2813005e875526d32283b
-_
-/src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
 b
 2src/main/java/com/feueau/service/entity/Porte.java,2\2\221ada2b44158a59dc97175b1994f1f6540ad15e
 c
