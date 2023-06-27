@@ -1,6 +1,7 @@
 package com.feueau.network;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.feueau.datas.RecupIPavecPartie;
 import com.feueau.sae.AppSAE;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import io.socket.client.IO;
@@ -20,8 +21,9 @@ public class Client {
     private static Socket socket;
     public static void main(String[] args) throws URISyntaxException {
 
-
-        socket = IO.socket("http://25.73.214.239:1234");
+        String IpAjoin = RecupIPavecPartie.RecupIP(args[0]);
+        socket = IO.socket("http://"+IpAjoin+":1234");
+        System.out.println("http://"+IpAjoin+":1234");
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {

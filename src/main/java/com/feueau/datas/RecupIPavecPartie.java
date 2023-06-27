@@ -35,7 +35,7 @@ public class RecupIPavecPartie {
 
             String sql2 = "SELECT IP FROM player WHERE ID = ?";
             String res2 = null;
-            try (PreparedStatement statement = connexion.prepareStatement(sql)) {
+            try (PreparedStatement statement = connexion.prepareStatement(sql2)) {
                 statement.setString(1, res);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
