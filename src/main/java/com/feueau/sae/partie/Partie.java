@@ -300,7 +300,7 @@ public class Partie {
             if (e.getCode() == KeyCode.Z && !joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur2.setJumping(true);
-                Client.socket.emit("mess","touche haute pressed");
+                Client.socket.emit("mess","touche haute  pressed");
             }
 //////
             if (e.getCode() == KeyCode.R) {
@@ -432,5 +432,14 @@ public class Partie {
 
     public Joueur getJoueur2() {
         return joueur2;
+    }
+
+    public static void sendMove(String direction) {
+        if(direction != "right" || direction != "left" || direction != "up")
+        {
+            return;
+        }
+
+        Client.socket.emit(direction);
     }
 }

@@ -52,18 +52,13 @@ public class Client {
             @Override
             public void call(Object... args) {
                 System.out.println(args[0]);
-            }
-        });
-
+        }});
 
         socket.connect();
 
 
     }
 
-    public static void sendMove(String direction) {
-        socket.emit("move", direction);
-    }
 
 
 }
