@@ -86,6 +86,7 @@ public class AppSAE extends Application {
                     Group root = new Group();
                     Scene sceneJeu = new Scene(root, 700, 400);
                     Partie partie = new Partie(primaryStage,  new Level("Level 1"));
+                    primaryStage.setFullScreenExitHint("");
                     primaryStage.setScene(partie.getScene());
                     primaryStage.setFullScreen(true);
                 }
@@ -135,14 +136,14 @@ public class AppSAE extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 
-        this.primaryStage.initStyle(StageStyle.UNDECORATED);
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (KeyCode.ESCAPE.equals(event.getCode())) {
-                event.consume();
-            }
-        });
 
+
+
+        this.primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Feu & Eau! - 2 éléments: un seul objectif !");
+        primaryStage.setResizable(false);
+        primaryStage.setFullScreenExitKeyCombination(null);
+        primaryStage.setFullScreenExitHint("");
         this.primaryStage.setScene(scene);
         titreVBox.getChildren().add(imageView);
         this.primaryStage.setFullScreen(true);

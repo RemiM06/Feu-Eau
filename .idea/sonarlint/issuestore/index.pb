@@ -51,5 +51,3 @@ a
 -src/main/java/com/feueau/network/Serveur.java,0\f\0f666c2236f057468cb8d7cb6f98f343151f47f4
 \
 ,src/main/java/com/feueau/network/Client.java,d\1\d199b75d12839a56259f06e7432194392e220ab0
-q
-Asrc/main/java/com/feueau/sae/menus/composants/AttenteJoueurs.java,d\1\d1151da94ca74bdee0ba79771f62a9421978639a
