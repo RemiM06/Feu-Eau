@@ -28,20 +28,23 @@ public class AjoutPartieServeur {
                 statement.setInt(3, Joueur1);
                 statement.executeUpdate();
                 System.out.println("Partie ajouté avec succès à la base de données.");
+
             } catch (SQLException e) {
                 e.printStackTrace();
+
+            } finally {
+                try {
+                    if (connexion != null) {
+                        connexion.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (connexion != null) {
-                    connexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
         }
     }
 

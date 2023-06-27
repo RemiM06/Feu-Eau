@@ -6,6 +6,7 @@ import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
 import com.feueau.service.entity.Bloc;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -299,25 +300,36 @@ public class PartieClient {
 //////
         });
 
-        switch (Client.argsOutsideClass) {
-            case "droiteP":
-                joueur1.setxVelocity(new BigDecimal("6.0"));
-            case "gaucheP":
-                joueur1.setxVelocity(new BigDecimal("-6.0"));
-            case "hautP":
-                if (!joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
-                    joueur1.setJumping(true);
-                }
-            case "droiteR":
-                joueur1.setxVelocity(new BigDecimal("0.0"));
-            case "gaucheR":
-                joueur1.setxVelocity(new BigDecimal("0.0"));
-            case "hautR":
-                if(!joueur1.isJumping()){
-                    joueur1.setJumping(false);
-                }
 
-        }
+        Client.setMessageListener(newMessage -> {
+            Platform.runLater(() -> {
+                System.out.println(newMessage);
+                if (newMessage == "droiteP"){
+                    System.out.println(joueur1);
+                    joueur1.setxVelocity(new BigDecimal("6.0"));
+                }
+                if (newMessage == "gaucheP") {
+                    joueur1.setxVelocity(new BigDecimal("-6.0"));
+                }
+                if (newMessage == "hautP") {
+                    if (!joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
+                        joueur1.setJumping(true);
+                    }
+                }
+                if (newMessage == "droiteR") {
+                    joueur1.setxVelocity(new BigDecimal("0.0"));
+                }
+                if (newMessage == "gaucheR") {
+                    joueur1.setxVelocity(new BigDecimal("0.0"));
+                }
+                if (newMessage == "hautR") {
+                    if(!joueur1.isJumping()){
+                        joueur1.setJumping(false);
+                    }
+                }
+            });
+        });
+
 
         System.out.println("initPartie");
     }

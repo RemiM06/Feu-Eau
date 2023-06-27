@@ -267,7 +267,7 @@ public class PartieServeur {
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","gaucheP");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
-            if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
+            if (e.getCode() == KeyCode.Z && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
                 Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","hautP");
@@ -298,7 +298,7 @@ public class PartieServeur {
 //////
         });
 
-        switch (Client.argsOutsideClass) {
+        /*switch (Client.argsOutsideClass) {
                 case "droiteP":
                     joueur2.setxVelocity(new BigDecimal("6.0"));
                 case "gaucheP":
@@ -316,7 +316,7 @@ public class PartieServeur {
                         joueur2.setJumping(false);
                     }
 
-            }
+            }*/
         System.out.println("initPartie");
 
     }
