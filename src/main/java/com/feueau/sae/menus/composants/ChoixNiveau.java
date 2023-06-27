@@ -140,7 +140,6 @@ static BackGroundImage backGroundImage;
 
 
         Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
-            AppSAE.getScene();
         });
         retourBouton.getStyleClass().add("one-piece-button");
 
