@@ -8,6 +8,7 @@ import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
+import com.feueau.sae.menus.composants.ChoixNiveau;
 import com.feueau.service.entity.Bloc;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -26,6 +27,8 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+
+import static com.feueau.sae.AppSAE.primaryStage;
 
 public class Partie {
 
