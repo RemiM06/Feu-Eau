@@ -188,7 +188,7 @@ public class Level {
         if (nom == "Level 2") {
             this.xJoueur1 = new BigDecimal("1.0");
             this.yJoueur1 = new BigDecimal("16.0");
-            this.xJoueur2 = new BigDecimal("2.0");
+            this.xJoueur2 = new BigDecimal("4.0");
             this.yJoueur2 = new BigDecimal("16.0");
 
             this.grille[17][5] = new Bloc( "feu", true);

@@ -35,7 +35,7 @@ public class AttenteJoueurs {
     }
 
     private static boolean joueur1Connecte = true;
-    private static boolean joueur2Connecte = false;
+    private static boolean joueur2Connecte = true;
 
     public static void setJoueur1Connecte(boolean value) {
         joueur1Connecte = value;
@@ -112,14 +112,12 @@ public class AttenteJoueurs {
             joueur1VBox.getChildren().add(imageView);
         }
 
-        if (joueur2Connecte) {
-            pane.setRight(joueur2VBox);
-            joueur2VBox.getChildren().add(imageViewJ2);
-        }
-
 
 
         if(joueur1Connecte && joueur2Connecte) {
+
+            pane.setRight(joueur2VBox);
+            joueur2VBox.getChildren().add(imageViewJ2);
 
             try {
                 Thread.sleep(5000);
@@ -135,11 +133,7 @@ public class AttenteJoueurs {
                 primaryStage.setFullScreen(true);
             }
             else if(numNiveau == 2) {
-                Group root = new Group();
-                Scene sceneJeu = new Scene(root, 700, 400);
                 Partie partie = new Partie(primaryStage, new Level("Level 2"));
-                primaryStage.setScene(partie.getScene());
-                primaryStage.setFullScreen(true);
             }
             else if(numNiveau == 3) {
                 Group root = new Group();

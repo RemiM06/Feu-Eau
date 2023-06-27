@@ -67,15 +67,11 @@ f
 0src/main/java/com/feueau/datas/MAJNumNiveau.java,3\e\3eb714dd31b3b33cba5acc7b4c64e06e37001569
 q
 Asrc/main/java/com/feueau/sae/menus/composants/CreerRejoindre.java,0\f\0faec8ce84c4af359d931d667419e75dd43933cd
-h
-8src/main/java/com/feueau/datas/VerifConnexionPartie.java,a\2\a2ce6a582b29129f1a85d790718a731ad119ec2c
 [
 +src/main/java/com/feueau/datas/RecupIP.java,b\b\bb62cbbdb4119bc8f00228c5116f28081cd96958
 _
 /src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
 Z
 *src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
-q
-Asrc/main/java/com/feueau/sae/menus/composants/AttenteJoueurs.java,d\1\d1151da94ca74bdee0ba79771f62a9421978639a
 a
 1src/main/java/com/feueau/datas/RecupIDJoueur.java,e\7\e76c1764e5a4423f2c32b4eae3c7b6b3f3b39e48
