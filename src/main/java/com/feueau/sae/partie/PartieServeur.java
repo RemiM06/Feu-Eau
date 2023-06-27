@@ -6,6 +6,7 @@ import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
 import com.feueau.service.entity.Bloc;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -298,25 +299,36 @@ public class PartieServeur {
 //////
         });
 
-        /*switch (Client.argsOutsideClass) {
-                case "droiteP":
+        Client.setMessageListener(newMessage -> {
+            Platform.runLater(() -> {
+                System.out.println(newMessage);
+                if (newMessage.equals("droiteP")){
                     joueur2.setxVelocity(new BigDecimal("6.0"));
-                case "gaucheP":
+                }
+                if (newMessage.equals("gaucheP")) {
                     joueur2.setxVelocity(new BigDecimal("-6.0"));
-                case "hautP":
+                }
+                if (newMessage.equals("hautP")) {
                     if (!joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
                         joueur2.setJumping(true);
                     }
-                case "droiteR":
+                }
+                if (newMessage.equals("droiteR")) {
                     joueur2.setxVelocity(new BigDecimal("0.0"));
-                case "gaucheR":
+                }
+                if (newMessage.equals("gaucheR")) {
                     joueur2.setxVelocity(new BigDecimal("0.0"));
-                case "hautR":
+                }
+                if (newMessage.equals("hautR")) {
                     if(!joueur2.isJumping()){
                         joueur2.setJumping(false);
                     }
+                }
+            });
+        });
 
-            }*/
+
+
         System.out.println("initPartie");
 
     }

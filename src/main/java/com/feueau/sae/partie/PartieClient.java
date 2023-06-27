@@ -305,7 +305,6 @@ public class PartieClient {
             Platform.runLater(() -> {
                 System.out.println(newMessage);
                 if (newMessage.equals("droiteP")){
-                    System.out.println(joueur1);
                     joueur1.setxVelocity(new BigDecimal("6.0"));
                 }
                 if (newMessage.equals("gaucheP")) {
