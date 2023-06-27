@@ -42,7 +42,7 @@ public class AttenteJoueurs {
     }
 
     private static boolean joueur1Connecte = true;
-    private static boolean joueur2Connecte = true;
+    private static boolean joueur2Connecte = false;
 
     public static void setJoueur1Connecte(boolean value) {
         joueur1Connecte = value;

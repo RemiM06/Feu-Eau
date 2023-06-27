@@ -20,7 +20,7 @@ public class Joueur1ou2 {
         try {
             connexion = DriverManager.getConnection(url, utilisateurBDD, motDePasseBDD);
 
-            String sql = "SELECT ID_Joueur1, ID_Joueur2 FROM NomTable WHERE Nom = ?";
+            String sql = "SELECT ID_Joueur1, ID_Joueur2 FROM partie WHERE Nom = ?";
             try (PreparedStatement statement = connexion.prepareStatement(sql)) {
                 statement.setString(1, nomPartie);
                 try (ResultSet resultSet = statement.executeQuery()) {
