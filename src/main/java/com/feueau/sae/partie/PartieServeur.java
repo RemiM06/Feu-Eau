@@ -168,7 +168,7 @@ public class PartieServeur {
                 if (joueur1.getX().doubleValue()/Joueur1x2 != 1) {
                     Joueur1x2 += 1;
                 }
-                if ((grille[joueur1.getY().intValue()+1][Joueur1x1].getName() == "eau") || (grille[joueur1.getY().intValue()+1][Joueur1x2].getName() == "eau"))
+                if (((grille[joueur1.getY().intValue()+1][Joueur1x1].getName() == "eau") && grille[joueur1.getY().intValue()+1][Joueur1x1].isEtat()) || ((grille[joueur1.getY().intValue()+1][Joueur1x2].getName() == "eau") && grille[joueur1.getY().intValue()+1][Joueur1x2].isEtat()))
                 {
                     joueur1ImageView.setTranslateY((joueur1.getY().intValue()) * 60);
                     etatPartie = "perdu";
@@ -235,7 +235,7 @@ public class PartieServeur {
                 if (joueur2.getX().doubleValue()/Joueur2x2 != 1) {
                     Joueur2x2 += 1;
                 }
-                if ((grille[joueur2.getY().intValue()+1][Joueur2x1].getName() == "feu") || (grille[joueur2.getY().intValue()+1][Joueur2x2].getName() == "feu"))
+                if (((grille[joueur2.getY().intValue()+1][Joueur2x1].getName() == "feu") && grille[joueur2.getY().intValue()+1][Joueur2x1].isEtat()) || ((grille[joueur2.getY().intValue()+1][Joueur2x2].getName() == "feu") && grille[joueur2.getY().intValue()+1][Joueur2x2].isEtat()))
                 {
                     joueur2ImageView.setTranslateY((joueur2.getY().intValue()) * 60);
                     etatPartie = "perdu";
