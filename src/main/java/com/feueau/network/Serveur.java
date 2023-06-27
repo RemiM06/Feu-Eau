@@ -7,6 +7,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.network.recuperation.IPUtilisateur;
 import com.feueau.sae.AppSAE;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import javafx.application.Platform;
@@ -22,6 +23,7 @@ import static com.feueau.sae.AppSAE.primaryStage;
 
 public class Serveur {
 
+    public static SocketIOServer serverSocket;
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
     public static List<SocketIOClient> getConnectedClients(){
@@ -29,15 +31,17 @@ public class Serveur {
     }
     public static void main(String[] args) {
         Configuration config = new Configuration();
-        config.setHostname("25.73.216.51");
+        String monIp = IPUtilisateur.getIPAddress();
+        config.setHostname(monIp);
         config.setPort(1234);
 
 
 
 
-        final SocketIOServer server = new SocketIOServer(config);
+        serverSocket = new SocketIOServer(config);
 
-        server.addConnectListener(new ConnectListener() {
+
+        serverSocket.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient client) {
 
@@ -49,34 +53,30 @@ public class Serveur {
                     AttenteJoueurs.sceneAttente(primaryStage, AttenteJoueurs.getLevelNum());
                 });
 
-            if(AttenteJoueurs.isJoueur1Connecte() && AttenteJoueurs.isJoueur2Connecte()){
-                try {
-                    AttenteJoueurs.updateConnectedClients();
-                    AppSAE.setSceneAttente(AppSAE.getScene());
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-            }}
+                if(AttenteJoueurs.isJoueur1Connecte() && AttenteJoueurs.isJoueur2Connecte()){
+                    try {
+                        AttenteJoueurs.updateConnectedClients();
+                        AppSAE.setSceneAttente(AppSAE.getScene());
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }}
         });
 
-        server.addEventListener("chat", String.class, (client, data, ackSender) -> {
+        serverSocket.addEventListener("chat", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
             AttenteJoueurs.setJoueur1Connecte(true);
             AttenteJoueurs.setJoueur2Connecte(true);
+
         });
 
-        server.addEventListener("playerMovement", MouvementJoueur.class, (client, data, ackSender) -> {
-            System.out.println("Received player movement from client: " + data.getPlayerId());
-            // Diffusez les mouvements du joueur à tous les autres clients
-            server.getBroadcastOperations().sendEvent("playerMovement", data);
-        });
 
-        server.addEventListener("mess", String.class, (client, data, ackSender) -> {
+        serverSocket.addEventListener("mess", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
         });
 
         Thread serverThread = new Thread(() ->{
-            server.start();
+            serverSocket.start();
             System.out.println("SocketIO server started");
 
         });

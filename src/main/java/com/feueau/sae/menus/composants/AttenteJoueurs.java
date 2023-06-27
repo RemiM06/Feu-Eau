@@ -35,7 +35,7 @@ public class AttenteJoueurs {
     }
 
     private static boolean joueur1Connecte = true;
-    private static boolean joueur2Connecte = false;
+    private static boolean joueur2Connecte = true;
 
     public static void setJoueur1Connecte(boolean value) {
         joueur1Connecte = value;
@@ -108,19 +108,16 @@ public class AttenteJoueurs {
             }
 
         if (joueur1Connecte) {
-
             pane.setLeft(joueur1VBox);
             joueur1VBox.getChildren().add(imageView);
-        }
-
-        if (joueur2Connecte) {
-            pane.setRight(joueur2VBox);
-            joueur2VBox.getChildren().add(imageViewJ2);
         }
 
 
 
         if(joueur1Connecte && joueur2Connecte) {
+
+            pane.setRight(joueur2VBox);
+            joueur2VBox.getChildren().add(imageViewJ2);
 
             try {
                 Thread.sleep(5000);
@@ -129,13 +126,21 @@ public class AttenteJoueurs {
             }
 
             if(numNiveau == 1) {
+                Group root = new Group();
+                Scene sceneJeu = new Scene(root, 700, 400);
                 Partie partie = new Partie(primaryStage, new Level("Level 1"));
+                primaryStage.setScene(partie.getScene());
+                primaryStage.setFullScreen(true);
             }
             else if(numNiveau == 2) {
                 Partie partie = new Partie(primaryStage, new Level("Level 2"));
             }
             else if(numNiveau == 3) {
-                Partie partie = new Partie(primaryStage, new Level("Level 3"));
+                Group root = new Group();
+                Scene sceneJeu = new Scene(root, 700, 400);
+                Partie partie = new Partie(primaryStage,  new Level("Level 3"));
+                primaryStage.setScene(partie.getScene());
+                primaryStage.setFullScreen(true);
             }
 
         }
