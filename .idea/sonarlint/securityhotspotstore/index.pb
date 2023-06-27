@@ -45,5 +45,3 @@ N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 a
 1src/main/java/com/feueau/service/entity/Bloc.java,b\b\bb8e62d51e1587e4d665d4f719b4d0c863c3327d
-]
--src/main/java/com/feueau/network/Serveur.java,0\f\0f666c2236f057468cb8d7cb6f98f343151f47f4
