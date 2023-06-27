@@ -103,8 +103,15 @@ public class Partie {
         this.joueur1ImageView = generationImageJoueur(joueur1);
         this.joueur2ImageView = generationImageJoueur(joueur2);
 
+        Button retourBouton = creerBouton("Retour", Pos.BOTTOM_LEFT, () -> {
+            ChoixNiveau.levelSelectorLocal(primaryStage);
+        });
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        retourBouton.getStyleClass().add("button");
+        retourBouton.setFocusTraversable(false);
+
         this.root.getChildren().removeAll();
-        this.root.getChildren().addAll(this.gridPane, this.joueur1ImageView, this.joueur2ImageView);
+        this.root.getChildren().addAll(this.gridPane, retourBouton, this.joueur1ImageView, this.joueur2ImageView);
 
         this.scene.widthProperty().addListener(((observableValue, oldValue, newValue) -> {
             this.root.getChildren().removeAll();
@@ -387,11 +394,7 @@ public class Partie {
 //////
         });
 
-        Button retourBouton = creerBouton("Retour", Pos.BOTTOM_LEFT, () -> {
-            ChoixNiveau.levelSelectorLocal(primaryStage);
-        });
-        retourBouton.getStyleClass().add("button");
-        root.getChildren().add(retourBouton);
+
         System.out.println("initPartie");
 
     }
