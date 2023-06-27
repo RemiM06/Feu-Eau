@@ -1,11 +1,9 @@
 package com.feueau.sae.menus.composants;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.partie.Partie;
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;

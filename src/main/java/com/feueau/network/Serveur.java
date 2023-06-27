@@ -23,10 +23,8 @@ import static com.feueau.sae.AppSAE.primaryStage;
 
 public class Serveur {
 
-    private static SocketIOServer serverSocket;
+    public static SocketIOServer serverSocket;
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
-
-    private static Map<String, String> gameState = new ConcurrentHashMap<>();
 
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
@@ -40,10 +38,10 @@ public class Serveur {
 
 
 
-        final SocketIOServer server = new SocketIOServer(config);
+        serverSocket = new SocketIOServer(config);
 
 
-        server.addConnectListener(new ConnectListener() {
+        serverSocket.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient client) {
 
@@ -65,19 +63,20 @@ public class Serveur {
                 }}
         });
 
-        server.addEventListener("chat", String.class, (client, data, ackSender) -> {
+        serverSocket.addEventListener("chat", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
             AttenteJoueurs.setJoueur1Connecte(true);
             AttenteJoueurs.setJoueur2Connecte(true);
 
         });
 
-        server.addEventListener("mess", String.class, (client, data, ackSender) -> {
+
+        serverSocket.addEventListener("mess", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
         });
 
         Thread serverThread = new Thread(() ->{
-            server.start();
+            serverSocket.start();
             System.out.println("SocketIO server started");
 
         });

@@ -24,7 +24,6 @@ public class Client {
     public static void main(String[] args) throws URISyntaxException {
         String IpAjoin = RecupIPavecPartie.RecupIP(args[0]);
         socket = IO.socket("http://"+IpAjoin+":1234");
-        System.out.println("http://"+IpAjoin+":1234");
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -49,24 +48,17 @@ public class Client {
             }
         });
 
-        socket.on("gameState", new Emitter.Listener() {
+        socket.on("mess", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                Map<String, String> gameState = (Map<String, String>) args[0];
-                System.out.println("Game state updated: " + gameState);
-                // Mettre à jour l'affichage du jeu en fonction de gameState
-            }
-        });
-
+                System.out.println(args[0]);
+        }});
 
         socket.connect();
 
 
     }
 
-    public static void sendMove(String direction) {
-        socket.emit("move", direction);
-    }
 
 
 }

@@ -1,8 +1,11 @@
 package com.feueau.sae.partie;
 
+import com.corundumstudio.socketio.protocol.Packet;
+import com.corundumstudio.socketio.protocol.PacketType;
 import com.feueau.datas.RecupIDJoueur;
 import com.feueau.datas.RecupIPavecPartie;
 import com.feueau.network.Client;
+import com.feueau.network.Serveur;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
 import com.feueau.service.entity.Bloc;
@@ -117,7 +120,9 @@ public class Partie {
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur1.isJumping() || checkBlocY(joueur1, "bas") || (joueur1.getY().doubleValue()/joueur1.getY().intValue() != 1)) {
                     //Vitesse de la chute
-                    joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
+                    if (joueur1.getyVelocity().intValue() < 24) {
+                        joueur1.setyVelocity(joueur1.getyVelocity().add(new BigDecimal("0.6")));
+                    }
 
                     //Verifie si il y a un bloc au dessus et que le joueur monte
                     if (!(checkBlocY(joueur1, "haut")) && (joueur1.getyVelocity().doubleValue() < 0)) {
@@ -182,7 +187,9 @@ public class Partie {
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur2.isJumping() || checkBlocY(joueur2, "bas") || (joueur2.getY().doubleValue()/joueur2.getY().intValue() != 1)) {
                     //Vitesse de la chute
-                    joueur2.setyVelocity(joueur2.getyVelocity().add(new BigDecimal("0.6")));
+                    if (joueur2.getyVelocity().intValue() < 24) {
+                        joueur2.setyVelocity(joueur2.getyVelocity().add(new BigDecimal("0.6")));
+                    }
 
                     //Verifie si il y a un bloc au dessus et que le joueur monte
                     if (!(checkBlocY(joueur2, "haut")) && (joueur2.getyVelocity().doubleValue() < 0)) {
@@ -283,16 +290,19 @@ public class Partie {
             if (e.getCode() == KeyCode.D) {
                 //Met la vitesse horizontal à 6.0
                 joueur2.setxVelocity(new BigDecimal("6.0"));
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche droite pressed");
             }
             //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.Q) {
                 //Met la vitesse horizontal à -6.0
                 joueur2.setxVelocity(new BigDecimal("-6.0"));
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche gauche pressed");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.Z && !joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur2.setJumping(true);
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","touche haute pressed");
             }
 //////
             if (e.getCode() == KeyCode.R) {
@@ -425,4 +435,5 @@ public class Partie {
     public Joueur getJoueur2() {
         return joueur2;
     }
+
 }
