@@ -57,8 +57,6 @@ M
 src/main/resources/styles.css,9\5\950ef63c412827937f23fc5bfdbdde2ad837019e
 \
 ,src/main/java/com/feueau/sae/Controller.java,e\d\edcb3e42c8792c755d0b325c48988d1e3079c47e
-_
-/src/main/java/com/feueau/sae/joueur/Joueur.java,f\e\fe50fb571dcc5f36508258a1edb0b144f0ab0e8d
 Y
 )src/main/java/com/feueau/sae/Lanceur.java,2\d\2d6a364d76f5d9eaf7b27cdc982173642b5c10f2
 e
