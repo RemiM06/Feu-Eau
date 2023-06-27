@@ -7,6 +7,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.network.recuperation.IPUtilisateur;
 import com.feueau.sae.AppSAE;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import javafx.application.Platform;
@@ -32,7 +33,8 @@ public class Serveur {
     }
     public static void main(String[] args) {
         Configuration config = new Configuration();
-        config.setHostname("134.59.143.49");
+        String monIp = IPUtilisateur.getIPAddress();
+        config.setHostname(monIp);
         config.setPort(1234);
 
 
