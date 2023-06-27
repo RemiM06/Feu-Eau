@@ -1,8 +1,13 @@
 package com.feueau.sae.partie;
 
+import com.feueau.datas.RecupIDJoueur;
+import com.feueau.datas.RecupIPavecPartie;
+import com.feueau.network.Client;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
 import com.feueau.service.entity.Bloc;
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
@@ -251,22 +256,29 @@ public class Partie {
         };
         aT.start();
 
+
+
         //Actions des touches lorsqu'elles sont enfoncées
         this.scene.setOnKeyPressed(e -> {
             //Si la flèche de droite est enfoncée
             if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 6.0
                 joueur1.setxVelocity(new BigDecimal("6.0"));
+                Client.socket.emit("mess","touche droite pressed");
+
             }
             //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à -6.0
                 joueur1.setxVelocity(new BigDecimal("-6.0"));
+                Client.socket.emit("mess","touche gauche pressed");
+
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
+                Client.socket.emit("mess","touche haute pressed");
             }
 //////
             //Si la flèche de droite est enfoncée

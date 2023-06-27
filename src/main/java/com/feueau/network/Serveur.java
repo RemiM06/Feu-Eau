@@ -73,15 +73,8 @@ public class Serveur {
             server.getBroadcastOperations().sendEvent("playerMovement", data);
         });
 
-        server.addEventListener("move", String.class, new DataListener<String>() {
-            @Override
-            public void onData(SocketIOClient client, String direction, AckRequest ackRequest) {
-                // Mettre à jour l'état du jeu en fonction de l'action du joueur
-                gameState.put(client.getSessionId().toString(), direction);
-
-                // Envoyer l'état du jeu mis à jour à tous les clients
-                server.getBroadcastOperations().sendEvent("gameState", gameState);
-            }
+        server.addEventListener("mess", String.class, (client, data, ackSender) -> {
+            System.out.println("Message received from client: " + data);
         });
 
         Thread serverThread = new Thread(() ->{
