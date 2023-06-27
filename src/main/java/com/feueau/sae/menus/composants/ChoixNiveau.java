@@ -22,6 +22,7 @@ import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
 public class ChoixNiveau {
 
 static BackGroundImage backGroundImage;
+private static Scene sceneApp;
 
 
     public static void levelSelector(Stage primaryStage, String nomPartie, String mdpPartie) {
@@ -138,9 +139,12 @@ static BackGroundImage backGroundImage;
         });
         niveau3.getStyleClass().add("one-piece-button");
 
+        sceneApp = primaryStage.getScene();
+
 
         Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
-            AppSAE.getScene();
+            primaryStage.setScene(sceneApp);
+
         });
         retourBouton.getStyleClass().add("one-piece-button");
 

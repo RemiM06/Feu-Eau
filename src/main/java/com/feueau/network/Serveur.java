@@ -38,10 +38,10 @@ public class Serveur {
 
 
 
-        final SocketIOServer server = new SocketIOServer(config);
+        serverSocket = new SocketIOServer(config);
 
 
-        server.addConnectListener(new ConnectListener() {
+        serverSocket.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient client) {
 
@@ -63,7 +63,7 @@ public class Serveur {
                 }}
         });
 
-        server.addEventListener("chat", String.class, (client, data, ackSender) -> {
+        serverSocket.addEventListener("chat", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
             AttenteJoueurs.setJoueur1Connecte(true);
             AttenteJoueurs.setJoueur2Connecte(true);
@@ -71,12 +71,12 @@ public class Serveur {
         });
 
 
-        server.addEventListener("mess", String.class, (client, data, ackSender) -> {
+        serverSocket.addEventListener("mess", String.class, (client, data, ackSender) -> {
             System.out.println("Message received from client: " + data);
         });
 
         Thread serverThread = new Thread(() ->{
-            server.start();
+            serverSocket.start();
             System.out.println("SocketIO server started");
 
         });
