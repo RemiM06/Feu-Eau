@@ -7,8 +7,8 @@ public class AjoutPartieServeur {
     public static void AjoutPS(String nomPartie, String motDePassePartie, int Joueur1) {
 
         String url = "jdbc:mysql://134.59.143.50:3306/sae_feueau";
-        String utilisateurBDD = "mr012420";
-        String motDePasseBDD = "Rqznu7ey";
+        String utilisateurBDD = "root";
+        String motDePasseBDD = "";
 
         Connection connexion = null;
 

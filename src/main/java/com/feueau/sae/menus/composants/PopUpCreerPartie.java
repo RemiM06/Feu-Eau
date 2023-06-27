@@ -62,16 +62,16 @@ public class PopUpCreerPartie {
             else{
                 PopUpCreerPartie.setJoueur1(PopUpConnection.getUsername());
                 int IDJ1 = RecupIDJoueur.RecupIDAvecPseudo(username);
-                System.out.println(username);
+                System.out.println("totootototot   " + username);
                 AjoutPartieServeur.AjoutPS(nomPartie, mdpPartie, IDJ1);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
             }
 
         });
 
-        Serveur.main(new String[]{});
-
         dialogCreatePartie.showAndWait();
+
+        Serveur.main(new String[]{});
 
     }
 
@@ -111,13 +111,14 @@ public class PopUpCreerPartie {
                 if(VerifConnexionPartie.Verif(nomPartie,mdpPartie)==1){
                     int IDJ2 = RecupIDJoueur.RecupIDAvecPseudo(J2 = PopUpConnection.getUsername());
                     AjoutPartieClient.AjoutPC(nomPartie, IDJ2);
+                    int numNiveau = 1;
+                    AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
                 }
                 else {
                     event.consume();
                     Alertes.showAlert("Nom de partie ou Mot de passe incorrect.");
                 }
-                int numNiveau = 1;
-                AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
+
 
             }
 

@@ -45,25 +45,11 @@ _
 /src/main/java/com/feueau/sae/partie/Partie.java,5\d\5dd4ba0b40e8df6b3a547a7fae34232e1c717453
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-p
-@src/main/java/com/feueau/network/recuperation/IPUtilisateur.java,5\2\52bba3fa50f8c8d50deb9c4127939d7e37a28013
 a
 1src/main/java/com/feueau/service/entity/Bloc.java,b\b\bb8e62d51e1587e4d665d4f719b4d0c863c3327d
 ]
 -src/main/java/com/feueau/network/Serveur.java,0\f\0f666c2236f057468cb8d7cb6f98f343151f47f4
 \
 ,src/main/java/com/feueau/network/Client.java,d\1\d199b75d12839a56259f06e7432194392e220ab0
-f
-6src/main/java/com/feueau/datas/VerifConnexionUser.java,9\9\99bc8eb0faf115186046da3cede8359588b24879
-_
-/src/main/java/com/feueau/datas/Utilisateur.java,7\3\73fc040a02f9fe7491f772ed6cd0cbb9af2c4600
-h
-8src/main/java/com/feueau/datas/VerifConnexionPartie.java,a\2\a2ce6a582b29129f1a85d790718a731ad119ec2c
-[
-+src/main/java/com/feueau/datas/RecupIP.java,b\b\bb62cbbdb4119bc8f00228c5116f28081cd96958
 q
 Asrc/main/java/com/feueau/sae/menus/composants/AttenteJoueurs.java,d\1\d1151da94ca74bdee0ba79771f62a9421978639a
-Z
-*src/main/java/com/feueau/datas/Partie.java,c\e\ceafcb00c0bac06362664443a978b67d2b95df1d
-`
-0src/main/java/com/feueau/datas/MAJNumNiveau.java,3\e\3eb714dd31b3b33cba5acc7b4c64e06e37001569
