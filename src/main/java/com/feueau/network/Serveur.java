@@ -24,8 +24,6 @@ public class Serveur {
 
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
-    private static Map<String, String> gameState = new ConcurrentHashMap<>();
-
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
     }

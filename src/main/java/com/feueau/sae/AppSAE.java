@@ -2,27 +2,20 @@ package com.feueau.sae;
 
 import com.feueau.sae.graphiques.BackGroundImage;
 import com.feueau.sae.menus.composants.ChoixNiveau;
-import com.feueau.sae.level.Level;
 import com.feueau.sae.menus.composants.CreerBouton;
 import com.feueau.sae.menus.composants.PopUpConnection;
-import com.feueau.sae.partie.Partie;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 public class AppSAE extends Application {
 
