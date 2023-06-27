@@ -34,6 +34,7 @@ private static Scene sceneApp;
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
         primaryStage.setTitle("Veuillez choisir une niveau");
 
+        AtomicInteger numNiveau = new AtomicInteger();
 
         Button niveau1 = creerBouton("NIVEAU 1", Pos.CENTER, () -> {
             numNiveau.set(1);
