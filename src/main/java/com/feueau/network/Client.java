@@ -3,6 +3,7 @@ package com.feueau.network;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.feueau.datas.RecupIPavecPartie;
 import com.feueau.sae.AppSAE;
+import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.menus.composants.AttenteJoueurs;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -10,6 +11,7 @@ import io.socket.emitter.Emitter;
 import javafx.application.Platform;
 
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.feueau.sae.AppSAE.primaryStage;
@@ -18,9 +20,8 @@ import static com.feueau.sae.AppSAE.primaryStage;
 
 public class Client {
 
-    private static Socket socket;
+    public static Socket socket;
     public static void main(String[] args) throws URISyntaxException {
-
         String IpAjoin = RecupIPavecPartie.RecupIP(args[0]);
         socket = IO.socket("http://"+IpAjoin+":1234");
         System.out.println("http://"+IpAjoin+":1234");
@@ -29,6 +30,7 @@ public class Client {
             public void call(Object... args) {
                 System.out.println("Connected to server");
                 AttenteJoueurs.setJoueur2Connecte(true);
+                // on peuy pas juste faire un public ou je sais quoi sur le socket et pouvoir y acceder partout ? parce que en soit on rest co sur le meme socket du debu a la fin
 
                 Platform.runLater(() -> {
                     try {
