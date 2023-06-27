@@ -183,6 +183,22 @@ public class Partie {
                     joueur1ImageView.setTranslateY((joueur1.getY().intValue()) * 60);
                     etatPartie = "perdu";
                 }
+
+                int CheckXJoueur1y1 = joueur1.getY().intValue();
+                int CheckXJoueur1y2 = joueur1.getY().intValue();
+                if (joueur1.getY().doubleValue()/CheckXJoueur1y2 != 1) {
+                    CheckXJoueur1y2 += 1;
+                }
+                if ((grille[CheckXJoueur1y1][joueur1.getX().intValue()+1].getName() == "eau") || (grille[CheckXJoueur1y2][joueur1.getX().intValue()+1].getName() == "eau"))
+                {
+                    joueur1ImageView.setTranslateX((joueur1.getX().intValue()) * 60);
+                    etatPartie = "perdu";
+                }
+                if ((grille[CheckXJoueur1y1][joueur1.getX().intValue()].getName() == "eau") || (grille[CheckXJoueur1y2][joueur1.getX().intValue()].getName() == "eau"))
+                {
+                    joueur1ImageView.setTranslateX((joueur1.getX().intValue()+1) * 60);
+                    etatPartie = "perdu";
+                }
 //////
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur2.isJumping() || checkBlocY(joueur2, "bas") || (joueur2.getY().doubleValue()/joueur2.getY().intValue() != 1)) {
@@ -240,14 +256,30 @@ public class Partie {
 
                     }
                 }
-                int Joueur2x1 = joueur2.getX().intValue();
-                int Joueur2x2 = joueur2.getX().intValue();
-                if (joueur2.getX().doubleValue()/Joueur2x2 != 1) {
-                    Joueur2x2 += 1;
+                int CheckYJoueur2x1 = joueur2.getX().intValue();
+                int CheckYJoueur2x2 = joueur2.getX().intValue();
+                if (joueur2.getX().doubleValue()/CheckYJoueur2x2 != 1) {
+                    CheckYJoueur2x2 += 1;
                 }
-                if ((grille[joueur2.getY().intValue()+1][Joueur2x1].getName() == "feu") || (grille[joueur2.getY().intValue()+1][Joueur2x2].getName() == "feu"))
+                if ((grille[joueur2.getY().intValue()+1][CheckYJoueur2x1].getName() == "feu") || (grille[joueur2.getY().intValue()+1][CheckYJoueur2x2].getName() == "feu"))
                 {
                     joueur2ImageView.setTranslateY((joueur2.getY().intValue()) * 60);
+                    etatPartie = "perdu";
+                }
+
+                int CheckXJoueur2y1 = joueur2.getY().intValue();
+                int CheckXJoueur2y2 = joueur2.getY().intValue();
+                if (joueur2.getY().doubleValue()/CheckXJoueur2y2 != 1) {
+                    CheckXJoueur2y2 += 1;
+                }
+                if ((grille[CheckXJoueur2y1][joueur2.getX().intValue()+1].getName() == "feu") || (grille[CheckXJoueur2y2][joueur2.getX().intValue()+1].getName() == "feu"))
+                {
+                    joueur2ImageView.setTranslateX((joueur2.getX().intValue()) * 60);
+                    etatPartie = "perdu";
+                }
+                if ((grille[CheckXJoueur2y1][joueur2.getX().intValue()].getName() == "feu") || (grille[CheckXJoueur2y2][joueur2.getX().intValue()].getName() == "feu"))
+                {
+                    joueur2ImageView.setTranslateX((joueur2.getX().intValue()+1) * 60);
                     etatPartie = "perdu";
                 }
 //////
