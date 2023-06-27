@@ -22,6 +22,7 @@ public class Joueur {
         this.y=y;
         this.x=x;
         this.type=type;
+        this.isJumping=false;
         if (type == "feu") {
             this.pathImgDroit = getClass().getResource("/img/Akainu-droite.png").toExternalForm();
             this.pathImgGauche =  getClass().getResource("/img/Akainu-gauche.png").toExternalForm();

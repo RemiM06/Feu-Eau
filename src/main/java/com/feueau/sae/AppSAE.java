@@ -41,8 +41,6 @@ public class AppSAE extends Application {
     @Override
     public void start(Stage stageMain) throws IOException {
 
-
-
         BorderPane rootPane = new BorderPane();
         BorderPane reglesPane = new BorderPane();
         BorderPane niveauxPane = new BorderPane();
