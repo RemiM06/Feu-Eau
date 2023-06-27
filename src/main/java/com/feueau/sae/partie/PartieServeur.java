@@ -1,36 +1,23 @@
 package com.feueau.sae.partie;
 
-import com.corundumstudio.socketio.protocol.Packet;
-import com.corundumstudio.socketio.protocol.PacketType;
-import com.feueau.datas.RecupIDJoueur;
-import com.feueau.datas.RecupIPavecPartie;
 import com.feueau.network.Client;
 import com.feueau.network.Serveur;
 import com.feueau.sae.joueur.Joueur;
 import com.feueau.sae.level.Level;
-import com.feueau.sae.menus.composants.ChoixNiveau;
 import com.feueau.service.entity.Bloc;
-import io.socket.client.IO;
-import io.socket.client.Socket;
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 
-import static com.feueau.sae.AppSAE.primaryStage;
-
-public class Partie {
+public class PartieServeur {
 
     private Stage stage;
     private Scene sceneVictoire;
@@ -45,7 +32,7 @@ public class Partie {
     private Joueur joueur2;
     private ImageView joueur2ImageView;
 
-    public Partie(Stage stage, Level level) {
+    public PartieServeur(Stage stage, Level level) {
 
         this.stage = stage;
         this.sceneVictoire = stage.getScene();
@@ -186,22 +173,6 @@ public class Partie {
                     joueur1ImageView.setTranslateY((joueur1.getY().intValue()) * 60);
                     etatPartie = "perdu";
                 }
-
-                int CheckXJoueur1y1 = joueur1.getY().intValue();
-                int CheckXJoueur1y2 = joueur1.getY().intValue();
-                if (joueur1.getY().doubleValue()/CheckXJoueur1y2 != 1) {
-                    CheckXJoueur1y2 += 1;
-                }
-                if ((grille[CheckXJoueur1y1][joueur1.getX().intValue()+1].getName() == "eau") || (grille[CheckXJoueur1y2][joueur1.getX().intValue()+1].getName() == "eau"))
-                {
-                    joueur1ImageView.setTranslateX((joueur1.getX().intValue()) * 60);
-                    etatPartie = "perdu";
-                }
-                if ((grille[CheckXJoueur1y1][joueur1.getX().intValue()].getName() == "eau") || (grille[CheckXJoueur1y2][joueur1.getX().intValue()].getName() == "eau"))
-                {
-                    joueur1ImageView.setTranslateX((joueur1.getX().intValue()+1) * 60);
-                    etatPartie = "perdu";
-                }
 //////
                 //Verifie si le joueur est en saut ou en chut libre (même façon de descendre)
                 if (joueur2.isJumping() || checkBlocY(joueur2, "bas") || (joueur2.getY().doubleValue()/joueur2.getY().intValue() != 1)) {
@@ -259,30 +230,14 @@ public class Partie {
 
                     }
                 }
-                int CheckYJoueur2x1 = joueur2.getX().intValue();
-                int CheckYJoueur2x2 = joueur2.getX().intValue();
-                if (joueur2.getX().doubleValue()/CheckYJoueur2x2 != 1) {
-                    CheckYJoueur2x2 += 1;
+                int Joueur2x1 = joueur2.getX().intValue();
+                int Joueur2x2 = joueur2.getX().intValue();
+                if (joueur2.getX().doubleValue()/Joueur2x2 != 1) {
+                    Joueur2x2 += 1;
                 }
-                if ((grille[joueur2.getY().intValue()+1][CheckYJoueur2x1].getName() == "feu") || (grille[joueur2.getY().intValue()+1][CheckYJoueur2x2].getName() == "feu"))
+                if ((grille[joueur2.getY().intValue()+1][Joueur2x1].getName() == "feu") || (grille[joueur2.getY().intValue()+1][Joueur2x2].getName() == "feu"))
                 {
                     joueur2ImageView.setTranslateY((joueur2.getY().intValue()) * 60);
-                    etatPartie = "perdu";
-                }
-
-                int CheckXJoueur2y1 = joueur2.getY().intValue();
-                int CheckXJoueur2y2 = joueur2.getY().intValue();
-                if (joueur2.getY().doubleValue()/CheckXJoueur2y2 != 1) {
-                    CheckXJoueur2y2 += 1;
-                }
-                if ((grille[CheckXJoueur2y1][joueur2.getX().intValue()+1].getName() == "feu") || (grille[CheckXJoueur2y2][joueur2.getX().intValue()+1].getName() == "feu"))
-                {
-                    joueur2ImageView.setTranslateX((joueur2.getX().intValue()) * 60);
-                    etatPartie = "perdu";
-                }
-                if ((grille[CheckXJoueur2y1][joueur2.getX().intValue()].getName() == "feu") || (grille[CheckXJoueur2y2][joueur2.getX().intValue()].getName() == "feu"))
-                {
-                    joueur2ImageView.setTranslateX((joueur2.getX().intValue()+1) * 60);
                     etatPartie = "perdu";
                 }
 //////
@@ -304,78 +259,78 @@ public class Partie {
             if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 6.0
                 joueur1.setxVelocity(new BigDecimal("6.0"));
-                Client.socket.emit("mess","touche droite pressed");
-
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","droiteP");
             }
             //Si la flèche de gauche est enfoncée
             if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à -6.0
                 joueur1.setxVelocity(new BigDecimal("-6.0"));
-
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","gaucheP");
             }
             //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping() && !checkBlocY(joueur1, "bas")) {
                 //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
                 joueur1.setJumping(true);
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","hautP");
             }
 //////
-            //Si la flèche de droite est enfoncée
-            if (e.getCode() == KeyCode.D) {
-                //Met la vitesse horizontal à 6.0
-                joueur2.setxVelocity(new BigDecimal("6.0"));
-            }
-            //Si la flèche de gauche est enfoncée
-            if (e.getCode() == KeyCode.Q) {
-                //Met la vitesse horizontal à -6.0
-                joueur2.setxVelocity(new BigDecimal("-6.0"));
-            }
-            //Si la flèche du haut est enfoncée, que le joueur n'est pas déjà entrain de sauter et qu'il est sur un sol
-            if (e.getCode() == KeyCode.Z && !joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
-                //Met sa variable de saut à vrai pour savoir qu'il est entrain de sauter et met sa vitesse vertical à -12.0
-                joueur2.setJumping(true);
-            }
-//////
-            if (e.getCode() == KeyCode.R) {
-                aT.stop();
-                this.initPartie();
-            }
         });
         //Actions des touches lorsqu'elles sont relachées
         this.scene.setOnKeyReleased(e -> {
+//////
             //Si la flèche de droite est relachée
             if (e.getCode() == KeyCode.RIGHT) {
                 //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","droiteR");
             }
             //Si la flèche de gauche est relachée
             if (e.getCode() == KeyCode.LEFT) {
                 //Met la vitesse horizontal à 0.0
                 joueur1.setxVelocity(new BigDecimal("0.0"));
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","gaucheR");
             }
             //Si la flèche du haut est relachée et que le joueur n'est pas entrain de sauter
             if (e.getCode() == KeyCode.UP && !joueur1.isJumping()) {
                 //Met sa variable de saut à faux pour savoir qu'il n'est pas entrain de sauter et met sa vitesse vertical à 0.0
                 joueur1.setJumping(false);
-            }
-//////
-            //Si la flèche de droite est relachée
-            if (e.getCode() == KeyCode.D) {
-                //Met la vitesse horizontal à 0.0
-                joueur2.setxVelocity(new BigDecimal("0.0"));
-            }
-            //Si la flèche de gauche est relachée
-            if (e.getCode() == KeyCode.Q) {
-                //Met la vitesse horizontal à 0.0
-                joueur2.setxVelocity(new BigDecimal("0.0"));
-            }
-            //Si la flèche du haut est relachée et que le joueur n'est pas entrain de sauter
-            if (e.getCode() == KeyCode.Z && !joueur2.isJumping()) {
-                //Met sa variable de saut à faux pour savoir qu'il n'est pas entrain de sauter et met sa vitesse vertical à 0.0
-                joueur2.setJumping(false);
+                Serveur.serverSocket.getBroadcastOperations().sendEvent("mess","hautR");
             }
 //////
         });
+
+        Serveur.setMessageListener(newMessage -> {
+            Platform.runLater(() -> {
+                System.out.println(newMessage);
+                if (newMessage.equals("droiteP")){
+                    joueur2.setxVelocity(new BigDecimal("6.0"));
+                }
+                if (newMessage.equals("gaucheP")) {
+                    joueur2.setxVelocity(new BigDecimal("-6.0"));
+                }
+                if (newMessage.equals("hautP")) {
+                    if (!joueur2.isJumping() && !checkBlocY(joueur2, "bas")) {
+                        joueur2.setJumping(true);
+                    }
+                }
+                if (newMessage.equals("droiteR")) {
+                    joueur2.setxVelocity(new BigDecimal("0.0"));
+                }
+                if (newMessage.equals("gaucheR")) {
+                    joueur2.setxVelocity(new BigDecimal("0.0"));
+                }
+                if (newMessage.equals("hautR")) {
+                    if(!joueur2.isJumping()){
+                        joueur2.setJumping(false);
+                    }
+                }
+            });
+        });
+
+
+
         System.out.println("initPartie");
+
     }
 
     //Verification de la presence d'un bloc solide au dessus ou en dessus en fonction du parametre direction

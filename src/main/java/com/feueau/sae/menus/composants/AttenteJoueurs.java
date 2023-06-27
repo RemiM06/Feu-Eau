@@ -1,9 +1,13 @@
 package com.feueau.sae.menus.composants;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.feueau.datas.Joueur1ou2;
+import com.feueau.datas.RecupIDJoueur;
 import com.feueau.network.Serveur;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.partie.Partie;
+import com.feueau.sae.partie.PartieClient;
+import com.feueau.sae.partie.PartieServeur;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -26,6 +30,9 @@ public class AttenteJoueurs {
 
     private static int levelNum = 1;
 
+    private static int idJoueur;
+    private static String nomPartie;
+
     public static int getLevelNum() {
         return levelNum;
     }
@@ -35,7 +42,7 @@ public class AttenteJoueurs {
     }
 
     private static boolean joueur1Connecte = true;
-    private static boolean joueur2Connecte = true;
+    private static boolean joueur2Connecte = false;
 
     public static void setJoueur1Connecte(boolean value) {
         joueur1Connecte = value;
@@ -112,30 +119,48 @@ public class AttenteJoueurs {
             joueur1VBox.getChildren().add(imageView);
         }
 
+        if (joueur2Connecte) {
+            pane.setRight(joueur2VBox);
+            joueur2VBox.getChildren().add(imageViewJ2);
+        }
+
 
 
         if(joueur1Connecte && joueur2Connecte) {
 
-            pane.setRight(joueur2VBox);
-            joueur2VBox.getChildren().add(imageViewJ2);
+            idJoueur = RecupIDJoueur.RecupIDAvecPseudo(PopUpConnection.getUsername());
+            nomPartie = PopUpCreerPartie.getNomPartie();
+            String NumJoueur = Joueur1ou2.verifierIdJoueur(nomPartie,idJoueur);
 
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
             if(numNiveau == 1) {
-                Partie partie = new Partie(primaryStage, new Level("Level 1"));
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 1"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 1"));
+                }
             }
             else if(numNiveau == 2) {
-                Partie partie = new Partie(primaryStage, new Level("Level 2"));
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 2"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 2"));
+                }
             }
             else if(numNiveau == 3) {
-                Partie partie = new Partie(primaryStage,  new Level("Level 3"));
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 3"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 3"));
+                }
             }
 
-        } });
+        }});
 
 
 

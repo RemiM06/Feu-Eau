@@ -4,6 +4,8 @@ import com.feueau.sae.AppSAE;
 import com.feueau.sae.graphiques.BackGroundImage;
 import com.feueau.sae.level.Level;
 import com.feueau.sae.partie.Partie;
+import com.feueau.sae.partie.PartieClient;
+import com.feueau.sae.partie.PartieServeur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -14,7 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.feueau.sae.menus.composants.CreerBouton.creerBouton;
@@ -25,7 +27,6 @@ static BackGroundImage backGroundImage;
 private static Scene sceneApp;
 
 
-
     public static void levelSelector(Stage primaryStage, String nomPartie, String mdpPartie) {
 
         BorderPane levelSelectorPane = new BorderPane();
@@ -33,17 +34,13 @@ private static Scene sceneApp;
         backGroundImage = new BackGroundImage("/img/aokiji-vs-akainu.jpg");
         primaryStage.setTitle("Veuillez choisir une niveau");
 
+        AtomicInteger numNiveau = new AtomicInteger();
 
         Button niveau1 = creerBouton("NIVEAU 1", Pos.CENTER, () -> {
-            Group root = new Group();
-            Scene sceneJeu = new Scene(root, 700, 400);
-            Partie partie = new Partie(primaryStage,  new Level("Level 1"));
-            primaryStage.setScene(partie.getScene());
-            primaryStage.setFullScreen(true);
+            numNiveau.set(1);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
         });
         niveau1.getStyleClass().add("one-piece-button");
-
-        AtomicInteger numNiveau = new AtomicInteger();
 
         Button niveau2 = creerBouton("NIVEAU 2", Pos.CENTER, () -> {
             numNiveau.set(2);
@@ -52,11 +49,8 @@ private static Scene sceneApp;
         niveau2.getStyleClass().add("one-piece-button");
 
         Button niveau3 = creerBouton("NIVEAU 3", Pos.CENTER, () -> {
-            Group root = new Group();
-            Scene sceneJeu3 = new Scene(root, 700, 400);
-            Partie partie3 = new Partie(primaryStage,  new Level("Level 3"));
-            primaryStage.setScene(partie3.getScene());
-            primaryStage.setFullScreen(true);
+            numNiveau.set(3);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
         });
         niveau3.getStyleClass().add("one-piece-button");
 
@@ -112,26 +106,41 @@ private static Scene sceneApp;
 
 
         Button niveau1 = creerBouton("NIVEAU 1", Pos.CENTER, () -> {
-            Partie partie = new Partie(primaryStage,  new Level("Level 1"));
+                Partie partie = new Partie(primaryStage,  new Level("Level 1"));
         });
         niveau1.getStyleClass().add("one-piece-button");
 
-        AtomicInteger numNiveau = new AtomicInteger();
-
         Button niveau2 = creerBouton("NIVEAU 2", Pos.CENTER, () -> {
-            Partie partie3 = new Partie(primaryStage,  new Level("Level 2"));
+            Partie partie = new Partie(primaryStage,  new Level("Level 2"));
+
         });
         niveau2.getStyleClass().add("one-piece-button");
 
         Button niveau3 = creerBouton("NIVEAU 3", Pos.CENTER, () -> {
-            Partie partie3 = new Partie(primaryStage,  new Level("Level 3"));
+            Partie partie = new Partie(primaryStage,  new Level("Level 3"));
         });
         niveau3.getStyleClass().add("one-piece-button");
+
+        Button niveau4 = creerBouton("NIVEAU 4", Pos.CENTER, () -> {
+            Partie partie = new Partie(primaryStage,  new Level("Level 4"));
+        });
+        niveau4.getStyleClass().add("one-piece-button");
+
+        Button niveau5 = creerBouton("NIVEAU 5", Pos.CENTER, () -> {
+            Partie partie = new Partie(primaryStage,  new Level("Level 5"));
+        });
+        niveau5.getStyleClass().add("one-piece-button");
+
+
+        sceneApp = primaryStage.getScene();
+        Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
+            primaryStage.setScene(sceneApp);
 
 
         Button quitterBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
         });
+        retourBouton.getStyleClass().add("button");
         quitterBouton.getStyleClass().add("one-piece-button");
 
 
@@ -142,7 +151,7 @@ private static Scene sceneApp;
         VBox vboxBoutons = new VBox(10);
         vboxBoutons.setPadding(new Insets(10));
         vboxBoutons.setAlignment(Pos.CENTER);
-        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3);
+        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3, niveau4, niveau5);
         levelSelectorPane.setCenter(vboxBoutons);
 
         VBox vboxRetour = new VBox(10);
@@ -163,9 +172,6 @@ private static Scene sceneApp;
                 event.consume();
             }
         });
-        sceneApp.getStylesheets().add(ChoixNiveau.class.getResource("/styles.css").toExternalForm());
-
-
 
 
         primaryStage.setFullScreenExitHint("");

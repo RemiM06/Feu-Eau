@@ -22,7 +22,7 @@ public class PopUpCreerPartie {
         J1 = username;
     }
 
-    private static String NomPartie;
+    private static String nomPartie;
 
 
     public static void dialogCreationPartie(Stage primaryStage){
@@ -52,8 +52,11 @@ public class PopUpCreerPartie {
 
         String username = PopUpConnection.getUsername();
 
+
+
         Button validateButton = (Button) dialogPane.lookupButton(validerButtonType);
         validateButton.addEventFilter(ActionEvent.ACTION, event -> {
+
             String nomPartie = nomPartieTextField.getText();
             String mdpPartie = mdpField.getText();
 
@@ -67,14 +70,22 @@ public class PopUpCreerPartie {
 
                 AjoutPartieServeur.AjoutPS(nomPartie, mdpPartie, IDJ1);
                 ChoixNiveau.levelSelector(primaryStage, nomPartie, mdpPartie);
+                nomPartie = nomPartieTextField.getText();
+                PopUpCreerPartie.nomPartie = nomPartie;
             }
 
         });
+
+        nomPartie = nomPartieTextField.getText();
 
         dialogCreatePartie.showAndWait();
 
         Serveur.main(new String[]{});
 
+    }
+
+    public static String getNomPartie(){
+        return nomPartie;
     }
 
     public static void dialogRejoindrePartie(Stage primaryStage) throws URISyntaxException {
@@ -115,6 +126,9 @@ public class PopUpCreerPartie {
                     AjoutPartieClient.AjoutPC(nomPartie, IDJ2);
                     int numNiveau = 1;
                     AttenteJoueurs.sceneAttente(primaryStage, numNiveau);
+
+                    nomPartie = nomPartieTextField.getText();
+                    PopUpCreerPartie.nomPartie = nomPartie;
                 }
                 else {
                     event.consume();
@@ -136,4 +150,6 @@ public class PopUpCreerPartie {
 
 
     }
+
+
 }

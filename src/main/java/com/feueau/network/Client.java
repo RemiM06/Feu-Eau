@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static com.feueau.sae.AppSAE.primaryStage;
 
@@ -21,6 +22,12 @@ import static com.feueau.sae.AppSAE.primaryStage;
 public class Client {
 
     public static Socket socket;
+
+    private static Consumer<String> messageListener;
+
+    public static void setMessageListener(Consumer<String> listener) {
+        messageListener = listener;
+    }
     public static void main(String[] args) throws URISyntaxException {
         String IpAjoin = RecupIPavecPartie.RecupIP(args[0]);
         socket = IO.socket("http://"+IpAjoin+":1234");
@@ -29,7 +36,6 @@ public class Client {
             public void call(Object... args) {
                 System.out.println("Connected to server");
                 AttenteJoueurs.setJoueur2Connecte(true);
-                // on peuy pas juste faire un public ou je sais quoi sur le socket et pouvoir y acceder partout ? parce que en soit on rest co sur le meme socket du debu a la fin
 
                 Platform.runLater(() -> {
                     try {
@@ -44,16 +50,19 @@ public class Client {
             @Override
             public void call(Object... args) {
                 String message = (String) args[0];
-                System.out.println("Message received from server: " + message);
+                System.out.println(message);
             }
         });
 
         socket.on("mess", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                System.out.println(args[0]);
-        }});
-
+                String message = (String) args[0];
+                if (messageListener != null) {
+                    messageListener.accept(message);
+                }
+            }
+        });
         socket.connect();
 
 

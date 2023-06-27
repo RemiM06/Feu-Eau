@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import static com.feueau.sae.AppSAE.primaryStage;
 
@@ -24,7 +25,14 @@ import static com.feueau.sae.AppSAE.primaryStage;
 public class Serveur {
 
     public static SocketIOServer serverSocket;
+
+    private static Consumer<String> messageListener;
+
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
+
+    public static void setMessageListener(Consumer<String> listener) {
+        messageListener = listener;
+    }
 
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
@@ -34,9 +42,6 @@ public class Serveur {
         String monIp = IPUtilisateur.getIPAddress();
         config.setHostname(monIp);
         config.setPort(1234);
-
-
-
 
         serverSocket = new SocketIOServer(config);
 
@@ -72,7 +77,9 @@ public class Serveur {
 
 
         serverSocket.addEventListener("mess", String.class, (client, data, ackSender) -> {
-            System.out.println("Message received from client: " + data);
+            if (messageListener != null) {
+                messageListener.accept(data);
+            }
         });
 
         Thread serverThread = new Thread(() ->{
@@ -83,4 +90,5 @@ public class Serveur {
 
         serverThread.start();
     }
+
 }
