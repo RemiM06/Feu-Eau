@@ -30,6 +30,10 @@ public class Serveur {
 
     private static List<SocketIOClient> connectedClients = new ArrayList<>();
 
+    public static void setMessageListener(Consumer<String> listener) {
+        messageListener = listener;
+    }
+
     public static List<SocketIOClient> getConnectedClients(){
         return connectedClients;
     }
@@ -86,4 +90,5 @@ public class Serveur {
 
         serverThread.start();
     }
+
 }

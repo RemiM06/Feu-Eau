@@ -299,7 +299,7 @@ public class PartieServeur {
 //////
         });
 
-        Client.setMessageListener(newMessage -> {
+        Serveur.setMessageListener(newMessage -> {
             Platform.runLater(() -> {
                 System.out.println(newMessage);
                 if (newMessage.equals("droiteP")){
