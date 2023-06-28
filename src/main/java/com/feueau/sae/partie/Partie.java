@@ -52,8 +52,6 @@ public class Partie {
 
     public Partie(Stage stage, Level level) {
 
-
-
         this.stage = stage;
         this.sceneVictoire = stage.getScene();
         this.root = new Group();
@@ -65,7 +63,6 @@ public class Partie {
 
         this.level = level;
         this.initPartie();
-
 
     }
 
