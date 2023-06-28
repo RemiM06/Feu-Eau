@@ -153,6 +153,41 @@ public class AttenteJoueurs {
                     PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 3"));
                 }
             }
+            else if(numNiveau == 4) {
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 4"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 4"));
+                }
+            }
+            else if(numNiveau == 5) {
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 5"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 5"));
+                }
+            }
+            else if(numNiveau == 6) {
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 6"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 6"));
+                }
+            }
+            else if(numNiveau == 7) {
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 7"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 7"));
+                }
+            }
+            else if(numNiveau == 8) {
+                if(NumJoueur.equals("Joueur 1")){
+                    PartieServeur PartieServeur = new PartieServeur(primaryStage, new Level("Level 8"));
+                } else if (NumJoueur.equals("Joueur 2")) {
+                    PartieClient PartieClient = new PartieClient(primaryStage, new Level("Level 8"));
+                }
+            }
 
         }});
 
