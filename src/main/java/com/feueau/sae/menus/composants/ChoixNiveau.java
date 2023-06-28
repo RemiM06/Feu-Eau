@@ -55,6 +55,35 @@ private static Scene sceneApp;
         });
         niveau3.getStyleClass().add("one-piece-button");
 
+        Button niveau4 = creerBouton("NIVEAU 4", Pos.CENTER, () -> {
+            numNiveau.set(4);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
+        });
+        niveau4.getStyleClass().add("one-piece-button");
+
+        Button niveau5 = creerBouton("NIVEAU 5", Pos.CENTER, () -> {
+            numNiveau.set(5);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
+        });
+        niveau5.getStyleClass().add("one-piece-button");
+
+        Button niveau6 = creerBouton("NIVEAU 6", Pos.CENTER, () -> {
+            numNiveau.set(6);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
+        });
+        niveau6.getStyleClass().add("one-piece-button");
+
+        Button niveau7 = creerBouton("NIVEAU 7", Pos.CENTER, () -> {
+            numNiveau.set(7);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
+        });
+        niveau7.getStyleClass().add("one-piece-button");
+
+        Button niveau8 = creerBouton("NIVEAU 8", Pos.CENTER, () -> {
+            numNiveau.set(8);
+            AttenteJoueurs.sceneAttente(primaryStage, numNiveau.get());
+        });
+        niveau8.getStyleClass().add("one-piece-button");
 
         Button retourBouton = creerBouton("RETOUR", Pos.BOTTOM_LEFT, () ->{
             CreerRejoindre.creerRejoindre(primaryStage);
@@ -69,7 +98,7 @@ private static Scene sceneApp;
         VBox vboxBoutons = new VBox(10);
         vboxBoutons.setPadding(new Insets(10));
         vboxBoutons.setAlignment(Pos.CENTER);
-        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3);
+        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3, niveau4, niveau5, niveau6, niveau7, niveau8);
         levelSelectorPane.setCenter(vboxBoutons);
 
         VBox vboxRetour = new VBox(10);
@@ -147,7 +176,7 @@ private static Scene sceneApp;
         Button niveau8 = creerBouton("NIVEAU 8", Pos.CENTER, () -> {
             Partie partie = new Partie(primaryStage,  new Level("Level 8"));
         });
-        niveau6.getStyleClass().add("one-piece-button");
+        niveau8.getStyleClass().add("one-piece-button");
 
         Button quitterBouton = creerBouton("QUITTER", Pos.BOTTOM_LEFT, () -> {
             primaryStage.close();
@@ -162,7 +191,7 @@ private static Scene sceneApp;
         VBox vboxBoutons = new VBox(10);
         vboxBoutons.setPadding(new Insets(10));
         vboxBoutons.setAlignment(Pos.CENTER);
-        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3, niveau4, niveau5, niveau6);
+        vboxBoutons.getChildren().addAll(niveau1, niveau2, niveau3, niveau4, niveau5, niveau6, niveau7, niveau8);
         levelSelectorPane.setCenter(vboxBoutons);
 
         VBox vboxRetour = new VBox(10);
