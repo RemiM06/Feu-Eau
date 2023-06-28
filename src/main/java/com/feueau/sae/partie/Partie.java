@@ -52,12 +52,9 @@ public class Partie {
 
     public Partie(Stage stage, Level level) {
 
-
-
         this.stage = stage;
         this.sceneVictoire = stage.getScene();
         this.root = new Group();
-
         this.scene = new Scene(root, 700, 400);
 
         stage.setScene(scene);
@@ -65,7 +62,6 @@ public class Partie {
 
         this.level = level;
         this.initPartie();
-
 
     }
 
