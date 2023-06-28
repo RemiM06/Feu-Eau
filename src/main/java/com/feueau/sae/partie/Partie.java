@@ -276,7 +276,6 @@ public class Partie {
                 {
                     stop();
                     ChoixNiveau.levelSelectorLocal(stage);
-                    stage.setFullScreen(true);
                 }
             }
         };
